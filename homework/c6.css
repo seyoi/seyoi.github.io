@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background: linear-gradient(to right, red,green);
+}
+.container{
+    height: auto;
+    margin:auto;
+    margin-top: 50%;
+}
+.box{
+    border: 2px solid blue;
+    padding: 10px;
+    border-radius: 20%;
+    color: yellow;
+    background: radial-gradient(circle,green,blue);
+}
+.box:hover{
+    border: 2px solid rgb(11, 242, 108);
+    padding: 10px;
+    border-radius: 20%;
+    color: white;
+    background: radial-gradient(circle,rgb(152, 9, 218),rgb(255, 0, 221));
+}

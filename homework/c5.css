@@ -1,10 +1,11 @@
 .signIn{
     text-align: center;
-    max-width: 400px;
+    background-color: aquamarine;
     margin: auto;
+    border-radius: 10%;
+    box-shadow: 10px 10px red,20px 20px yellow,30px 30px blue;
 }
 .container{
-   max-width: 400px;
 }
 .form1{
     padding: 10px;
@@ -14,20 +15,26 @@
 }
 input{
     margin: 10px;
-
+    border: 1px solid green;
 }
 .auth{
     text-align: right;
+    margin-right: 30px;
 }
 .phone > input{
-    border-color: red;
     display: inline;
     margin-right: 10px;
+    width: 88px
 }
 
+.sex {
+}
 
 #region, select{
  width: 400px;
+margin: 10px;
+padding: 10px;
+ border: 1px solid green;
 }
 .submit{
     width: 400px;

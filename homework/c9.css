@@ -1,0 +1,19 @@
+.box{
+    background-color: yellow;
+    display: flex;
+    flex-direction: row;
+    
+}
+.left{
+    background-color: aquamarine;
+    width: 20%;
+    padding: 10px;
+}
+.right{
+    background-color: white;
+    width: 80%;
+    padding: 10px;
+}
+body{
+    background-color: rgb(233, 215, 115);
+}
