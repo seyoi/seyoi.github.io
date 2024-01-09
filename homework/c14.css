@@ -1,0 +1,14 @@
+.box{
+    background-color: rgb(246, 0, 0);
+    height: 500px;
+}
+@media screen and (max-width: 1400px){
+    .box{
+        background-color: rgb(87, 244, 8);
+    }
+}
+@media screen and (max-width: 600px){
+    .box{
+        background-color: rgb(29, 10, 235);
+    }
+}

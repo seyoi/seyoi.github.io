@@ -58,8 +58,6 @@ body{
     height: 300px;
     border-radius: 20cm;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 .button{
     background-color: rgb(11, 1, 1);
@@ -71,6 +69,7 @@ body{
     left: 0px;
     padding-top: 10px;
     margin-top: 10px;
+    
 }
 .leftArm{
     background-color: rgb(224, 141, 8);
@@ -79,7 +78,7 @@ body{
     border-radius: 20cm;
     position: relative;
     top: 0px;
-    left: 0px;
+    left: -100px;
     padding-top: 10px;
     margin-top: 10px;
     rotate: 30deg;
@@ -92,7 +91,7 @@ body{
     border-radius: 20cm;
     position: relative;
     top: 0px;
-    left: 0px;
+    left: 100px;
     padding-top: 10px;
     margin-top: 10px;
     rotate: 130deg;

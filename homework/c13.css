@@ -1,0 +1,62 @@
+
+nav{
+    width: 100%;
+    background-color: beige;
+
+    border: 5px solid black;
+    margin: auto;
+}
+nav.min{
+    border: 1px solid rgb(143, 10, 10);
+    width: 100px;
+    height: 100px;
+    }
+ul.min{
+    display: block;
+}
+button{
+    text-align: center;
+}
+li:nth-child(1)
+{
+    background-color: aqua;
+}
+ul{
+    border: 1px solid green;
+
+}
+li{
+    width: 20%;
+    display: inline;
+    border: 1px solid green;
+    justify-content: space-between;
+
+}
+ul.min li{
+    display: block;
+    text-align: center;
+}
+
+@media screen and (max-width:777px) {
+    nav{
+        display: none;
+    }
+    nav.min
+    {
+    display: contents;
+    }
+    ul.min li{
+        display: block;
+        text-align: center;
+    }
+    
+}
+
+@media screen and (min-width:777px){
+    nav.min{
+        display: none;
+    }
+    nav {
+        display: contents;
+        }
+    }
