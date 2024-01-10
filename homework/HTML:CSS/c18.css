@@ -36,11 +36,7 @@ li {
     color: rgb(255, 255, 255);
 }
 
-@media screen and (min-width:300px){
-    nav.menu{
-        display: none;
-    }
-}
+
 
 a {
     text-decoration: none;
@@ -68,9 +64,19 @@ ul ul li {
 }
 
 .menuicon{
-    background-color: aliceblue;
+    display: none;
+    background-color: rgb(255, 255, 255);
     width: 50px;
     height: 5px;
-    float: right;
 
+}
+
+@media screen and (max-width:768px){
+    .menu{
+        display: none
+    }
+    .menuicon{
+        display: block;
+        
+    }
 }
