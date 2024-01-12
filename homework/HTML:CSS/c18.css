@@ -5,19 +5,12 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 
 }
-
-header{
-    
-}
-
 nav{
-    position: absolute;
-    padding: 50px 0px 0px 20px;
     display: flex;
-    justify-content: space-between;
+    padding: 10px;
+    position: relative;
 }
-
-.menu{
+.menu {
     padding-top: 5px;
 }
 
@@ -33,19 +26,17 @@ li {
     position: relative;
     padding: 0px 20px 20px 60px;
     text-wrap: nowrap;
-    color: rgb(255, 255, 255);
+    color: rgb(231, 13, 13);
 }
-
 
 
 a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(185, 240, 21);
 }
 
-ul ul {
+ul ul{
     display: none;
-    position: absolute;
     left: 100%;
     top: 0;
 }
@@ -58,25 +49,42 @@ li:hover ul{
     
 }
 
-ul ul li {
+ul ul li{
     margin: 0;
-
+    color: rgb(48, 234, 11);
 }
-
+.ham{
+    padding-top: 10px;
+    
+}
 .menuicon{
     display: none;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(14, 13, 13);
     width: 50px;
-    height: 5px;
+    height: 1px;
+    margin-bottom: 5px;
+    
 
 }
 
 @media screen and (max-width:768px){
     .menu{
-        display: none
+        display: none;
     }
     .menuicon{
-        display: block;
+        display: flex;
         
     }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        
+    }
+}
+
+.hv img{
+    width: 100%;
+    position: fixed;
+    top: 10px;
+    z-index: -1;
 }
