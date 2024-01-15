@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    let score = window.prompt(`whats your score`)
+    let grade = 'x'
+    if(score > 90){
+        let grade = 'a';
+        document.write(`나의 기말고사 점수는 ${score}, 학점은 ${grade}!!!`);
+    }else if(score >= 80 & score<=89){
+        let grade = 'b';
+        document.write(`나의 기말고사 점수는 ${score}, 학점은 ${grade}!!!`);
+    }else if(score>=70 & score<=79){
+        let grade = 'c';
+        document.write(`나의 기말고사 점수는 ${score}, 학점은 ${grade}!!!`);
+    }else if ( score >= 60 & score <= 69 ){
+        let grade = 'd';
+        document.write(`나의 기말고사 점수는 ${score}, 학점은 ${grade}!!!`);
+    }else {
+        let grade = 'e';
+        document.write(`나의 기말고사 점수는 ${score}, 학점은 ${grade}!!!`);
+    }
+
+    
+</script>
+<body>
+    
+</body>
+</html>
