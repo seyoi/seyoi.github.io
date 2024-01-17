@@ -3,59 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="c5.css">
+    <link rel="stylesheet" href="">
     <title>Document</title>
 </head>
 <style>
-    .signIn{
+
+
+.signIn{
     text-align: center;
     background-color: aquamarine;
     margin: auto;
     border-radius: 10%;
     box-shadow: 10px 10px red,20px 20px yellow,30px 30px blue;
 }
-.container{
-}
+
 .form1{
     padding: 10px;
 }
+
 *{
     padding: 10px;
 }
+
 input{
     margin: 10px;
     border: 1px solid green;
 }
+
 .auth{
     text-align: right;
     margin-right: 30px;
 }
-.phone > input{
-    display: inline;
-    margin-right: 10px;
-    width: 88px
-}
 
-.sex {
+.phone > input{
+    margin-right: 10px;
+    width: 100%;
 }
 
 #region, select{
- width: 400px;
-margin: 10px;
-padding: 10px;
- border: 1px solid green;
+    width: 400px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid green;
 }
-.submit{
 
-}
+
+
 </style>
 <body>
-    <script>
-        const form = document.getElementById('form');
-        const submit = document.getElementById('submit');
-
-
-    </script>
+   
     
     <div class="signIn">
         <p>!Oz Hyper! Sign up</p>
@@ -63,48 +59,63 @@ padding: 10px;
         <div class="container">
             <form class="form1" id="form">
 
-                <input placeholder="이메일일 입력" size="50" type="email"><br>
-                <input placeholder="Name 입력" size="50" ><br>
-                <input placeholder="Password 입력" size="50" type="password"><br>
-                <input placeholder="Password Re 입력" size="50" type="password"><br>
+                <input placeholder="이메일일 입력" size="50" type="email" name="email" value=""><br>
+                <input placeholder="Name 입력" size="50" name="name" value="" ><br>
+                <input placeholder="Password 입력" size="50" type="password" name="pass" value=""><br>
+                <input placeholder="Password Re 입력" size="50" type="password" name="confirm" value=""><br>
                 
                 <div class="phone">
-                    <input placeholder="010" type="number" >
-                    <input placeholder="1234" type="number">
-                    <input placeholder="1234" type="number" ><br>
-                </div>
+                    <input placeholder="phone no." type="number" name="phoneno" value="" >
+                    </div>
                 
     
-            <div class="auth">
-            00000 <button onclick="">인증번호 전송</button><br>
-            3:00 <button>인증 done</button><br>
+                <!-- <div class="auth">
+                <button onclick="">인증번호 전송</button><br>
+                <button>인증 done</button><br>
            
                 <br>
-            </div>
+                </div> -->
             
             
-            <div>
-                <select name="" id="region" size="1">
-                <option value="">지역선택</option>
-                <option value="지방">지방</option>
-                <option value="서울">서울</option></select>
-            </div>
+                <div>
+                    <select id="region" size="1" name="region">
+                        <option value="">지역선택</option>
+                        <option value="지방">지방</option>
+                        <option value="서울">서울</option>
+                    </select>
+                </div>
                 
-            <br>
-            <div class="sex">
-                <input type="radio">여성
-            <input type="radio">남성 <br></div>
-            
-            <button class="submit" id="submit">가입하기
-            </button>
-            <button class="reset" id="reset">Reset
-            </button>
+                <br>
+                <div class="sex">
+                    <input type="radio" name="female" value="selected">여성
+                    <input type="radio" name="male" value="selected">남성 <br>
+                </div>
+                
+                <button class="submit" id="submit" type="submit">가입하기
+                </button>
+                <!-- <button class="reset" id="reset" >Reset
+                </button> -->
             </form>
         </div>
         
         
     </div>
-   
+    <script>
+        
+        const submit = document.getElementById('submit');
+        
+        function getFormData(){
+            event.preventDefault();
+            const form = document.getElementById('form');
+            const formData = new FormData(form);
+            for( const [key, value] of formData.entries()){
+                console.log(`${key}: ${value}`);
+            }
+            
+        }
+        submit.onclick = getFormData;
+
+    </script>
 
 </body>
 </html>
