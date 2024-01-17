@@ -9,17 +9,26 @@
     <script>
 
         let maxNo = window.prompt('맥시멈 숫자입력하시오.')
-        const numbersPerRow = 5;
-        i=1;
+        
+        const numberPerRow = 5;
+        let currentNumber = 4;
+        let row = '';
+        let count = 0;
 
-        while(i <= numbersPerRow ){
-            let j = 0;
-            let row = '';
-
-            while( j < numbersPerRow ){
+        while(currentNumber <= maxNo  ){
+            row += `${currentNumber}\t`;
+            
+            count++;
+            console.log(row);
+            if(count===numberPerRow){
+                row+='<br>'
                 
+                
+                count = 0;
             }
-        }
+        currentNumber+=4;
+
+        }document.write(`${row}`);
     </script>
 </body>
 </html>
