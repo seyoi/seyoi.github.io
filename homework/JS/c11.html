@@ -114,18 +114,30 @@ input{
             for( const [key, value] of formData.entries()){
                 
                 user.push({ key: key, value: value});
-                document.write(user);
+                
             }
-            console.log(user);
             
            const values = user.map(obj =>obj.value);
-            console.log(user);
-           console.log(values);
            
-           document.write(`hi, ${values[1]}. <br> 
+           const keys = user.map(obj =>obj.key);
+           console.log(keys);
+            console.log(values.length);
+            console.log(keys.length);
+            
+           document.write(`Hi, ${values[1]}. <br> 
            Check below your information just registerd.<br>
-           ${user[1]}`);
+           `);
 
+           document.write('<ul>');
+           
+            for(i=0; i<keys.length; i++){
+                document.write(`<li> ${keys[i]} : ${values[i]} </li><br>`)
+            }
+            document.write('</ul>');
+            
+            // let stringValues = JSON.stringify(values);
+
+            // let stringKeys = JSON.stringify(keys);
         }
         
         submit.onclick = getFormData;

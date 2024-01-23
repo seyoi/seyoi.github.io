@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>올해남은시간</title>
+</head>
+<body>
+    <script>
+        // setTimeout(()=>document.write('올해가 ',remainTime[1]+'월',remainTime[2]+'일',remainTime[3]+'시간',remainTime[4]+'초 남았사옵니다.'),3000);
+        setInterval(function(){
+        let now = new Date();
+        let endOfYear = new Date(now.getFullYear(),11,31,23,59,59,999);
+        let timeDifference = endOfYear - now;
+        
+        
+        const remainingYears = Math.floor(timeDifference / (365.25 * 24 * 60 * 60 * 1000));
+        const remainingMonths = Math.floor((timeDifference % (365.25 * 24 * 60 * 60 * 1000)) / (30.44 * 24 * 60 * 60 * 1000));
+        const remainingDays = Math.floor((timeDifference % (30.44 * 24 * 60 * 60 * 1000)) / (24 * 60 * 60 * 1000));
+        const remainingHours = Math.floor((timeDifference % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+        const remainingMinutes = Math.floor((timeDifference % (60 * 60 * 1000)) / (60 * 1000));
+        const remainingSeconds = Math.floor((timeDifference % (60 * 1000)) / 1000);
+
+        let remainTime =  ['올해가'+remainingMonths+'월',remainingDays+'일',remainingHours+'시간', remainingMinutes+'분', remainingSeconds+'초 남았어요, 멋진 계획을 세워보세요!'];
+        // remainTime[0].style.color = 'red';
+        document.body.textContent = `${remainTime.join('-')}`;
+        },1000);
+
+        
+    </script>
+</body>
+</html>
