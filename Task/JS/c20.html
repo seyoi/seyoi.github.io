@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    button {
+        background-image: url();
+        width: 100vw;
+        height: 10cqh;
+    }
+
+    img {
+        width: 100vw;
+    }
+
+    #imgbox {
+        width: 100vw;
+        height: 10rem;
+        overflow: hidden;
+    }
+</style>
+<body>
+    <main>
+        <div id="imgbox">
+        <img src="../HTML:CSS/1.png" alt="" id="img">
+    </div>
+        <button id="stop">stop</button>
+    </main>
+
+    <script>
+        const imgDOM = document.getElementById('img');
+        const buttonDOM = document.getElementById('stop');
+        const int1 = setInterval(imgChange,1000);
+        const int2 = setInterval(imgChange2,2000);
+        buttonDOM.addEventListener('click',function(){
+            clearInterval(int1);
+        });
+        
+        function imgChange(){
+            imgDOM.src = "../HTML:CSS/2.png"
+            
+        }
+        function imgChange2(){
+            imgDOM.src = "../HTML:CSS/1.png"
+            
+        }
+    </script>
+</body>
+</html>
