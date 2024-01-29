@@ -10,14 +10,26 @@
 header{
     display: flex;
 }
+
+main{
+
+}
+#img{
+
+}
+#img img{
+
+}
 </style>
 <body>
 
     <header>
-        <input type="text" id="search-input">
+        <input type="text" id="search-input" placeholder="search keyword">
+       
         <button id="search-button">search</button>
-        <select id="sort" title="sort">
-            <option value=""></option>
+        
+        <select id="sort" title="sort" placeholder="">
+            <option value="" selected>breed sort</option>
         </select>
 
     </header>
@@ -44,20 +56,47 @@ header{
     </footer>
     <script>
         const imgBox = document.getElementById('img');
+        const searchInput = document.getElementById('search-input').addEventListener('change',function(e){
+            imgBox = ``;
+            dogsArray.forEach(function(i){
+                if(e === indexOf(i))
+            })
+        });
+        const dogsArray = [];
+
+
+
         window.addEventListener('load',function(){
             request = new XMLHttpRequest();
-            request.open('get','https://dog.ceo/api/breeds/image/random/12');
+            request.open('get','https://dog.ceo/api/breeds/image/random/20');
         
             request.addEventListener('load',function(){
             const response = JSON.parse(request.response);
             response.message.forEach(function(i){
-
+                imgBox.innerHTML += `
+                <img src=${i}>`
+                dogsArray.push(i);
             })
             });
 
             request.send();  
         });
        
+        const sort = document.getElementById('sort');
+        const request2 = new XMLHttpRequest();
+        request2.addEventListener('load',function(){
+           const response = JSON.parse(request2.response);
+           const keys = Object.keys(response.message);
+           keys.forEach(function(i){
+            sort.innerHTML += `
+            <option>${i}</option>`
+           });
+
+        });
+        request2.open('get', 'https://dog.ceo/api/breeds/list/all');
+        request2.send();
+
+        console.log(dogsArray);
 
         
         
