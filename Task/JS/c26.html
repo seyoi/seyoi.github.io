@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+header{
+    display: flex;
+}
+</style>
+<body>
+
+    <header>
+        <input type="text" id="search-input">
+        <button id="search-button">search</button>
+        <select id="sort" title="sort">
+            <option value=""></option>
+        </select>
+
+    </header>
+
+
+
+    <main>
+        <div id="img">
+
+
+
+        </div>
+        <button id="more">
+            see more
+        </button>
+        <button id="top">
+            top
+        </button>
+
+
+    </main>
+    <footer>
+        
+    </footer>
+    <script>
+        const imgBox = document.getElementById('img');
+        window.addEventListener('load',function(){
+            request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/12');
+        
+            request.addEventListener('load',function(){
+            const response = JSON.parse(request.response);
+            response.message.forEach(function(i){
+
+            })
+            });
+
+            request.send();  
+        });
+       
+
+        
+        
+   </script>
+</body>
+</html>

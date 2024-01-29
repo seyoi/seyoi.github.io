@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docuicecreamment</title>
+</head>
+<body>
+    <button id="add-button">add</button>
+    <button id="show-list">list</button>
+    <div id="list">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        const array = [];
+        const addButtonDOM = document.getElementById('add-button');
+        const listButtonDOM = document.getElementById('show-list');
+        const listDisplayDOM = document.getElementById('list');
+
+        addButtonDOM.addEventListener('click',add);
+        listButtonDOM.addEventListener('click',print);
+
+
+        function add(){
+
+        const name = prompt('icecream name');
+        array.push(name);
+        }
+
+        function print(){
+            listDisplayDOM.textContent = array;
+        }
+
+
+        console.log(array);
+
+
+    </script>
+</body>
+</html>
