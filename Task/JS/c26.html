@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
+    <title>dogsAPI</title>
+    
+    <style>
 
 header{
     display: flex;
@@ -21,6 +21,13 @@ main{
 
 }
 </style>
+
+
+</head>
+
+
+
+
 <body>
 
     <header>
@@ -37,11 +44,8 @@ main{
 
 
     <main>
-        <div id="img">
-
-
-
-        </div>
+        <div id="img"></div>
+        
         <button id="more">
             see more
         </button>
@@ -54,25 +58,49 @@ main{
     <footer>
         
     </footer>
-    <script>
-        const imgBox = document.getElementById('img');
-        const searchInput = document.getElementById('search-input').addEventListener('change',function(e){
-            imgBox = ``;
-            dogsArray.forEach(function(i){
-                if(e === indexOf(i))
-            })
-        });
-        const dogsArray = [];
 
+
+
+
+    <script>
+
+        let dogsArray = [];
+        let newArray = [];
+        let imgBox = document.getElementById('img');
+        const searchInput = document.getElementById('search-input');
+
+
+        const searchButton = document
+        .getElementById('search-button')
+        .addEventListener('click',function(e)
+        {
+            imgBox.innerHTML = ``;
+            
+
+            dogsArray.forEach(function(e){
+                
+                if(e.includes(searchInput.value)){
+                  newArray.push(e);
+                  imgBox.innerHTML += `<img src=${e}>`;
+                }
+            })
+            
+
+
+               
+          
+         });
 
 
         window.addEventListener('load',function(){
-            request = new XMLHttpRequest();
-            request.open('get','https://dog.ceo/api/breeds/image/random/20');
+          
+            const request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/1');
         
             request.addEventListener('load',function(){
-            const response = JSON.parse(request.response);
-            response.message.forEach(function(i){
+            
+                const response = JSON.parse(request.response);
+                response.message.forEach(function(i){
                 imgBox.innerHTML += `
                 <img src=${i}>`
                 dogsArray.push(i);
@@ -81,10 +109,32 @@ main{
 
             request.send();  
         });
+
        
         const sort = document.getElementById('sort');
+        
+        sort.addEventListener('change',function(){
+           
+            imgBox.innerHTML = ``;
+            
+
+            dogsArray.forEach(function(e){
+                
+                if(e.includes(sort.value)){
+                  newArray.push(e);
+                  imgBox.innerHTML += `<img src=${e}>`;
+                }
+            })
+        })
+        
+       
+
+
+
         const request2 = new XMLHttpRequest();
-        request2.addEventListener('load',function(){
+
+        request2
+        .addEventListener('load',function(){
            const response = JSON.parse(request2.response);
            const keys = Object.keys(response.message);
            keys.forEach(function(i){
@@ -93,13 +143,41 @@ main{
            });
 
         });
+
+
         request2.open('get', 'https://dog.ceo/api/breeds/list/all');
         request2.send();
 
-        console.log(dogsArray);
+        const seeMoreDOM = document.getElementById('more');
+        const topDOM = document.getElementById('top');
 
+        seeMoreDOM.addEventListener('click',function(){
+            console.log(dogsArray);
+            
+            const request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/1');
         
-        
-   </script>
+            request.addEventListener('load',function(){
+            
+                const response = JSON.parse(request.response);
+                response.message.forEach(function(i){
+                imgBox.innerHTML += `
+                <img src=${i}>`
+                dogsArray.push(i);
+            })
+            });
+
+            request.send();  
+        });
+
+        topDOM.addEventListener('click',function(){
+            // document.body.scrollTop = 0;
+            // document.documentElement.scrollTop = 0;
+            window.scrollTo(0, 0);
+        })
+
+
+
+    </script>
 </body>
 </html>
