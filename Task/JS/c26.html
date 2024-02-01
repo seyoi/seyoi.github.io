@@ -39,6 +39,10 @@ main{
             <option value="" selected>breed sort</option>
         </select>
 
+        <button id="reset-button">
+            reset
+        </button>
+
     </header>
 
 
@@ -63,6 +67,25 @@ main{
 
 
     <script>
+
+        const resetDOM = document.getElementById('reset-button')
+        .addEventListener('click',function(){
+            imgBox.innerHTML = ``;
+            const request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/42');
+        
+            request.addEventListener('load',function(){
+            
+                const response = JSON.parse(request.response);
+                response.message.forEach(function(i){
+                imgBox.innerHTML += `
+                <img src=${i}>`
+                dogsArray.push(i);
+            })
+            });
+
+            request.send();  
+        });
 
         let dogsArray = [];
         let newArray = [];
@@ -150,6 +173,8 @@ main{
 
         const seeMoreDOM = document.getElementById('more');
         const topDOM = document.getElementById('top');
+
+
 
         seeMoreDOM.addEventListener('click',function(){
             console.log(dogsArray);
