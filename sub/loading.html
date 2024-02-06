@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투자 성향 테스트</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+    <main class="main load">
+        <video loop autoplay muted>
+            <source src="../img/loading.mov">
+            </source>
+        </video>
+        <p class="loadText">ANALYSING...</p>
+    </main>
+
+    <script>
+        let mbtiResultArr = [];
+        let E, I, S, N, T, F, P, J = 0;
+        let mbtiResult = '';
+
+        // 결과값 배열 가져오기
+        function loadResult() {
+            const answers = localStorage.getItem('mbtiResult');
+            if (answers !== null) {
+                mbtiResultArr = JSON.parse(answers);
+            }
+        }
+        loadResult();
+        console.log(mbtiResultArr);
+
+        mbtiResultArr = mbtiResultArr.join('');
+        console.log(mbtiResultArr);
+        E = mbtiResultArr.match(/E/g)?.length;
+        I = mbtiResultArr.match(/I/g)?.length;
+        S = mbtiResultArr.match(/S/g)?.length;
+        N = mbtiResultArr.match(/N/g)?.length;
+        T = mbtiResultArr.match(/T/g)?.length;
+        F = mbtiResultArr.match(/F/g)?.length;
+        P = mbtiResultArr.match(/P/g)?.length;
+        J = mbtiResultArr.match(/J/g)?.length;
+        console.log(E, I, S, N, T, F, P, J);
+
+        mbtiResult += E > I ? 'E' : 'I';
+        mbtiResult += S > N ? 'S' : 'N';
+        mbtiResult += T > F ? 'T' : 'F';
+        mbtiResult += P > J ? 'P' : 'J';
+        console.log(mbtiResult);
+    </script>
+</body>
+
+</html>
