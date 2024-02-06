@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>YOUR INVESTMENT TYPE</title>
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+   
+
         <meta name="keywords" content='투자, mbti, 투자성향, 투자mbti' />
         <meta name="author" content='oz코딩' />
         <meta name="descripption" content='재미로 보는 투자 성향 테스트' />
@@ -35,67 +38,12 @@
 
     </header>
     <main>
-        <div id="resultDisplay">
-            <p class="result_title"></p>
-            <p class="sub_title"></p>
-            <p class="mbti_tendency"></p>
-            <p class="mbti_caution"></p>
-
-        </div>
+        <div id="resultDisplay"></div>
     </main>
     <footer>
 
     </footer>
     <main class="main" >
-<!--        
-        <h2 class="result_title"></h2>
-       
-        <div class="result_img_box">
-            <img id="main_img" alt="">
-       
-        </div>
-       
-        <h3 class="sub_title">
-        
-        </h3>
-       
-        <h4 class="result_tendency">투자성향</h4>
-       
-        <ul class="mbti_tendency">
-
-        </ul>
-        <h4 class="result_caution">주의사항</h4>
-        <ul class="mbti_caution">
-            
-        </ul>
-        <div class="result_same">
-            <h4>성격테스트를 한 사람 중 나와 같은 유형은?</h4>
-            <div class="percent">
-                <span>3%</span>
-            </div>
-        </div>
-        <ul class="resul_other">
-            <li class="result_fit">
-                <h4>Best Match</h4>
-                <div class="fit">
-                    <div class="resul_other_img_box">
-                        <img src="../img/test_02.jpg" alt="INFP">
-                    </div>
-                    <span>아가리 주식러형(INFP)</span>
-                </div>
-            </li>
-            <li class="result_opposition">
-                <h4>Worst Match</h4>
-                <div class="opposition">
-                    <div class="resul_other_img_box">
-                        <img src="../img/test_03.jpg" alt="ISFJ">
-                    </div>
-                    <span>쫌쫌따리 형(ISFJ,ESFJ,ISTJ,ESTJ)</span>
-                </div>
-            </li>
-        </ul>
-
- -->
     <div id="bottomWrapper">
 
         <div class="btn_list">
@@ -106,9 +54,6 @@
                 <!-- <button type="button" data-cls="popupShow">INFO</button> -->
             <!-- <button type="button" data-cls="shareShow">SHARE</button> -->
          </div>
-       
-
-
         <div class="developInfo">
             <div>
                 <br>
@@ -120,31 +65,6 @@
             </div>  
         </div>
 
-        <!-- <div class="shareInfo">
-            <div id="shareRow">
-                <h3>Sharedfdsfsfdsf</h3> <br>
-
-                <ul class="shareList">
-                    
-                 <li><a href="#"><span class="xi-facebook"></span></a></li> -->
-                    <!-- <li onclick="shareWithKakao()"><a href="#"><span class="xi-kakaotalk"></span></a></li> -->
-                    <!-- <li><a href="#"><span class="xi-twitter"></span></a></li> -->
-                    <!-- <li onclick="openModal()"><a href="#"><span class="xi-share-alt"></span></a></li>
-                </ul>
-
-                <div id="shareModal" class="modal"> -->
-                    <!-- 모달 내용 -->
-                    <!-- <div class="modal-content">
-                        <span class="close" onclick="closeModal()">&times;</span>
-                        <p></p>
-                        <input type="text" id="shareLink" value="https://imexer.github.io/index.html#" style="width: 100%;" readonly>
-                        <button onclick="copyLink()" style="background-color: black;color: #fefefe;padding: 0 1rem 0 1rem;">Copy Link</button>
-                    </div>
-                </div>
-                <button class="closeBtn"><span class="xi-close"></span></button>
-            </div>
-        </div> --> 
-
         <ul class="icon_list_box">
             <!-- <li id="instagram-share-btn"><a href="#"><span class="xi-facebook"></span></a></li> -->
             <li onclick="shareWithKakao()"><a href="#"><span class="xi-kakaotalk"></span></a></li>
@@ -152,13 +72,13 @@
             <li onclick="openModal()"><a href="#"><span class="xi-share-alt"></span></a></li>
         </ul>
 
-        
+
         <div id="shareModal" class="modal">
             <!-- 모달 내용 -->  
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <p></p>
-                <input type="text" id="shareLink" value="https://imexer.github.io/index.html#" style="width: 100%;" readonly>
+                <!-- <input type="text" id="shareLink" value="https://imexer.github.io/index.html#" style="width: 100%;" readonly> -->
                 <button onclick="copyLink()" style="background-color: black;color: #fefefe;padding: 0 1rem 0 1rem;">Copy Link</button>
             </div>
         </div>
@@ -209,12 +129,8 @@ console.log(result);
 
 
 if(result == 'E,S,T,J' || result =='I,S,T,J' || result =='I,S,F,J' ||result == 'E,S,F,J' ){
-    resultDisplay.innerHTML = `The Guardian<br><br>
-    Responsible and duty-driven by nature, long-term financial planning comes naturally to you. You like having financial security, and investing just seems like the responsible thing to do. You're good at staying organized and are happiest when life is a smooth-running machine -- making you a measured, thoughtful investor who can ride out short-term bumps in the road for the longer-term payoff.
-
-You hate losing money, and the idea of gambling with your financial future gives you hives. While your patient and conservative nature is a strength, it can be a weakness if taken to the extreme.
-<br><br>TIP<br><br>
-As the most risk-averse temperament, unexpected change can make Guardians anxious. Resist the urge to stuff your cash under a mattress. Embrace your strengths, but remember there's no opportunity without some risk. If you play it too safe, sticking only to guaranteed investments, your returns could be eroded by inflation. A financial planner can help you determine exactly what you need for a comfortable retirement, and whether you can take on a bit more risk without losing any sleep.`;
+    resultDisplay.innerHTML = `The Guardian<br><br>Responsible and duty-driven by nature, long-term financial planning comes naturally to you. You like having financial security, and investing just seems like the responsible thing to do. You're good at staying organized and are happiest when life is a smooth-running machine -- making you a measured, thoughtful investor who can ride out short-term bumps in the road for the longer-term payoff. You hate losing money, and the idea of gambling with your financial future gives you hives. While your patient and conservative nature is a strength, it can be a weakness if taken to the extreme.
+<br><br>TIP<br><br>As the most risk-averse temperament, unexpected change can make Guardians anxious. Resist the urge to stuff your cash under a mattress. Embrace your strengths, but remember there's no opportunity without some risk. If you play it too safe, sticking only to guaranteed investments, your returns could be eroded by inflation. A financial planner can help you determine exactly what you need for a comfortable retirement, and whether you can take on a bit more risk without losing any sleep.`;
 } else if( result == 'I,S,F,P' || result =='E,S,F,P' || result =='I,S,T,P' || result =='E,S,T,P'){
     
     const artisan = `The Artisan <br><br>Artisans seek adventure and excitement in all facets of life, and investments are no different. If you fall into this group, you prefer to learn by doing, and couldn't force yourself to read an economics textbook, even if you wanted to. That said, if investing piques your interest, you're more than capable of becoming proficient at it.

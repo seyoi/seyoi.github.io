@@ -34,51 +34,33 @@ const aArray = [
 
     ];
 
-
-
-
-
-
 const qDOM = document.getElementById('question-container');
 const aDOM = document.getElementById('answer-container');
-// aDOM.style.border = '1px solid black';
-// aDOM.style.height = '5rem';
 const aDOM2 = document.getElementById('answer-container2');
-// aDOM2.style.border = '1px solid black';
-// aDOM2.style.height = '5rem';
-
-
 const bar = document.getElementById('bar');
 let per = 10;
 let increaseRate = 100/aArray.length;
-
-
-
-// anal.addEventListener('click',function(){
-    
-// setTimeout(function(){
-//     console.log('3sec...');
-//     location.href = 'result.html';
-
-// },1000)
-// bar.style.width = per+'%';
-
-// // resultDOM.textContent = `Your investment style is ${result}`;
-// // anal.style.display = 'none';
-
-
-// });
-
 let currIndex = 0;
+
 qDOM.innerHTML = `<p>${qArray[currIndex]}</p>`;
 aDOM.innerHTML = `<label id='first-label'> ${aArray[currIndex][0]}</label><input type='radio' value='test' class='acon' style='display:none;'>`;
 aDOM2.innerHTML = `<label id='second-label'> ${aArray[currIndex][2]} </label><input type='radio' value='test' class='acon' style='display:none;'>`;
-
 const firstLabel = document.getElementById('first-label');
 const secondLabel = document.getElementById('second-label');
 firstLabel.textContent = aArray[currIndex][0];
 secondLabel.textContent = aArray[currIndex][2];
 
+const main = document.getElementById('main');
+const mbtiKeys = Object.keys(mbtis);
+const mbtiValues = Object.values(mbtis);
+const analBtn = document.createElement('button');
+const wrapper = document.getElementById('wrapper');
+main.append(analBtn);
+analBtn.id = 'anal';
+const anal = document.getElementById('anal');
+anal.style.display = 'none';
+const resultDOM = document.getElementById('result-container');
+const result = [];
 
 const nextQ = function(e){
 
@@ -144,8 +126,6 @@ const nextQ = function(e){
             
         }
 
-            console.log(currIndex);
-
             bar.style.width = '100%';
         
             for(i = 0; i< mbtiKeys.length; i+=2){
@@ -186,14 +166,47 @@ const nextQ = function(e){
         
     }
 
-
-
-
 aDOM.addEventListener('click',nextQ);
 aDOM2.addEventListener('click',nextQ);
 
 
+Kakao.init('457888e49bbd52d9d5246812ad264e69');
+const kakaoLink = function(){
+    Kakao.Link.sendDefault({
+        objectType : 'feed',
+        content : {
+            title : 'MY INVESTMENT TYPE CHECK',
+            description : 'Check your investment style!',
+            imageUrl : 'img.png',
+            link : {
+                mobileWebUrl : 'https://imexer.github.io/index.html',
+                webUrl : 'https://imexer.github.io/index.html',
 
+            },
+        },
+        social : {
+            likeCount : 0,
+            commentCount : 0,
+            shareedCount : 0,
+        },
+        button : [{
+            title : 'web',
+            link : {
+                mobileUrl : 'https://imexer.github.io/index.html',
+                webUrl : 'https://imexer.github.io/index.html',
+
+            },
+        },
+        {
+            title: 'app',
+            link : {
+                mobileUrl : 'https://imexer.github.io/index.html',
+                webUrl : 'https://imexer.github.io/index.html',
+
+            },
+        }],
+    })
+}
 
 function shareWithKakao() {
     // 앱 링크 URL
@@ -213,14 +226,24 @@ function shareWithKakao() {
 }
 
 
-const main = document.getElementById('main');
-const mbtiKeys = Object.keys(mbtis);
-const mbtiValues = Object.values(mbtis);
-const analBtn = document.createElement('button');
-const wrapper = document.getElementById('wrapper');
-main.append(analBtn);
-analBtn.id = 'anal';
-const anal = document.getElementById('anal');
-anal.style.display = 'none';
-const resultDOM = document.getElementById('result-container');
-const result = [];
+
+ // 모달 열기 함수
+ function openModal() {
+    var modal = document.getElementById('shareModal');
+    modal.style.display = 'block';
+}
+
+// 모달 닫기 함수
+function closeModal() {
+    var modal = document.getElementById('shareModal');
+    modal.style.display = 'none';
+}
+
+// 링크 복사 함수
+function copyLink() {
+    var copyText = document.getElementById("shareLink");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand("copy");
+    alert("Copied: " + copyText.value);
+}

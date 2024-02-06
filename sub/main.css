@@ -145,3 +145,9 @@ body{
     .shareRow {
         background-color: aqua;
     }
+
+
+    .modal-content{
+        background-color: rgb(255, 255, 255);
+        width: 150px;
+    }
