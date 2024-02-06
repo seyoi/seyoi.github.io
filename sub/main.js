@@ -34,162 +34,75 @@ const aArray = [
 
     ];
 
-const qDOM = document.getElementById('question-container');
 
+
+
+
+
+const qDOM = document.getElementById('question-container');
 const aDOM = document.getElementById('answer-container');
 // aDOM.style.border = '1px solid black';
 // aDOM.style.height = '5rem';
-
 const aDOM2 = document.getElementById('answer-container2');
 // aDOM2.style.border = '1px solid black';
 // aDOM2.style.height = '5rem';
 
-let currIndex = 0;
-aDOM.innerHTML = `<label id='first-label'> ${aArray[currIndex][0]}</label><input type='radio' value='test' class='acon' style='display:none;'>`
-aDOM2.innerHTML = `<label id='second-label'> ${aArray[currIndex][2]} </label><input type='radio' value='test' class='acon' style='display:none;'>`
 
-const firstLabel = document.getElementById('first-label')
-const secondLabel = document.getElementById('second-label')
 const bar = document.getElementById('bar');
 let per = 10;
 let increaseRate = 100/aArray.length;
 
-const main = document.getElementById('main');
-const mbtiKeys = Object.keys(mbtis);
-const mbtiValues = Object.values(mbtis);
-const analBtn = document.createElement('button');
-const wrapper = document.getElementById('wrapper');
-main.append(analBtn);
-analBtn.id = 'anal';
-const anal = document.getElementById('anal');
-anal.style.display = 'none';
-const resultDOM = document.getElementById('result-container');
-
-const result = [];
 
 
-anal.addEventListener('click',function(){
+// anal.addEventListener('click',function(){
     
-setTimeout(function(){
-    console.log('3sec...');
-    location.href = 'result.html';
+// setTimeout(function(){
+//     console.log('3sec...');
+//     location.href = 'result.html';
 
-},1000)
-bar.style.width = per+'%';
+// },1000)
+// bar.style.width = per+'%';
 
-// resultDOM.textContent = `Your investment style is ${result}`;
-// anal.style.display = 'none';
-
-
-});
+// // resultDOM.textContent = `Your investment style is ${result}`;
+// // anal.style.display = 'none';
 
 
+// });
+
+let currIndex = 0;
 qDOM.innerHTML = `<p>${qArray[currIndex]}</p>`;
+aDOM.innerHTML = `<label id='first-label'> ${aArray[currIndex][0]}</label><input type='radio' value='test' class='acon' style='display:none;'>`;
+aDOM2.innerHTML = `<label id='second-label'> ${aArray[currIndex][2]} </label><input type='radio' value='test' class='acon' style='display:none;'>`;
 
-
+const firstLabel = document.getElementById('first-label');
+const secondLabel = document.getElementById('second-label');
 firstLabel.textContent = aArray[currIndex][0];
 secondLabel.textContent = aArray[currIndex][2];
 
 
 const nextQ = function(e){
-   
-    
 
     bar.style.width = per+'%';
     per = per + increaseRate;
-
-    
-
-    qDOM.innerHTML = `<p>${qArray[currIndex]}</p>`;
-
     const targetText = e.target.textContent;
 
-    
-    
+    if (currIndex < 11 ){
+        
+        // firstLabel.textContent = aArray[currIndex][0];
+        // secondLabel.textContent = aArray[currIndex][2];
 
-
-   if(currIndex === qArray.length ){
-
-
-    for( let i= 0; i < aArray.length; i++){
+        for( let i= 0; i < aArray.length; i++){
         const innerIndex = aArray[i];
         
         for ( let j = 0; j< innerIndex.length; j++){
-            if (innerIndex[j] === targetText){
-                let mbti = innerIndex[j+1];
-                console.log()
-                console.log(mbti);
-                for( k=0; k < mbtiKeys.length; k++){
-                    if( mbtiKeys[k] === mbti ){
-                        mbtis[mbti]++;
-                    }   ;
-    
-
-                    }
-                }
-            }
-            
-        }
-
-        bar.style.width = '100%';
-       
-        for(i = 0; i< mbtiKeys.length; i+=2){
-            const key1 = mbtiKeys[i];
-            const key2 = mbtiKeys[i+1];
-            result.push(mbtis[key1]>mbtis[key2] ? key1:key2);
-    
-           }
-        currIndex = 0;
-        wrapper.style.display = 'none';
-
-        const btnWrapper = document.createElement('div');
-        anal.parentNode.insertBefore(btnWrapper,anal);
-        btnWrapper.appendChild(anal);
-        anal.style.display = 'block';
-        anal.style.marginLeft = '0';
-        anal.style.width = '100%';
-        anal.style.padding = '1rem';
-        anal.textContent = 'Analyzing...';
-        anal.classList.add('animation');
-        btnWrapper.classList.add('animation');
-        
-        qDOM.style.display = 'none';
-        console.log(`Your type is ${result}`);
-        localStorage.clear();
-        localStorage.setItem('result',`${result}`);
-
-        console.log(mbtis);
-        setTimeout(function(){
-            location.href = 'result.html';
-            
-        },4000)
-
-        return;
-
-        }
-        
-        if (currIndex < 12 ){
-            currIndex++;
-            console.log(currIndex);
-
-
-            firstLabel.textContent = aArray[currIndex-1][0];
-            secondLabel.textContent = aArray[currIndex-1][2];
-
-
-    
-            for( let i= 0; i < aArray.length; i++){
-            const innerIndex = aArray[i];
-            
-            for ( let j = 0; j< innerIndex.length; j++){
                 if (innerIndex[j] === targetText){
                     let mbti = innerIndex[j+1];
-                    console.log()
-                    console.log(mbti);
+                    
                     for( k=0; k < mbtiKeys.length; k++){
                         if( mbtiKeys[k] === mbti ){
                             mbtis[mbti]++;
-                        }   ;
+                            
+                        };
         
 
                         }
@@ -197,16 +110,90 @@ const nextQ = function(e){
                 }
                 
             }
+
+      
+    currIndex++;  
+            console.log(currIndex);
+    firstLabel.textContent = aArray[currIndex][0];
+    secondLabel.textContent = aArray[currIndex][2];
+    qDOM.textContent = qArray[currIndex];  
+     
+    } else {
+        console.log('last question!');
+        currIndex++;
+    }
+
+
+   if(currIndex === qArray.length ){
+
+        for( let i= 0; i < aArray.length; i++){
+            const innerIndex = aArray[i];
+            
+            for ( let j = 0; j< innerIndex.length; j++){
+                if (innerIndex[j] === targetText){
+                    let mbti = innerIndex[j+1];
+                  
+                    for( k=0; k < mbtiKeys.length; k++){
+                        if( mbtiKeys[k] === mbti ){
+                            mbtis[mbti]++;
+                            console.log(mbtis);
+                        };
+                    }
+                }
             }
-   }
+            
+        }
 
+            console.log(currIndex);
 
-  
+            bar.style.width = '100%';
+        
+            for(i = 0; i< mbtiKeys.length; i+=2){
+                const key1 = mbtiKeys[i];
+                const key2 = mbtiKeys[i+1];
+                result.push(mbtis[key1]>mbtis[key2] ? key1:key2);
+        
+            }
+            currIndex = 0;
+            wrapper.style.display = 'none';
+
+            const btnWrapper = document.createElement('div');
+            anal.parentNode.insertBefore(btnWrapper,anal);
+            btnWrapper.appendChild(anal);
+            anal.style.display = 'block';
+            anal.style.marginLeft = '0';
+            anal.style.width = '100%';
+            anal.style.padding = '1rem';
+            anal.textContent = 'Analyzing...';
+            anal.classList.add('animation');
+            btnWrapper.classList.add('animation');
+            
+            qDOM.style.display = 'none';
+            console.log(`Your type is ${result}`);
+            localStorage.clear();
+            localStorage.setItem('result',`${result}`);
+
+            console.log(mbtis);
+            setTimeout(function(){
+                location.href = 'result.html';
+                
+            },3000)
+
+            return;
+
+        }
+        
+        
+    }
+
 
 
 
 aDOM.addEventListener('click',nextQ);
 aDOM2.addEventListener('click',nextQ);
+
+
+
 
 function shareWithKakao() {
     // 앱 링크 URL
@@ -226,3 +213,14 @@ function shareWithKakao() {
 }
 
 
+const main = document.getElementById('main');
+const mbtiKeys = Object.keys(mbtis);
+const mbtiValues = Object.values(mbtis);
+const analBtn = document.createElement('button');
+const wrapper = document.getElementById('wrapper');
+main.append(analBtn);
+analBtn.id = 'anal';
+const anal = document.getElementById('anal');
+anal.style.display = 'none';
+const resultDOM = document.getElementById('result-container');
+const result = [];

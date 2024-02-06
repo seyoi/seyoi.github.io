@@ -81,14 +81,10 @@ html{
 }
 .icon_list_box{
     display: flex;
-    width: 80%;
-    border-radius: 5px;
-    margin: auto ;
-    text-align: center;
-
+    background-color: #ffffff;
+    justify-content: space-around;
 }
 .icon_list_box li{
-    width: 25%;
 }
 .icon_list_box li a{
     display: block;
