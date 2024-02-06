@@ -44,10 +44,9 @@ const aDOM2 = document.getElementById('answer-container2');
 // aDOM2.style.border = '1px solid black';
 // aDOM2.style.height = '5rem';
 
-let qArrayIndex = 0;
-
-aDOM.innerHTML = `<label id='first-label'> ${aArray[qArrayIndex][0]}</label><input type='radio' value='test' class='acon' style='display:none;'>`
-aDOM2.innerHTML = `<label id='second-label'> ${aArray[qArrayIndex][2]} </label><input type='radio' value='test' class='acon' style='display:none;'>`
+let currIndex = 0;
+aDOM.innerHTML = `<label id='first-label'> ${aArray[currIndex][0]}</label><input type='radio' value='test' class='acon' style='display:none;'>`
+aDOM2.innerHTML = `<label id='second-label'> ${aArray[currIndex][2]} </label><input type='radio' value='test' class='acon' style='display:none;'>`
 
 const firstLabel = document.getElementById('first-label')
 const secondLabel = document.getElementById('second-label')
@@ -83,47 +82,55 @@ bar.style.width = per+'%';
 
 
 });
-let currQIndex = 0;
-qDOM.innerHTML = `<p>${qArray[currQIndex]}</p>`;
 
 
+qDOM.innerHTML = `<p>${qArray[currIndex]}</p>`;
 
+
+firstLabel.textContent = aArray[currIndex][0];
+secondLabel.textContent = aArray[currIndex][2];
 
 
 const nextQ = function(e){
-    currQIndex++;
+   
     
-    firstLabel.textContent = aArray[qArrayIndex][0];
-    secondLabel.textContent = aArray[qArrayIndex][2];
-
-    qDOM.innerHTML = `<p>${qArray[currQIndex]}</p>`;
-
-const targetText = e.target.textContent;
-
-
-for( let i= 0; i < aArray.length; i++){
-    const innerIndex = aArray[i];
-    for ( let j = 0; j< innerIndex.length; j++){
-        if (innerIndex[j] === targetText){
-            let mbti = innerIndex[j+1];
-            for(k=0; k<mbtiKeys.length; k++){
-                if( mbtiKeys[k] === mbti ){
-                    mbtis[mbti]++;
-                    console.log(mbtis);
-                }
-            }
-        }
-        
-    }
-    }
 
     bar.style.width = per+'%';
     per = per + increaseRate;
 
-    qArrayIndex++;
+    
 
-   if(qArrayIndex === qArray.length-1){
+    qDOM.innerHTML = `<p>${qArray[currIndex]}</p>`;
+
+    const targetText = e.target.textContent;
+
+    
+    
+
+
+   if(currIndex === qArray.length ){
+
+
+    for( let i= 0; i < aArray.length; i++){
+        const innerIndex = aArray[i];
         
+        for ( let j = 0; j< innerIndex.length; j++){
+            if (innerIndex[j] === targetText){
+                let mbti = innerIndex[j+1];
+                console.log()
+                console.log(mbti);
+                for( k=0; k < mbtiKeys.length; k++){
+                    if( mbtiKeys[k] === mbti ){
+                        mbtis[mbti]++;
+                    }   ;
+    
+
+                    }
+                }
+            }
+            
+        }
+
         bar.style.width = '100%';
        
         for(i = 0; i< mbtiKeys.length; i+=2){
@@ -132,7 +139,7 @@ for( let i= 0; i < aArray.length; i++){
             result.push(mbtis[key1]>mbtis[key2] ? key1:key2);
     
            }
-        qArrayIndex = 0;
+        currIndex = 0;
         wrapper.style.display = 'none';
 
         const btnWrapper = document.createElement('div');
@@ -151,22 +158,71 @@ for( let i= 0; i < aArray.length; i++){
         localStorage.clear();
         localStorage.setItem('result',`${result}`);
 
+        console.log(mbtis);
         setTimeout(function(){
             location.href = 'result.html';
             
-        },3000)
+        },4000)
+
+        return;
+
+        }
+        
+        if (currIndex < 12 ){
+            currIndex++;
+            console.log(currIndex);
+
+
+            firstLabel.textContent = aArray[currIndex-1][0];
+            secondLabel.textContent = aArray[currIndex-1][2];
+
+
+    
+            for( let i= 0; i < aArray.length; i++){
+            const innerIndex = aArray[i];
+            
+            for ( let j = 0; j< innerIndex.length; j++){
+                if (innerIndex[j] === targetText){
+                    let mbti = innerIndex[j+1];
+                    console.log()
+                    console.log(mbti);
+                    for( k=0; k < mbtiKeys.length; k++){
+                        if( mbtiKeys[k] === mbti ){
+                            mbtis[mbti]++;
+                        }   ;
         
 
+                        }
+                    }
+                }
+                
+            }
+            }
    }
 
 
   
-}
+
 
 
 aDOM.addEventListener('click',nextQ);
 aDOM2.addEventListener('click',nextQ);
 
+function shareWithKakao() {
+    // 앱 링크 URL
+    var appLink = 'https://google.com';
 
+    // 카카오톡 공유하기 URL
+    var kakaoShareURL = 'kakaolink://sendurl?url=' + encodeURIComponent(appLink);
+
+    // 카카오톡 앱이 설치되어 있는지 확인
+    if (navigator.userAgent.match(/KAKAOTALK/i)) {
+        // 카카오톡 앱이 설치되어 있으면 공유하기
+        window.location.href = kakaoShareURL;
+    } else {
+        // 카카오톡 앱이 설치되어 있지 않으면 메시지 출력
+        alert('카카오톡 앱이 설치되어 있지 않습니다.');
+    }
+}
 
 
