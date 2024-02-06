@@ -171,7 +171,8 @@ aDOM2.addEventListener('click',nextQ);
 
 
 Kakao.init('457888e49bbd52d9d5246812ad264e69');
-const kakaoLink = function(){
+
+function kakaoLink(){
     Kakao.Link.sendDefault({
         objectType : 'feed',
         content : {
@@ -187,12 +188,12 @@ const kakaoLink = function(){
         social : {
             likeCount : 0,
             commentCount : 0,
-            shareedCount : 0,
+            sharedCount : 0,
         },
-        button : [{
+        buttons : [{
             title : 'web',
             link : {
-                mobileUrl : 'https://imexer.github.io/index.html',
+                mobileWebUrl : 'https://imexer.github.io/index.html',
                 webUrl : 'https://imexer.github.io/index.html',
 
             },
@@ -200,7 +201,7 @@ const kakaoLink = function(){
         {
             title: 'app',
             link : {
-                mobileUrl : 'https://imexer.github.io/index.html',
+                mobileWebUrl : 'https://imexer.github.io/index.html',
                 webUrl : 'https://imexer.github.io/index.html',
 
             },
