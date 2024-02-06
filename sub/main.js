@@ -232,6 +232,7 @@ function shareWithKakao() {
  function openModal() {
     var modal = document.getElementById('shareModal');
     modal.style.display = 'block';
+
 }
 
 // 모달 닫기 함수
@@ -243,8 +244,8 @@ function closeModal() {
 // 링크 복사 함수
 function copyLink() {
     var copyText = document.getElementById("shareLink");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
+    // copyText.select();
+    // copyText.setSelectionRange(0, 99999); // For mobile devices
     document.execCommand("copy");
-    alert("Copied: " + copyText.value);
+    copyBtn.textContent = 'Copied!';
 }
