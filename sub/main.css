@@ -149,5 +149,9 @@ body{
 
     .modal-content{
         background-color: rgb(255, 255, 255);
-        width: 150px;
+        
+    }
+
+    .modal-content button {
+        margin-top: 1rem;
     }

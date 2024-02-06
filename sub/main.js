@@ -244,8 +244,8 @@ function closeModal() {
 // 링크 복사 함수
 function copyLink() {
     var copyText = document.getElementById("shareLink");
-    // copyText.select();
-    // copyText.setSelectionRange(0, 99999); // For mobile devices
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
     document.execCommand("copy");
     copyBtn.textContent = 'Copied!';
 }
