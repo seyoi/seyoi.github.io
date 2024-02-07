@@ -71,19 +71,17 @@ Kakao.init('457888e49bbd52d9d5246812ad264e69');
 
         <ul class="icon_list_box">
             <!-- <li id="instagram-share-btn"><a href="#"><span class="xi-facebook"></span></a></li> -->
-            <li onclick="shareWithKakao()"><a href="#"><span class="xi-kakaotalk"></span></a></li>
+            <li onclick="kakaoLink()"><a href="#"><span class="xi-kakaotalk"></span></a></li>
             <!-- <li><a href="#"><span class="xi-twitter"></span></a></li> -->
             <li onclick="openModal()"><a href="#"><span class="xi-share-alt"></span></a></li>
         </ul>
-
-
         <div id="shareModal" class="modal">
             <!-- 모달 내용 -->  
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <p></p>
-                <!-- <input type="text" id="shareLink" value="https://imexer.github.io/index.html#" style="width: 100%;" readonly> -->
-                <button onclick="copyLink()" style="background-color: black;color: #fefefe;padding: 0 1rem 0 1rem;">Copy Link</button>
+                <input  type="text" id="shareLink" value="https://imexer.github.io/index.html#" style="width: 100%;" readonly>
+                <button id="copyBtn" onclick="copyLink()" style="background-color: black;color: #fefefe;padding: 0 1rem 0 1rem;">Copy Link</button>
             </div>
         </div>
 
