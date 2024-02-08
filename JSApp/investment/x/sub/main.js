@@ -169,44 +169,6 @@ aDOM2.addEventListener('click',nextQ);
 
 Kakao.init('457888e49bbd52d9d5246812ad264e69');
 
-function kakaoLink(){
-    Kakao.Link.sendDefault({
-        objectType : 'feed',
-        content : {
-            title : 'MY INVESTMENT TYPE CHECK',
-            description : 'Check your investment style!',
-            imageUrl : 'img.png',
-            link : {
-                mobileWebUrl : 'https://imexer.github.io/index.html',
-                webUrl : 'https://imexer.github.io/index.html',
-
-            },
-        },
-        social : {
-            likeCount : 0,
-            commentCount : 0,
-            sharedCount : 0,
-        },
-        buttons : [{
-            title : 'web',
-            link : {
-                mobileWebUrl : 'https://imexer.github.io/index.html',
-                webUrl : 'https://imexer.github.io/index.html',
-
-            },
-        },
-        {
-            title: 'app',
-            link : {
-                mobileWebUrl : 'https://imexer.github.io/index.html',
-                webUrl : 'https://imexer.github.io/index.html',
-
-            },
-        }],
-    })
-}
-
-
 
 
  // 모달 열기 함수

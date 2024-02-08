@@ -1,0 +1,48 @@
+*{
+    background-color: rgb(0, 0, 0);
+    margin: 0 auto;
+    color: aliceblue;
+}
+
+.videoList {
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    margin: 0 auto;
+}
+
+.video img{
+    width: 300px;
+    margin: .5rem;
+    border-radius: .2rem;
+
+}
+
+.videoDesc {
+    width: 300px;
+    margin: .5rem;
+    border-radius: .2rem;
+}
+
+@media screen and (max-width:600px){
+    .video img{
+        width: 100%;
+    
+    }
+}
+
+@media screen and (max-width:1000px) and (min-width:600px){
+    .video img{
+        width: 350px;
+        margin: 0 auto;
+    
+    }
+}
+
+.searchInput {
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    margin: .5rem;
+    height: 1.5rem;
+    border-radius: .3rem;
+}
