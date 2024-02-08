@@ -184,7 +184,7 @@ label {
     background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
-    height: 100vw;
+    margin-top: 3rem;
     justify-content: center;
     font-size: 2rem;
     animation: bounce 1.5s infinite;
