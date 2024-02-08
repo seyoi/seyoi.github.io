@@ -81,13 +81,10 @@ firstLabel.textContent = aArray[currIndex][0];
 secondLabel.textContent = aArray[currIndex][2];
 
 const nextQ = function(e){
-
     bar.style.width = per+'%';
     per = per + increaseRate;
     const targetText = e.target.textContent;
-
     if (currIndex < qArray.length-1){
-        
         for( let i= 0; i < aArray.length; i++){
         const innerIndex = aArray[i];
         
@@ -145,11 +142,11 @@ const nextQ = function(e){
             console.log(`Your type is ${result}`);
             localStorage.clear();
             localStorage.setItem('result',`${result}`);
-
+            showLoadingScreen();
             setTimeout(function(){
                 location.href = 'result.html';
                 
-            },1000)
+            },3000)
 
             return;
 
@@ -162,9 +159,14 @@ aDOM.addEventListener('click',nextQ);
 aDOM2.addEventListener('click',nextQ);
 
 
+let isLoading = false;
 
-
-// Kakao.init('457888e49bbd52d9d5246812ad264e69');
+const showLoadingScreen = () => {
+  const loadingScreen = document.createElement('div');
+  loadingScreen.classList.add('loading');
+  loadingScreen.textContent = 'Analysing...';
+  document.body.appendChild(loadingScreen);
+};
 
 function kakaoLink(){
     Kakao.Link.sendDefault({
