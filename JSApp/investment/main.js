@@ -74,12 +74,10 @@ const maxIndex = 11;
 qDOM.innerHTML = `<p>${qArray[currIndex]}</p>`;
 aDOM.innerHTML = `<label id='first-label'> ${aArray[currIndex][0]}</label><input type='radio' value='test' class='acon' style='display:none;'>`;
 aDOM2.innerHTML = `<label id='second-label'> ${aArray[currIndex][2]} </label><input type='radio' value='test' class='acon' style='display:none;'>`;
-
 const firstLabel = document.getElementById('first-label');
 const secondLabel = document.getElementById('second-label');
 firstLabel.textContent = aArray[currIndex][0];
 secondLabel.textContent = aArray[currIndex][2];
-
 const nextQ = function(e){
     bar.style.width = per+'%';
     per = per + increaseRate;
@@ -87,22 +85,16 @@ const nextQ = function(e){
     if (currIndex < qArray.length-1){
         for( let i= 0; i < aArray.length; i++){
         const innerIndex = aArray[i];
-        
         for ( let j = 0; j< innerIndex.length; j++){
                 if (innerIndex[j] === targetText){
-                    let mbti = innerIndex[j+1];
-                    
+                    let mbti = innerIndex[j+1];    
                     for( k=0; k < mbtiKeys.length; k++){
                         if( mbtiKeys[k] === mbti ){
-                            mbtis[mbti]++;
-                            
+                            mbtis[mbti]++;  
                         };
-        
-
                         }
                     }
-                }
-                
+                }        
             }
     currIndex++;  
     firstLabel.textContent = aArray[currIndex][0];
@@ -125,46 +117,32 @@ const nextQ = function(e){
                     }
                 }
             }
-            
         }
             bar.style.width = '100%';
             for(i = 0; i< mbtiKeys.length; i+=2){
                 const key1 = mbtiKeys[i];
                 const key2 = mbtiKeys[i+1];
                 result.push(mbtis[key1]>mbtis[key2] ? key1:key2);
-        
             }
             currIndex = 0;
             qDOM.style.display = 'none';
             wrapper.style.display = 'none';
-            
-            
-            console.log(`Your type is ${result}`);
             localStorage.clear();
             localStorage.setItem('result',`${result}`);
             showLoadingScreen();
             setTimeout(function(){
                 location.href = 'result.html';
-                
             },3000)
-
             return;
-
-        }
-        
-        
+        }   
     }
-
 aDOM.addEventListener('click',nextQ);
 aDOM2.addEventListener('click',nextQ);
-
-
 let isLoading = false;
-
 const showLoadingScreen = () => {
   const loadingScreen = document.createElement('div');
   loadingScreen.classList.add('loading');
-  loadingScreen.textContent = 'Analysing...';
+  loadingScreen.textContent = `Analysing...`;
   document.body.appendChild(loadingScreen);
 };
 

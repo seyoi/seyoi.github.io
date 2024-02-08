@@ -15,11 +15,18 @@
     </header>
     <main>
         <div class="links">
-          <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">
-     
-          <img src="link.png" alt="" class="link"> 
+            <div class="ktCon">
+                <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">  
+            </div>
+             <img onclick="openModal()" src="link.png" alt="" class="link">
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                <span class="close">&times;</span>
+                <input type="text" value="https://imexer.github.io/JSApp/investment" id="linkInputField">
+                <button id="copyLinkBtn">Copy Link</button>
+                </div>
+              </div>
         </div>
-        
         <a href="question.html">
         <button id="start" class="button">Start</button>
         </a>
@@ -34,8 +41,8 @@ function kakaoLink(){
             description : 'Check your investment style!',
             imageUrl : 'img.png',
             link : {
-                mobileWebUrl : 'https://imexer.github.io/index.html',
-                webUrl : 'https://imexer.github.io/index.html',
+                mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
+                webUrl : 'https://imexer.github.io/JSApp/investment',
 
             },
         },
@@ -47,16 +54,16 @@ function kakaoLink(){
         buttons : [{
             title : 'web',
             link : {
-                mobileWebUrl : 'https://imexer.github.io/index.html',
-                webUrl : 'https://imexer.github.io/index.html',
+                mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
+                webUrl : 'https://imexer.github.io/JSApp/investment',
 
             },
         },
         {
             title: 'app',
             link : {
-                mobileWebUrl : 'https://imexer.github.io/index.html',
-                webUrl : 'https://imexer.github.io/index.html',
+                mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
+                webUrl : 'https://imexer.github.io/JSApp/investment',
 
             },
         }],
@@ -84,7 +91,7 @@ copyLinkBtn.addEventListener('click', function() {
   
   window.getSelection().removeAllRanges();
   
-  alert('Done!');
+  copyLinkBtn.textContent = 'Copied!';
 });
 
     </script>

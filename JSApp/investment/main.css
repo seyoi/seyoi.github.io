@@ -151,6 +151,7 @@ label {
     color: white;
     padding: 1rem;
     font-size: 1.5rem;
+    border: none;
 }
 
 .links {
@@ -159,9 +160,10 @@ label {
     margin: 1rem;
 }
 .ktlink {
-        width: 50px;
-        background-color: rgb(255, 255, 255);
-    }
+    width: 50px;
+    background-color: rgb(255, 255, 255);
+}
+
 
 .link {
     width: 52px;
@@ -222,4 +224,8 @@ label {
     }
   }
   
- 
+ #copyLinkBtn {
+    background-color: black;
+    color: white;
+
+ }
