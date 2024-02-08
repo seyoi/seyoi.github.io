@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>Kakao.init('457888e49bbd52d9d5246812ad264e69');</script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <main>
+        <div id="resultDisplay"></div>
+        <a href="index.html"><button id="restart" class="button">Restart</button></a> 
+        <div class="links">
+            <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">
+            
+            <img onclick="openModal()" src="link.png" alt="" class="link">
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>share link</p>
+                <input type="text" value="https://example.com" id="linkInputField">
+                <button id="copyLinkBtn">링크 복사</button>
+                </div>
+              </div>
+        </div>
+    </main>
+<script>
+    const resultDisplay = document.getElementById('resultDisplay');
+    const display = localStorage.getItem('result');
+    document.addEventListener('DOMContentLoaded',function(){
+    const result = localStorage.getItem('result');
+    console.log(result);
+    if(result == 'E,S,T,J' || result =='I,S,T,J' || result =='I,S,F,J' ||result == 'E,S,F,J' ){
+        resultDisplay.innerHTML = `My investment type is The Guardian<br><br>Responsible and duty-driven by nature, long-term financial planning comes naturally to you. You like having financial security, and investing just seems like the responsible thing to do. You're good at staying organized and are happiest when life is a smooth-running machine -- making you a measured, thoughtful investor who can ride out short-term bumps in the road for the longer-term payoff. You hate losing money, and the idea of gambling with your financial future gives you hives. While your patient and conservative nature is a strength, it can be a weakness if taken to the extreme.
+    <br><br>TIP<br><br>As the most risk-averse temperament, unexpected change can make Guardians anxious. Resist the urge to stuff your cash under a mattress. Embrace your strengths, but remember there's no opportunity without some risk. If you play it too safe, sticking only to guaranteed investments, your returns could be eroded by inflation. A financial planner can help you determine exactly what you need for a comfortable retirement, and whether you can take on a bit more risk without losing any sleep.`;
+    } else if( result == 'I,S,F,P' || result =='E,S,F,P' || result =='I,S,T,P' || result =='E,S,T,P'){
+        const artisan = `MY investment type is The Artisan <br><br>Artisans seek adventure and excitement in all facets of life, and investments are no different. If you fall into this group, you prefer to learn by doing, and couldn't force yourself to read an economics textbook, even if you wanted to. That said, if investing piques your interest, you're more than capable of becoming proficient at it.
+    As an Artisan, you're motivated by novel opportunities, and your adaptability and predilection for "living in the moment" means you can roll with the punches when markets fluctuate (thanks to your aggressive, riskier investment style). However, your adaptability is both an asset and liability, as Artisans can be prone to distraction and may lack the self-discipline to stick to a plan if it starts to feel boring. Do your thing and "go big," but always have a plan.
+    <br><br>TIP<br><br>If you're looking for excitement, don't do it with all your money. Have a financial planner by your side to help navigate and channel your high risk appetite towards a coordinated strategy. When markets fluctuate, tap into that tolerance for ups and downs. And if you absolutely must have a stake in Bitcoin, set aside some "play money" so you can indulge your adventurous side without risking your financial future.
+    `;
+         resultDisplay.innerHTML = artisan;
+    } else if ( result == 'I,N,F,J' || result =='E,N,F,J' || result =='I,N,F,P' || result =='E,N,F,P'){
+        resultDisplay.innerHTML = `My investment type is The Idealist<br><br>
+        Idealists are more concerned with meaning than money for money's sake. They see the world through the lens of their personal identity, growth and relationships, and extend these values into all areas of their lives, including their finances.
+        Idealists care about the impact of their dollars and are conscious of where those dollars up. You'd be uncomfortable investing in anything that doesn't fit with your internal values or is in conflict with causes you hold dear. By the same token, creating wealth that benefits your family, church or favourite charity is a very appealing idea to you. Ethical considerations aside, you're less of a micromanager than some of the other temperaments and prefer to "set it and forget it," the approach an average investor really should be taking.<br><br>TIP<br><br>
+        Values-based and socially responsible investing may spark your interest in thinking about your financial future. What you do with your money is an extension of your identity, and your investment decisions should reflect your values. You'd benefit from having a financial advisor who understands your values (in addition to your goals and priorities), so you can meet those goals in a way that feels authentic to you.`;
+        } else if (result == 'I,N,T,J' || result == 'E,N,T,J' || result== 'I,N,T,P' || result ==  'E,N,T,P') {
+        resultDisplay.innerHTML =`My investment type is The Rational<br><br>
+        You like knowing how things work. Curious and logical, you approach the world (and investing) as a puzzle to be solved. You won't get emotionally attached to a particular investment, and enjoy the challenge of learning the mechanics of investing. Your self-discipline would likely translate into a balanced portfolio, without anything too exotic in it.If you're a Rational, you're better with money than most, and enjoy watching your investments grow. You may even have authored this article and/or may be the 'robo' in robo-advisor.
+    <br><br>TIP<br><br>Rationals take a hands-on approach with their money, which can evolve into micromanaging and an obsessive desire to optimize. Keep in mind most research shows those who try to time the market don't fare any better than those who don't. DIY investing options may be more attractive, but consider leaving a large portion of your funds in passive investments for the long term. One word of caution: beware of analysis paralysis. Once you have undertaken analytical due diligence, make a decision and move on to the next thing.`;
+    }
+    })
+function kakaoLink(){
+    Kakao.Link.sendDefault({
+        objectType : 'feed',
+        content : {
+            title : 'MY INVESTMENT TYPE CHECK',
+            description : 'Check your investment style!',
+            imageUrl : 'img.png',
+            link : {
+                mobileWebUrl : 'https://imexer.github.io/index.html',
+                webUrl : 'https://imexer.github.io/index.html',
+
+            },
+        },
+        social : {
+            likeCount : 0,
+            commentCount : 0,
+            sharedCount : 0,
+        },
+        buttons : [{
+            title : 'web',
+            link : {
+                mobileWebUrl : 'https://imexer.github.io/index.html',
+                webUrl : 'https://imexer.github.io/index.html',
+
+            },
+        },
+        {
+            title: 'app',
+            link : {
+                mobileWebUrl : 'https://imexer.github.io/index.html',
+                webUrl : 'https://imexer.github.io/index.html',
+
+            },
+        }],
+    })
+}
+const openModal =  function() {
+  document.getElementById("myModal").style.display = "block";
+};
+
+document.querySelector(".close").addEventListener("click", function() {
+  document.getElementById("myModal").style.display = "none";
+});
+
+window.onclick = function(event) {
+  if (event.target == document.getElementById("myModal")) {
+    document.getElementById("myModal").style.display = "none";
+  }
+}
+const copyLinkBtn = document.getElementById('copyLinkBtn');
+const linkInputField = document.getElementById('linkInputField');
+copyLinkBtn.addEventListener('click', function() {
+  linkInputField.select();
+  document.execCommand('copy');
+  
+  window.getSelection().removeAllRanges();
+  
+  alert('Done!');
+});
+    </script>
+</body>
+</html>
