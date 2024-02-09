@@ -11,16 +11,16 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    
     <header>
          <h1 class="title">CHECK YOUR INVESTMENT TYPE</h1>
     </header>
     <main>
         <div class="links">
-            <div class="ktCon">
+            <div class="hover-effect">
                 <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">    
             </div>
-             <img onclick="openModal()" src="link.png" alt="" class="link">
+            <div class="hover-effect"> <img onclick="openModal()" src="link.png" alt="" class="link"></div>
+            
             <div id="myModal" class="modal">
                 <div class="modal-content">
                 <span class="close">&times;</span>
@@ -29,7 +29,6 @@
                 </div>
               </div>
         </div>
-        
         <div class="visitorsNum">
             <p> <span id="visitorCount">0</span> people found out their investment type!</p>
         </div>
@@ -117,13 +116,12 @@
         }), 
         // error => {
         //     if (error) {
-        //         console.error('Failed to increment visitor count:', error);
+        //         console.error('no', error);
         //     } else {
-        //         console.log('Visitor count incremented successfully!');
+        //         console.log('ok');
         //     }
         // });
 
-        // Firebase Realtime Database에서 방문자 수 업데이트
         dbRef.on('value', snapshot => {
             const visitorCount = snapshot.val();
             document.getElementById('visitorCount').textContent = visitorCount;

@@ -245,11 +245,32 @@ label {
     background-color: rgb(255, 255, 255);
     position: fixed;
     bottom: 5rem;
-    font-size: 1.5rem;
     text-align: center;
     flex-wrap: wrap;
  }
 
+#visitorCount{
+
+  font-size: 1.5rem;
+}
  #linkInputField {
   border: none;
  }
+
+ .hover-effect {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-effect img {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-effect:hover img {
+  transform: scale(1.3); 
+}
+/* 
+.hover-effect:hover:before,
+.hover-effect:hover:after {
+  opacity: 1;
+} */
