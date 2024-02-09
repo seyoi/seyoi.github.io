@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHECK YOUR INVESTMENT STYLE</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>Kakao.init('457888e49bbd52d9d5246812ad264e69');</script>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    
     <header>
          <h1 class="title">CHECK YOUR INVESTMENT TYPE</h1>
     </header>
@@ -27,95 +30,104 @@
               </div>
         </div>
         
-        <div class="visitorsNum"></div>
+        <div class="visitorsNum">
+            <p> <span id="visitorCount">0</span> people found out their investment type!</p>
+        </div>
         <a href="question.html">
         <button id="start" class="button">Start</button>
         </a>
         </div>
     </main>
     <script>
-function kakaoLink(){
-    Kakao.Link.sendDefault({
-        objectType : 'feed',
-        content : {
-            title : 'MY INVESTMENT TYPE CHECK',
-            description : 'Check your investment style!',
-            imageUrl : 'img.png',
-            link : {
-                mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
-                webUrl : 'https://imexer.github.io/JSApp/investment',
+        function kakaoLink() {
+            Kakao.Link.sendDefault({
+                objectType : 'feed',
+                content : {
+                    title : 'MY INVESTMENT TYPE CHECK',
+                    description : 'Check your investment style!',
+                    imageUrl : 'img.png',
+                    link : {
+                        mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
+                        webUrl : 'https://imexer.github.io/JSApp/investment',
 
-            },
-        },
-        social : {
-            likeCount : 0,
-            commentCount : 0,
-            sharedCount : 0,
-        },
-        buttons : [{
-            title : 'web',
-            link : {
-                mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
-                webUrl : 'https://imexer.github.io/JSApp/investment',
+                    },
+                },
+                social : {
+                    likeCount : 0,
+                    commentCount : 0,
+                    sharedCount : 0,
+                },
+                buttons : [{
+                    title : 'web',
+                    link : {
+                        mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
+                        webUrl : 'https://imexer.github.io/JSApp/investment',
 
-            },
-        },
-        {
-            title: 'app',
-            link : {
-                mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
-                webUrl : 'https://imexer.github.io/JSApp/investment',
+                    },
+                },
+                {
+                    title: 'app',
+                    link : {
+                        mobileWebUrl : 'https://imexer.github.io/JSApp/investment',
+                        webUrl : 'https://imexer.github.io/JSApp/investment',
 
-            },
-        }],
-    })
-}
+                    },
+                }],
+            })
+        }
 
-const openModal =  function() {
-  document.getElementById("myModal").style.display = "block";
+        const openModal = function() {
+            document.getElementById("myModal").style.display = "block";
+        };
+
+        document.querySelector(".close").addEventListener("click", function() {
+            document.getElementById("myModal").style.display = "none";
+        });
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myModal")) {
+                document.getElementById("myModal").style.display = "none";
+            }
+        }
+
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        const linkInputField = document.getElementById('linkInputField');
+        copyLinkBtn.addEventListener('click', function() {
+            linkInputField.select();
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            copyLinkBtn.textContent = 'Copied!';
+        });
+        const firebaseConfig = {
+        apiKey: "AIzaSyB8lGwJ29lpW-uZchlDVm7Xso4Krk1ZAqE",
+        authDomain: "investmentmbti-a20d6.firebaseapp.com",
+        databaseURL: "https://investmentmbti-a20d6-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "investmentmbti-a20d6",
+        storageBucket: "investmentmbti-a20d6.appspot.com",
+        messagingSenderId: "677413735365",
+        appId: "1:677413735365:web:4e519ab5083c7a70ffd9ac",
+        measurementId: "G-LSY3GNFZQW"
 };
+        const app = firebase.initializeApp(firebaseConfig);
 
-document.querySelector(".close").addEventListener("click", function() {
-  document.getElementById("myModal").style.display = "none";
-});
+        const dbRef = firebase.database().ref('visitorCount');
 
-window.onclick = function(event) {
-  if (event.target == document.getElementById("myModal")) {
-    document.getElementById("myModal").style.display = "none";
-  }
-}
-const copyLinkBtn = document.getElementById('copyLinkBtn');
-const linkInputField = document.getElementById('linkInputField');
-copyLinkBtn.addEventListener('click', function() {
-  linkInputField.select();
-  document.execCommand('copy');
-  window.getSelection().removeAllRanges();
-  copyLinkBtn.textContent = 'Copied!';
-});
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) 
-    return parts.pop().split(';').shift();
-};
-function setCookie(name, value, days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = `expires=${date.toUTCString()}`;
-    document.cookie = `${name}=${value};${expires};path=/`;
-    console.log(document.cookie);
-}
-function increaseVisitorCount() {
-    let count = parseInt(getCookie('visitorCount')) || 0;
-    count++;
-    setCookie('visitorCount', count, 1365); 
-}
-window.onload = function() {
-    increaseVisitorCount();
-    const visitorsNum = document.querySelector('.visitorsNum')
-    visitorsNum.innerHTML = `${getCookie('visitorCount')} people found out their investment type!`;
-};
+        dbRef.transaction(count => {
+            return (count || 0) + 1;
+        }), 
+        // error => {
+        //     if (error) {
+        //         console.error('Failed to increment visitor count:', error);
+        //     } else {
+        //         console.log('Visitor count incremented successfully!');
+        //     }
+        // });
+
+        // Firebase Realtime Database에서 방문자 수 업데이트
+        dbRef.on('value', snapshot => {
+            const visitorCount = snapshot.val();
+            document.getElementById('visitorCount').textContent = visitorCount;
+        });
     </script>
 </body>
 </html>
