@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-         <h1 class="title">CHECK YOUR INVESTMENT STYLE</h1>
+         <h1 class="title">CHECK YOUR INVESTMENT TYPE</h1>
     </header>
     <main>
         <div class="links">
@@ -92,29 +92,25 @@ copyLinkBtn.addEventListener('click', function() {
   window.getSelection().removeAllRanges();
   copyLinkBtn.textContent = 'Copied!';
 });
-// 쿠키를 읽는 함수
 function getCookie(name) {
     const value = `; ${document.cookie}`;
+    
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-// 쿠키에 방문자 수를 저장하는 함수
+    if (parts.length === 2) 
+    return parts.pop().split(';').shift();
+};
 function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = `expires=${date.toUTCString()}`;
     document.cookie = `${name}=${value};${expires};path=/`;
+    console.log(document.cookie);
 }
-
-// 방문자 수를 증가시키는 함수
 function increaseVisitorCount() {
     let count = parseInt(getCookie('visitorCount')) || 0;
     count++;
     setCookie('visitorCount', count, 1365); 
 }
-
-// 페이지가 로드될 때 방문자 수를 증가시킴
 window.onload = function() {
     increaseVisitorCount();
     const visitorsNum = document.querySelector('.visitorsNum')
