@@ -10,13 +10,12 @@
 </head>
 <body>
     <header>
-
-       <h1 class="title">CHECK YOUR INVESTMENT STYLE</h1>
+         <h1 class="title">CHECK YOUR INVESTMENT STYLE</h1>
     </header>
     <main>
         <div class="links">
             <div class="ktCon">
-                <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">  
+                <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">    
             </div>
              <img onclick="openModal()" src="link.png" alt="" class="link">
             <div id="myModal" class="modal">
@@ -27,12 +26,14 @@
                 </div>
               </div>
         </div>
+        
+        <div class="visitorsNum"></div>
         <a href="question.html">
         <button id="start" class="button">Start</button>
         </a>
+        </div>
     </main>
     <script>
-
 function kakaoLink(){
     Kakao.Link.sendDefault({
         objectType : 'feed',
@@ -88,12 +89,37 @@ const linkInputField = document.getElementById('linkInputField');
 copyLinkBtn.addEventListener('click', function() {
   linkInputField.select();
   document.execCommand('copy');
-  
   window.getSelection().removeAllRanges();
-  
   copyLinkBtn.textContent = 'Copied!';
 });
+// 쿠키를 읽는 함수
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
+// 쿠키에 방문자 수를 저장하는 함수
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value};${expires};path=/`;
+}
+
+// 방문자 수를 증가시키는 함수
+function increaseVisitorCount() {
+    let count = parseInt(getCookie('visitorCount')) || 0;
+    count++;
+    setCookie('visitorCount', count, 1365); 
+}
+
+// 페이지가 로드될 때 방문자 수를 증가시킴
+window.onload = function() {
+    increaseVisitorCount();
+    const visitorsNum = document.querySelector('.visitorsNum')
+    visitorsNum.innerHTML = `${getCookie('visitorCount')} people found out their investment type!`;
+};
     </script>
 </body>
 </html>
