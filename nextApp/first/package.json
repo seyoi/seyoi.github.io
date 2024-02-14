@@ -17,7 +17,8 @@
     "react": "^18",
     "react-dom": "^18",
     "sanity": "^3.28.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "youngmatiascalendar": "file:../Users/youngmatias/Documents/GitHub/oz/tsApp"
   },
   "devDependencies": {
     "@types/node": "^20",

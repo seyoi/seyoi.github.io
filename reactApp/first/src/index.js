@@ -1,15 +1,15 @@
-// pages/index.tsx
+// src/App.js
 
 import React from 'react';
-import MyCalendarLibrary from 'youngmatiascalendar'; // 내가 만든 라이브러리 import
+import MyCalendarLibrary from './Users/youngmatias/Documents/GitHub/oz/tsApp'; // 로컬 경로로 라이브러리 임포트
 
-const HomePage = () => {
+function App() {
   // MyCalendarLibrary를 사용하여 캘린더 데이터 생성
   const calendarData = MyCalendarLibrary.generateCalendarData(2024, 2);
 
   return (
     <div>
-      <h1>My Next.js App</h1>
+      <h1>My React App with Local Library</h1>
       {/* 라이브러리를 사용한 JSX */}
       <ul>
         {calendarData.map((day, index) => (
@@ -18,6 +18,6 @@ const HomePage = () => {
       </ul>
     </div>
   );
-};
+}
 
-export default HomePage;
+export default App;

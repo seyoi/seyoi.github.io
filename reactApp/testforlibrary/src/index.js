@@ -1,25 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { useState, useRef, useEffect } from 'react';
+
 import './index.css';
 import {videos} from './data.js';
-import { useState } from 'react';
-import MyCalendarLibrary from './src'; // 로컬 경로로 라이브러리 임포트
-
-const calendarData = MyCalendarLibrary.generateCalendarData(2024, 2);
+import { sayHello, addClickListener } from 'youngmatiaslibrary';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+
+
+function MyComponent() {
+  const myElement = useRef(null);
+
+  useEffect(() => {
+      if (myElement.current) {
+          addClickListener(myElement.current);
+      }
+  }, []);
+
+  return <div ref={myElement}>Click me!</div>;
+}
+
+
 const VideoList = () => { 
-    <h1>My React App with Local Library</h1>
-    {/* 라이브러리를 사용한 JSX */}
-    <ul>
-      {calendarData.map((day, index) => (
-        <li key={index}>{day !== null ? day : 'Empty'}</li>
-      ))}
-    </ul>    
+    
     const [search, setSearch] = useState('')
     return (
         <div className='videoList'>
+            
             <input value={search} onChange={(e)=>{setSearch(e.target.value)}} type='text' className='searchInput' placeholder='Search' ></input>
            {
             videos.map((video) => {
@@ -51,4 +60,4 @@ const Video = ({id,title,desc,views}) =>{
 }
 
 
-root.render(<VideoList></VideoList>);
+root.render(<VideoList></VideoList>,<MyComponent></MyComponent>);
