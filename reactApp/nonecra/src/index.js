@@ -5,8 +5,6 @@ import './index.css'
 const root = createRoot(document.getElementById('root'));
 
 function App() {
-  
-
 
   return (
     <div>

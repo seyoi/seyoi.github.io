@@ -172,6 +172,9 @@ label {
     background-color: rgb(255, 255, 255);
     filter: grayscale(100%);
 }
+.walogo {
+  width: 40px;
+}
 .link {
     width: 52px;
     height: 50px;

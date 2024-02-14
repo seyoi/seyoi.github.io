@@ -9,7 +9,7 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>Kakao.init('457888e49bbd52d9d5246812ad264e69');</script>
     <link rel="stylesheet" href="main.css">
-</head>
+ </head>
 <body>
     <header>
          <h1 class="title">CHECK YOUR INVESTMENT TYPE</h1>
@@ -19,8 +19,9 @@
             <div class="hover-effect">
                 <img class="ktlink" src="ktlogo.png" alt="" onclick="kakaoLink()">    
             </div>
+            <a href="whatsapp://send?text=This is WhatsApp sharing example using link"       data-action="share/whatsapp/share"  
+                target="_blank"> <img class="walogo" src="walogo.png" alt="whatsappLink"> </a>   
             <div class="hover-effect"> <img onclick="openModal()" src="link.png" alt="" class="link"></div>
-            
             <div id="myModal" class="modal">
                 <div class="modal-content">
                 <span class="close">&times;</span>
@@ -127,5 +128,6 @@
             document.getElementById('visitorCount').textContent = visitorCount;
         });
     </script>
+    
 </body>
 </html>
