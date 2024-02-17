@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        Lottery
+    </header>
+    <main>
+        <div id="numbers">
+            <p>???????</p>
+        </div>
+        <button id="roll">
+            Roll
+        </button>
+        <button id="reset">
+            Reset
+        </button>
+
+    </main>
+
+    <script>
+       
+       let array = [];
+       const sixNumsDOM = document.getElementById('numbers');
+       const rollDOM = document.getElementById('roll').addEventListener('click',function(){
+        for(i=2; i < 8; i++){
+                
+                let ranNum = Math.random(i)*10;
+                let sixNums = Math.floor(ranNum);
+                array.push(sixNums);
+                
+                sixNumsDOM.textContent = `${array}`
+                
+            } array = [];
+
+       });
+       const resetDOM = document.getElementById('reset').addEventListener('click',function(){
+        sixNumsDOM.textContent = '??????';
+       });
+
+
+       
+
+       
+    </script>
+</body>
+</html>

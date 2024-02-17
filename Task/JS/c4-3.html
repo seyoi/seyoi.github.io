@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <title>Document</title>
+</head>
+<style>
+
+
+.signIn{
+    text-align: center;
+    background-color: aquamarine;
+    margin: auto;
+    border-radius: 10%;
+    box-shadow: 10px 10px red,20px 20px yellow,30px 30px blue;
+}
+
+.form1{
+    padding: 10px;
+}
+
+*{
+    padding: 10px;
+}
+
+input{
+    margin: 10px;
+    border: 1px solid green;
+}
+
+.auth{
+    text-align: right;
+    margin-right: 30px;
+}
+
+.phone > input{
+    margin-right: 10px;
+    width: 100%;
+}
+
+#region, select{
+    width: 400px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid green;
+}
+
+
+
+</style>
+<body>
+   
+    
+    <div class="signIn">
+        <p>!Oz Hyper! Sign up</p>
+
+        <div class="container">
+            <form class="form1" id="form">
+
+                <input placeholder="이메일일 입력" size="50" type="email" name="email" value=""><br>
+                <input placeholder="Name 입력" size="50" name="name" value="" ><br>
+                <input placeholder="Password 입력" size="50" type="password" name="pass" value=""><br>
+                <input placeholder="Password Re 입력" size="50" type="password" name="confirm" value=""><br>
+                
+                <div class="phone">
+                    <input placeholder="phone no." type="number" name="phoneno" value="" >
+                    </div>
+                
+    
+                <!-- <div class="auth">
+                <button onclick="">인증번호 전송</button><br>
+                <button>인증 done</button><br>
+           
+                <br>
+                </div> -->
+            
+            
+                <div>
+                    <select id="region" size="1" name="region">
+                        <option value="">지역선택</option>
+                        <option value="지방">지방</option>
+                        <option value="서울">서울</option>
+                    </select>
+                </div>
+                
+                <br>
+                <div class="sex">
+                    <input type="radio" name="female" value="selected">여성
+                    <input type="radio" name="male" value="selected">남성 <br>
+                </div>
+                
+                <button class="submit" id="submit" type="submit">가입하기
+                </button>
+                <!-- <button class="reset" id="reset" >Reset
+                </button> -->
+            </form>
+        </div>
+        
+        
+    </div>
+    <script>
+        
+        const submit = document.getElementById('submit');
+        
+        function getFormData(){
+            event.preventDefault();
+            const form = document.getElementById('form');
+            const formData = new FormData(form);
+            for( const [key, value] of formData.entries()){
+                console.log(`${key}: ${value}`);
+            }
+            
+        }
+        submit.onclick = getFormData;
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+body{
+    text-align: center;
+    background-color: rgb(119, 189, 217);
+}
+.hat{
+    background-color: rgb(1, 7, 6);
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+.hat1{
+    background-color: black;
+    width: 150px;
+    height: 20px;
+}    
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.head{
+    background-color: white;
+    width: 250px;
+    height: 250px;
+    border-radius: 20cm;
+
+}
+.eye{
+    background-color: rgb(11, 1, 1);
+    width: 25px;
+    height: 25px;
+    border-radius: 20cm;
+    position: relative;
+    top: 50px;
+    left: 50px;
+}
+.eye2{
+    background-color: rgb(11, 1, 1);
+    width: 25px;
+    height: 25px;
+    border-radius: 20cm;
+    position: relative;
+    top: 25px;
+    left: 150px;
+}
+.nose{
+    background-color: rgb(227, 12, 12);
+    width: 65px;
+    height: 25px;
+    border-radius: 20cm;
+    position: relative;
+    top: 35px;
+    left: 50px;
+}
+.body{
+    background-color: white;
+    width: 350px;
+    height: 300px;
+    border-radius: 20cm;
+    display: flex;
+}
+.button{
+    background-color: rgb(11, 1, 1);
+    width: 25px;
+    height: 25px;
+    border-radius: 20cm;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    padding-top: 10px;
+    margin-top: 10px;
+    
+}
+.leftArm{
+    background-color: rgb(224, 141, 8);
+    width: 150px;
+    height: 5px;
+    border-radius: 20cm;
+    position: relative;
+    top: 0px;
+    left: -100px;
+    padding-top: 10px;
+    margin-top: 10px;
+    rotate: 30deg;
+    
+}
+.rightArm{
+    background-color: rgb(224, 141, 8);
+    width: 150px;
+    height: 5px;
+    border-radius: 20cm;
+    position: relative;
+    top: 0px;
+    left: 100px;
+    padding-top: 10px;
+    margin-top: 10px;
+    rotate: 130deg;
+    
+}
+.leg{
+    background-color: white;
+    width: 300px;
+    height: 200px;
+    border-radius: 20cm;
+}

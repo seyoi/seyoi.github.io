@@ -1,0 +1,40 @@
+header{
+    background-color: black;
+    
+}
+
+nav{
+    background-color: black;
+    border: 1px solid red;
+    display: flex;
+}
+.logo img{
+    margin: auto;
+    padding: 8px;
+    width: 120px;
+  }  
+
+.navmenu{
+    color: white;
+    border: 2px solid rgb(0, 255, 0);
+}
+
+.medmenu{
+    color: white;
+    border: 2px solid rgb(255, 238, 0);
+    justify-content: end;
+
+}
+ul{
+    display: flex;
+    justify-content: end;
+    list-style-type: none;
+}
+
+li{
+    padding-left: 20px;
+}
+.hv img{
+    width: 100%;
+    border: 2px solid rgb(0, 119, 255);
+}

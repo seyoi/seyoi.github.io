@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dogsAPI</title>
+    
+    <style>
+
+header{
+    display: flex;
+}
+
+main{
+
+}
+#img{
+
+}
+img{
+    width: 100px;
+}
+</style>
+
+
+</head>
+
+
+
+
+<body>
+
+    <header>
+        <input type="text" id="search-input" placeholder="search keyword">
+       
+        <button id="search-button">search</button>
+        
+        <select id="sort" title="sort" placeholder="">
+            <option value="" selected>breed sort</option>
+        </select>
+
+        <button id="reset-button">
+            reset
+        </button>
+
+    </header>
+
+
+
+    <main>
+        <div id="img"></div>
+        
+        <button id="more">
+            see more
+        </button>
+        <button id="top">
+            top
+        </button>
+
+
+    </main>
+    <footer>
+        
+    </footer>
+
+
+
+
+    <script>
+
+        const resetDOM = document.getElementById('reset-button')
+        .addEventListener('click',function(){
+            imgBox.innerHTML = ``;
+            const request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/42');
+        
+            request.addEventListener('load',function(){
+            
+                const response = JSON.parse(request.response);
+                response.message.forEach(function(i){
+                imgBox.innerHTML += `
+                <img src=${i}>`
+                dogsArray.push(i);
+            })
+            });
+
+            request.send();  
+        });
+
+        let dogsArray = [];
+        let newArray = [];
+        let imgBox = document.getElementById('img');
+        const searchInput = document.getElementById('search-input');
+
+
+        const searchButton = document
+        .getElementById('search-button')
+        .addEventListener('click',function(e)
+        {
+            imgBox.innerHTML = ``;
+            
+
+            dogsArray.forEach(function(e){
+                
+                if(e.includes(searchInput.value)){
+                  newArray.push(e);
+                  imgBox.innerHTML += `<img src=${e}>`;
+                }
+            })
+            
+
+
+               
+          
+         });
+
+
+        window.addEventListener('load',function(){
+          
+            const request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/1');
+        
+            request.addEventListener('load',function(){
+            
+                const response = JSON.parse(request.response);
+                response.message.forEach(function(i){
+                imgBox.innerHTML += `
+                <img src=${i}>`
+                dogsArray.push(i);
+            })
+            });
+
+            request.send();  
+        });
+
+       
+        const sort = document.getElementById('sort');
+        
+        sort.addEventListener('change',function(){
+           
+            imgBox.innerHTML = ``;
+            
+
+            dogsArray.forEach(function(e){
+                
+                if(e.includes(sort.value)){
+                  newArray.push(e);
+                  imgBox.innerHTML += `<img src=${e}>`;
+                }
+            })
+        })
+        
+       
+
+
+
+        const request2 = new XMLHttpRequest();
+
+        request2
+        .addEventListener('load',function(){
+           const response = JSON.parse(request2.response);
+           const keys = Object.keys(response.message);
+           keys.forEach(function(i){
+            sort.innerHTML += `
+            <option>${i}</option>`
+           });
+
+        });
+
+
+        request2.open('get', 'https://dog.ceo/api/breeds/list/all');
+        request2.send();
+
+        const seeMoreDOM = document.getElementById('more');
+        const topDOM = document.getElementById('top');
+
+
+
+        seeMoreDOM.addEventListener('click',function(){
+            console.log(dogsArray);
+            
+            const request = new XMLHttpRequest();
+            request.open('get','https://dog.ceo/api/breeds/image/random/1');
+        
+            request.addEventListener('load',function(){
+            
+                const response = JSON.parse(request.response);
+                response.message.forEach(function(i){
+                imgBox.innerHTML += `
+                <img src=${i}>`
+                dogsArray.push(i);
+            })
+            });
+
+            request.send();  
+        });
+
+        topDOM.addEventListener('click',function(){
+            // document.body.scrollTop = 0;
+            // document.documentElement.scrollTop = 0;
+            window.scrollTo(0, 0);
+        })
+
+
+
+    </script>
+</body>
+</html>

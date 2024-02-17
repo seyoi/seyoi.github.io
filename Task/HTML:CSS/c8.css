@@ -1,0 +1,45 @@
+.container{
+   /* container: 2px solid black;
+    width: max-content;
+    height: max-content;*/
+    padding: 10px;
+    background-color: antiquewhite;
+}
+.date{
+    /*
+    border: 2px solid black;
+    
+    height: max-content;
+
+    */
+    width: max-content;
+
+}
+.weather{
+    margin: auto;
+    width: 360px;
+}
+td{
+    border: 2px solid black;
+    width: max-content;
+    height: max-content;
+    padding: 10px;
+}
+.main{
+    display: block;
+    background-color: rgb(213, 205, 235);
+}
+.title{
+    text-decoration: underline;
+    
+}
+tr{
+    
+}
+.text{
+    border: 2px soild black;
+    background-color: rgb(201, 188, 215);
+}
+td.title{
+    width: 478px;
+}
