@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink , Outlet} from 'react-router-dom'
+import { NavLink , Outlet} from 'react-router-dom';
 
 
 const RootLayout = () => {
@@ -7,17 +7,15 @@ const RootLayout = () => {
     <>
     <div className="root-layout">
         <nav>
-
-          <NavLink to='/'>Home</NavLink>
-
-         <NavLink to='/about'>About</NavLink>
+        <NavLink className={'nav-home'} to='/'>Home</NavLink>
+        <NavLink to='/about'>About</NavLink>
         </nav>
 
     </div>
-    <main>
+    <main className='outlet'>
         <Outlet/>
     </main></>
   )
 }
 
-export default RootLayout
+export default RootLayout;

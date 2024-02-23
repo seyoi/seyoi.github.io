@@ -8,6 +8,19 @@ nav .active {
 }
 
 nav {
-    float: right;
-    
+    display: flex;
+    justify-content: flex-end;
+}
+.data-loader {
+    background-color: aqua;
+}
+.nav-home {
+    background-color: antiquewhite;
+}
+.outlet {
+    background-color: rgb(179, 149, 149);
+}
+
+.root-layout {
+    background-color: rgb(157, 157, 199);
 }
