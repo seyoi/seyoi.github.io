@@ -2,17 +2,17 @@
     {
       "id": "0",
       "title": "Project title",
-      "src": "https://www.google.com/"
+      "src": "/"
     },
     {
       "id": "1",
       "title": "Project title2",
-      "src": "https://www.naver.com/"
+      "src": "/"
     },
     {
       "id": "2",
       "title": "Project title3",
-      "src": "https://ko.react.dev/reference/react"
+      "src": ""
     },
     {
       "id": "3",
