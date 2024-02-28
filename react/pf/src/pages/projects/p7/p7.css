@@ -1,0 +1,49 @@
+.p7 
+{
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.questions
+{
+    background-color: blueviolet;
+    ;
+    text-align: left;
+
+}
+
+.question
+{
+    background-color: bisque;
+    position: relative;
+    padding: .1rem;
+    margin: 1rem;
+    
+    p{
+        margin: 1rem;
+    }
+}
+
+.p7-wrapper
+{
+    width: 70vw;
+    background-color: aqua;
+    height: 100%;
+}
+
+.p7-btn
+{
+    position: absolute;
+    top: 15px;
+    right: 1%;
+}
+
+.answer {
+    display: none;
+}
+
+.answer.show {
+    display: block;
+}

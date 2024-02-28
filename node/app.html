@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="body">hihi</p>
+    <input type="text" class="input" id="input">
+    <button class="btn" onclick="getSound()">Get Sound</button>
+<script>
+    function getSound(){
+        const animal = document.getElementById('input');
+        const name = animal.value;
+
+        fetch(`http://localhost:8080/animals/${name}`)
+        .then(response => {
+           // 서버로부터 응답을 받으면 JSON 형식으로 파싱합니다.
+          return response.json();
+             })
+         .then(data => {
+           // 파싱된 데이터를 처리합니다.
+           console.log(data);
+           const display = document.getElementById('body');
+           display.innerHTML = `${data.sound}`;
+            })
+            .catch(error => {
+                // 에러가 발생한 경우 처리합니다.
+                console.error('Error:', error);
+            });
+
+    }
+</script>
+</body>
+</html>

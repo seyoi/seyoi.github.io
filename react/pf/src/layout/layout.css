@@ -1,0 +1,10 @@
+.navlink {
+    color: red;
+    margin: 1rem;
+    z-index: 10;
+}
+
+.top-navlink {
+    margin: 1rem;
+    z-index: 10;
+}
