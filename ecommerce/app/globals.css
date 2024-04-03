@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+li {
+  list-style: none;
+  margin: 1rem;
+}
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;

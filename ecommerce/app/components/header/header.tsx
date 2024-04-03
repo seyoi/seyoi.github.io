@@ -6,14 +6,17 @@ function Header() {
       <nav>
         <div className="navbar flex justify-between bg-base-300">
           <Link href="/" className="btn text-lg">
-            Ecommerce
+            <li> Ecommerce</li>
           </Link>
           <ul className="flex">
             <li>
               <Link href="/cart">Cart</Link>
             </li>
             <li>
-              <Link href="/singIn">Sign in</Link>
+              <Link href="/sign-in">Sign in</Link>
+            </li>
+            <li>
+              <Link href="/admin">Admin</Link>
             </li>
           </ul>
         </div>

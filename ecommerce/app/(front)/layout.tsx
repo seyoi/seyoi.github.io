@@ -1,6 +1,6 @@
 import React from "react";
 
-function FrontLayout({ children }: React.ReactNode) {
+function FrontLayout({ children }: { children: React.ReactNode }) {
   return <main>{children}</main>;
 }
 

@@ -1,5 +1,7 @@
-import ProductItem from "@/components/products/ProductItem";
-import data from "@/lib/data";
+"use client";
+import ProductItem from "@/app/components/products/ProductItem";
+import data from "@/app/lib/data/data";
+
 export default function Home() {
   return (
     <>
