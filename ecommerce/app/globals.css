@@ -6,6 +6,13 @@ li {
   list-style: none;
   margin: 1rem;
 }
+input {
+  border: 1px solid red;
+}
+
+button {
+  border: 1px solid red;
+}
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;

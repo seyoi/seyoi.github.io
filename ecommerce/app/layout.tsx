@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Header from "@/app/components/header/page";
 import "./globals.css";
-import Header from "@/app/components/header/header";
 import { CartProvider } from "@/app/contexts/CartContext";
-const inter = Inter({ subsets: ["latin"] });
 
+import { AuthStateProvider } from "@/app/contexts/AuthContext";
+import { ProductProvider } from "@/app/contexts/ProductContext";
+
+const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Ecommerce",
   description: "NEXTjs",
@@ -18,12 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartProvider>
-          <div>
-            <Header /> {children}
-            <footer className="fixed bottom-0">footer</footer>
-          </div>
-        </CartProvider>
+        <ProductProvider>
+          <AuthStateProvider>
+            <CartProvider>
+              <div>
+                <Header /> {children}
+                {/* <footer className="fixed bottom-0">footer</footer> */}
+              </div>
+            </CartProvider>
+          </AuthStateProvider>
+        </ProductProvider>
       </body>
     </html>
   );

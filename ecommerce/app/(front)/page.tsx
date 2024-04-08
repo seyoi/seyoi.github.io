@@ -1,16 +1,39 @@
 "use client";
-import ProductItem from "@/app/components/products/ProductItem";
-import data from "@/app/lib/data/data";
+import React, { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./my-page/FirebaseAppConfig";
+import ProductItem from "../components/products/ProductItem";
 
-export default function Home() {
+function ProductPage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        const productsData = [];
+        querySnapshot.forEach((doc) => {
+          productsData.push(doc.data());
+        });
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching products: ", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
-    <>
-      <h2 className="text-2xl py-2">Lastest Product</h2>
-      <div>
-        {data.products.map((product) => (
-          <ProductItem product={product} key={product.slug}></ProductItem>
-        ))}
-      </div>
-    </>
+    <div>
+      <h2>Products</h2>
+      {products
+        ? products.map((product, index) => (
+            <ProductItem key={index} product={product} />
+          ))
+        : "no products"}
+    </div>
   );
 }
+
+export default ProductPage;

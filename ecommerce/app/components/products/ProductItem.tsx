@@ -5,17 +5,18 @@ import { Product } from "@/app/type/ProductModel";
 function ProductItem({ product }: { product: Product }) {
   return (
     <div style={{ border: "1px solid red", marginBottom: "1rem" }}>
-      <figure>
-        <Link href={`/product/${product.slug}`}>
-          <Image alt="" src="/images/next.svg" width={300} height={300} />
-        </Link>
-      </figure>
-      <div className="card-body">
-        <Link href={product.slug}>
+      <Link href={`/product/${product.slug}`}>
+        <Image
+          alt={product.name}
+          src={product.image}
+          width={300}
+          height={300}
+        />
+        <div className="card-body">
           <h2>{product.name}</h2>
-        </Link>
-        <p>{product.brand}</p> <span>{product.price}</span>
-      </div>
+          <p>{product.brand}</p> <span>{product.price}</span>
+        </div>{" "}
+      </Link>
     </div>
   );
 }

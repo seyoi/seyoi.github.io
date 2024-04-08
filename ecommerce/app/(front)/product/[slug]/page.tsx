@@ -1,13 +1,36 @@
 "use client";
-import React, { useState } from "react";
-import data from "@/app/lib/data/data";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/app/contexts/CartContext";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../my-page/FirebaseAppConfig";
+import AddReview from "@/app/components/review/AddReview";
+import ShowReviews from "@/app/components/review/ShowReviews";
 const ProductDetails = ({ params }: { params: { slug: string } }) => {
-  const { cart, addToCart } = useCart();
+  const { addToCart } = useCart();
+  const [product, setProduct] = useState<any>(null);
 
-  const product = data.products.find((x) => x.slug === params.slug);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const q = query(
+          collection(db, "products"),
+          where("slug", "==", params.slug)
+        );
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setProduct(doc.data());
+          console.log(doc.id);
+        });
+      } catch (error) {
+        console.error("Error fetching product: ", error);
+      }
+    };
+
+    fetchProduct();
+  }, [params.slug]);
+
   if (!product) {
     return (
       <div>
@@ -16,7 +39,6 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
       </div>
     );
   }
-
   return (
     <div>
       <div className="back">
@@ -26,20 +48,19 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
       </div>
       <div className="content">
         <Image
-          alt="1"
-          src="/images/vercel.svg"
+          alt={product.name}
+          src={product.image}
           width={300}
           height={300}
           sizes="100vw"
         />
         <p>{product?.name ?? "no name"}</p>
-        <p>{product.price}</p>
-        <p>{product.desc}</p>
+        <p>{product.price} USD</p>
+        <p>Description: {product.desc}</p>
         <div className="status">
-          status
           <div className="stock">
             {product.countInStock > 0
-              ? `${product.countInStock}stock available`
+              ? `${product.countInStock} stock available`
               : "no stock"}
           </div>
           <button
@@ -48,6 +69,8 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
           >
             Add to Cart
           </button>
+          <AddReview slug={params.slug} />
+          <ShowReviews slug={params.slug} />
         </div>
       </div>
     </div>

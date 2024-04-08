@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/contexts/x.tsx"
+    "app/contexts/x.tsx",
+    "app/contexts/firebase.js"
   ],
   "exclude": ["node_modules"]
 }

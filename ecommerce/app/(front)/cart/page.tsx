@@ -1,29 +1,34 @@
-// CartPage.tsx
 "use client";
+import React, { useEffect, useState } from "react";
 import { useCart } from "@/app/contexts/CartContext";
 
 const CartPage = () => {
   const { cart } = useCart();
-  const classified = [];
-  cart.forEach((item) => {
-    if (!classified[item.id]) {
-      classified[item.id] = [];
-    }
-    classified[item.id].push(item);
-  });
 
-  console.log(classified);
   return (
     <div>
       <h2>Shopping Cart</h2>
-
-      {classified.map((item, index) => (
+      {Object.keys(cart).length > 0 ? (
         <div>
-          {item[0].name}
-          <p>{item.length}</p>
+          {Object.keys(cart).map((key: string) => (
+            <div key={key}>
+              <span>{key}</span>: <span>{cart[key].length}</span>
+            </div>
+          ))}
         </div>
-      ))}
-      <p>total: {cart.length}</p>
+      ) : (
+        <p>Cart is empty</p>
+      )}
+      <p>
+        Total items:{" "}
+        {cart
+          ? Object.values(cart).reduce(
+              (acc, category) => acc + category.length,
+              0
+            )
+          : 0}
+      </p>
+
       <div>
         <button style={{ border: "1px solid red" }}>Check out</button>
       </div>
