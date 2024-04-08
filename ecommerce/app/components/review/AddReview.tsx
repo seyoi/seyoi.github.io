@@ -31,7 +31,6 @@ function AddReview({ slug }) {
         createdAt: serverTimestamp(),
       };
 
-      // 해당 제품의 리뷰를 추가하기 위해 slug를 이용하여 제품을 찾습니다.
       const q = query(collection(db, "products"), where("slug", "==", slug));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach(async (doc) => {

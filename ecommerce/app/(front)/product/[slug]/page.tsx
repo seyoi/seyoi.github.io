@@ -52,7 +52,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
           src={product.image}
           width={300}
           height={300}
-          sizes="100vw"
+          layout="fixed"
         />
         <p>{product?.name ?? "no name"}</p>
         <p>{product.price} USD</p>

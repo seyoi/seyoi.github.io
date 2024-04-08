@@ -12,7 +12,7 @@ export const ProductProvider = ({ children }) => {
   const [reviewContent, setReviewContent] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [calculatedRate, setCalculatedRate] = useState(0);
-  const [slug, setSlug] = useState(""); // 프로덕트 아이디 상태 추가
+  const [slug, setSlug] = useState(""); 
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
     const fetchCountInStock = async () => {

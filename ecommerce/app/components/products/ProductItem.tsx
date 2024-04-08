@@ -11,6 +11,7 @@ function ProductItem({ product }: { product: Product }) {
           src={product.image}
           width={300}
           height={300}
+          layout={fixed}
         />
         <div className="card-body">
           <h2>{product.name}</h2>

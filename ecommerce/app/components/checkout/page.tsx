@@ -9,8 +9,6 @@ const CheckoutForm = () => {
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
@@ -23,7 +21,6 @@ const CheckoutForm = () => {
       console.error("Failed to create payment method:", error);
     } else {
       console.log("Payment method created:", paymentMethod);
-      // 이 부분에서 서버로 생성된 결제 정보(paymentMethod)를 전송하여 실제로 결제를 처리할 수 있습니다.
     }
   };
 

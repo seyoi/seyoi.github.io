@@ -14,10 +14,10 @@ function Header() {
           </Link>
           <ul className="flex">
             <li>
-              <Link href="/cart">cart</Link>
+              <Link href="/cart">Cart</Link>
             </li>
             <li>
-              <Link href="/my-page">my page</Link>
+              <Link href="/my-page">My page</Link>
             </li>
             <li>
               <Link href="/admin">Admin</Link>
