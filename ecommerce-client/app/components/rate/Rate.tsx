@@ -8,7 +8,7 @@ export default function StarRating({ noOfStar = 5 }) {
   const [hover, setHover] = useState(0);
 
   useEffect(() => {
-    console.log(hover);
+    // console.log(hover);
   }, [hover]);
   const handleMouseOver = (index) => {
     setHover(index + 1);

@@ -21,7 +21,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           setProduct(doc.data());
-          console.log(doc.id);
+          //   console.log(doc.id);
         });
       } catch (error) {
         console.error("Error fetching product: ", error);
@@ -47,13 +47,7 @@ const ProductDetails = ({ params }: { params: { slug: string } }) => {
         </Link>
       </div>
       <div className="content">
-        <Image
-          alt={product.name}
-          src={product.image}
-          width={300}
-          height={300}
-          layout="fixed"
-        />
+        <img alt={product.name} src={product.image} width={300} height={300} />
         <p>{product?.name ?? "no name"}</p>
         <p>{product.price} USD</p>
         <p>Description: {product.desc}</p>

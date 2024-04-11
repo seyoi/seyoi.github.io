@@ -19,6 +19,7 @@ function Header() {
             <li>
               <Link href="/my-page">My page</Link>
             </li>
+
             <li>
               <Link href="/admin">Admin</Link>
             </li>

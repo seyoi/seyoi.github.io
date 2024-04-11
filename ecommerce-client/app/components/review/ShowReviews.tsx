@@ -6,7 +6,7 @@ import { db } from "@/app/(front)/my-page/FirebaseAppConfig";
 
 function ShowReviews({ slug }) {
   const { reviews, setReviews } = useProduct();
-  console.log(slug);
+
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -19,8 +19,7 @@ function ShowReviews({ slug }) {
           reviewsSnapshot.forEach((reviewDoc) => {
             fetchedReviews.push({ id: reviewDoc.id, ...reviewDoc.data() });
           });
-          console.log(fetchedReviews);
-          console.log("test");
+
           setReviews(fetchedReviews);
         });
       } catch (error) {

@@ -37,18 +37,15 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
           const items = querySnapshot.docs.map((doc) => doc.data());
 
-          const groupedItem: { [key: string]: Product[] } = items.reduce(
-            (acc, item) => {
-              const key = item.name;
-              if (!item.name) {
-                return acc;
-              }
-              acc[key] = acc[key] || [];
-              acc[key].push(item);
+          const groupedItem = items.reduce((acc, item) => {
+            const key = item.name;
+            if (!key) {
               return acc;
-            },
-            {}
-          );
+            }
+            acc[key] = acc[key] || [];
+            acc[key].push(item);
+            return acc;
+          }, []);
           setCart(groupedItem);
         }
       } catch (error) {

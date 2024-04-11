@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Header from "@/app/components/header/page";
+import Header from "@/app/components/Header/Header";
 import "./globals.css";
 import { CartProvider } from "@/app/contexts/CartContext";
-
 import { AuthStateProvider } from "@/app/contexts/AuthContext";
 import { ProductProvider } from "@/app/contexts/ProductContext";
 
