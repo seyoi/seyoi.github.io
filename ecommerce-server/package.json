@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "iamport-rest-client-nodejs": "^0.9.12",
-    "nodemon": "^3.1.0"
-  }
-}
