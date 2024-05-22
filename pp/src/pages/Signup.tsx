@@ -23,7 +23,7 @@ function Signup() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h2 className="text-2xl font-bold mb-6">Signup</h2>
+      <h2 className="text-2xl font-bold mb-6">회원가입</h2>
       <form onSubmit={handleSignup} className="w-full max-w-sm">
         <div className="mb-4">
           <input
@@ -48,7 +48,7 @@ function Signup() {
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Signup
+            회원가입
           </button>
         </div>
       </form>

@@ -279,12 +279,10 @@ function CreateMeet() {
         imgURL: imgURL,
         createdAt: Timestamp.now(),
       });
-      console.log(imgURL);
-      console.log('Document written with ID: ', docRef.id);
-      alert('Data successfully submitted!');
+      alert('모임이 생성되었어요!');
     } catch (error) {
-      console.error('Error adding document: ', error);
-      alert('Error submitting data!');
+      console.error(error);
+      alert('문제가 생겼어요. 다시 시도해 주세요!');
     }
     // try {
     //   const response = await axios.post('https://101.79.9.36/planpeak/post/content_save/', form, {

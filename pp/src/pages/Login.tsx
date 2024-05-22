@@ -36,15 +36,15 @@ function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h2 className="text-2xl font-bold mb-6">{user ? 'Logout' : 'Login'}</h2>
+      <h2 className="text-2xl font-bold mb-6">{user ? '로그아웃' : '로그인'}</h2>
       {user ? (
         <div className="text-center">
-          <p className="mb-4">Welcome, {user && user.email}</p>
+          <p className="mb-4">어서오세요, {user && user.email}</p>
           <button
             onClick={handleLogout}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Logout
+            로그아웃
           </button>
         </div>
       ) : (
@@ -72,7 +72,7 @@ function Login() {
               type="submit"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Login
+              로그인
             </button>
           </div>
         </form>
