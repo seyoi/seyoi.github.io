@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-// import { Inter } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import '../styles/globals.css';
 import '../styles/reset.css';
 import { ReactQueryClientProvider } from '@/libs/ReactQueryClientProvider';
 
-// const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'copy petodo',
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
       </body>
     </html>
