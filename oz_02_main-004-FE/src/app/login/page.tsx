@@ -45,25 +45,28 @@ const Login = () => {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {!isLoggedIn ? (
-        <>
-          <button onClick={handleKakaoLogin}>
-            <img
-              src="https://developers.kakao.com/assets/img/about/logos/kakaologin/logo/kakao_account_login_btn_medium_narrow.png"
-              alt="카카오 로그인"
-            />
-          </button>
-        </>
-      ) : (
-        <>
-          <div>
-            <h2>안녕하세요, {user?.id}님</h2>
-            <button onClick={handleLogout}>로그아웃</button>
-          </div>
-        </>
-      )}
-    </main>
+    <>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        {!isLoggedIn ? (
+          <>
+            xx
+            <button onClick={handleKakaoLogin}>
+              <img
+                src="https://developers.kakao.com/assets/img/about/logos/kakaologin/logo/kakao_account_login_btn_medium_narrow.png"
+                alt="카카오 로그인"
+              />
+            </button>
+          </>
+        ) : (
+          <>
+            <div>
+              <h2>안녕하세요, {user?.id}님</h2>
+              <button onClick={handleLogout}>로그아웃</button>
+            </div>
+          </>
+        )}
+      </main>{' '}
+    </>
   );
 };
 
