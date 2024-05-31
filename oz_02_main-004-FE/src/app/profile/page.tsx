@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 interface User {
-  first_name: string;
+  email: string;
 }
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -19,6 +19,7 @@ const Profile = () => {
         })
         .then(response => {
           setUser(response.data);
+          console.log(user);
         })
         .catch(error => {
           console.error('Failed to fetch user:', error);
@@ -32,7 +33,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>안녕하세요, {user.first_name}님</h2>
+      <h2>안녕하세요, {user.email}님</h2>
     </div>
   );
 };
