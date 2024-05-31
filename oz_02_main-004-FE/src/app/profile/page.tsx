@@ -1,6 +1,6 @@
 'use client';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 interface User {
   id: number;
