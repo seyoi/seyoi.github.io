@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 interface User {
   email: string;
+  id: number;
 }
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -12,7 +13,7 @@ const Profile = () => {
     const token = Cookies.get('auth_token');
     if (token) {
       axios
-        .get('http://54.180.86.80/users/myinfo', {
+        .get('http://54.180.86.80/api/v1/users/myinfo', {
           headers: {
             Authorization: `Token ${token}`,
           },
@@ -33,7 +34,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>안녕하세요, {user.email}님</h2>
+      <h2>안녕하세요, {user.id}님</h2>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 const handleKakaoLogin = () => {
-  window.location.href = 'http://54.180.86.80/users/kakao/';
+  window.location.href = 'https://api.oz-02-main-04.xyz/api/v1/users/kakao/';
 };
 
 const Login = () => {
