@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-
+interface User {
+  first_name: string;
+}
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const token = Cookies.get('auth_token');
