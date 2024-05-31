@@ -29,7 +29,7 @@ const Profile = () => {
   }, []);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>wth</div>;
   }
 
   return (
