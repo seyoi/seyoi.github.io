@@ -1,12 +1,12 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 import axios from 'axios';
 
 interface User {
   email: string;
   id: number;
+  nickname: string;
 }
 
 const Profile = () => {
@@ -14,29 +14,41 @@ const Profile = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = Cookies.get('auth_token');
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get('token');
+    if (token) {
+      localStorage.setItem('auth_token', token);
+      window.history.replaceState(null, '', '/profile'); // Remove token from URL
+    }
+
+    const storedToken = localStorage.getItem('auth_token');
+    if (!storedToken) {
+      router.push('/login');
+      return;
+    }
 
     axios
       .get<User>('http://54.180.86.80/api/v1/users/myinfo', {
         headers: {
-          Authorization: `Token ${token}`,
+          Authorization: `Token ${storedToken}`,
         },
       })
       .then(response => {
         setUser(response.data);
-        console.log(user);
       })
       .catch(error => {
-        console.error(error);
+        console.error('Failed to fetch user:', error);
+        router.push('/login');
       });
   }, [router]);
 
   const handleLogout = () => {
-    Cookies.remove('auth_token');
+    localStorage.removeItem('auth_token');
+    router.push('/login');
   };
 
   if (!user) {
-    return <div>Loading..2.</div>;
+    return <div>Loading...</div>;
   }
 
   return (
