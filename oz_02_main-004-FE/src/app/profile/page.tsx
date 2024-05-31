@@ -15,10 +15,6 @@ const Profile = () => {
 
   useEffect(() => {
     const token = Cookies.get('auth_token');
-    if (!token) {
-      router.push('/login');
-      return;
-    }
 
     axios
       .get<User>('http://54.180.86.80/api/v1/users/myinfo', {
@@ -31,14 +27,12 @@ const Profile = () => {
         console.log(user);
       })
       .catch(error => {
-        console.error('Failed to fetch user:', error);
-        router.push('/login');
+        console.error(error);
       });
   }, [router]);
 
   const handleLogout = () => {
     Cookies.remove('auth_token');
-    router.push('/login');
   };
 
   if (!user) {
