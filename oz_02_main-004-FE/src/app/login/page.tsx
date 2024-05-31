@@ -8,14 +8,6 @@ const handleKakaoLogin = () => {
 };
 
 const Login = () => {
-  const router = useRouter();
-  useEffect(() => {
-    const token = Cookies.get('auth_token');
-    if (token) {
-      router.push('/profile');
-    }
-  }, [router]);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       test{' '}
