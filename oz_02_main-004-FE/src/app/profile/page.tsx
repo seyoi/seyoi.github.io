@@ -1,70 +1,53 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import axiosInstance from './axiosInstance';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-interface UserData {
-  id: number | null;
-  계정: string;
-  닉네임: string;
-  운영진: boolean;
-  휴면회원: boolean;
-  활동회원: boolean;
-  가입일: string;
-  변동일: string;
-  로그인: string;
+
+interface User {
+  id: number;
+  email: string;
+  is_staff: boolean;
+  is_down: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
-const Profile = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [retry, setRetry] = useState(false);
-
-  const fetchData = async () => {
-    try {
-      const response = await axiosInstance.get('/api/v1/users/myinfo');
-      setUserData(response.data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
-        console.log('Unauthorized, setting retry to true');
-        setRetry(true);
-      } else {
-        console.log('Other error', error);
-      }
-    }
-  };
+export default function Page() {
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    if (!userData && !retry) {
-      console.log('Initial data fetch');
-      fetchData();
-    } else if (retry) {
-      console.log('Retrying data fetch');
-      const retryFetch = setTimeout(() => {
-        fetchData();
-        setRetry(false);
-      }, 2000); // 2-second delay to ensure token setting
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
+          withCredentials: true, // 쿠키를 함께 보냅니다
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error('Failed to fetch user data', error);
+      }
+    };
 
-      return () => clearTimeout(retryFetch);
-    }
-  }, [userData, retry]);
+    fetchUserData();
+  }, []);
 
-  if (!userData) {
-    return <div>Loading...</div>;
-  }
+  const handleLogin = () => {
+    window.location.href = 'https://api.oz-02-main-04.xyz/api/v1/users/kakao';
+  };
 
   return (
     <div>
-      <h1>Profile</h1>
-      <p>계정: {userData.계정}</p>
-      <p>닉네임: {userData.닉네임}</p>
-      <p>운영진: {userData.운영진 ? 'Yes' : 'No'}</p>
-      <p>휴면회원: {userData.휴면회원 ? 'Yes' : 'No'}</p>
-      <p>활동회원: {userData.활동회원 ? 'Yes' : 'No'}</p>
-      <p>가입일: {userData.가입일}</p>
-      <p>변동일: {userData.변동일}</p>
-      <p>로그인: {userData.로그인}</p>
+      <h1>카카오 로그인</h1>
+      {!user ? (
+        <button onClick={handleLogin}>카카오로 로그인</button>
+      ) : (
+        <div>
+          <h2>유저 정보</h2>
+          <p>아이디: {user?.id}</p>
+          <p>이메일: {user?.email}</p>
+          <p>운영진: {user?.is_staff ? 'Yes' : 'No'}</p>
+          <p>휴면회원: {user?.is_down ? 'Yes' : 'No'}</p>
+          <p>가입일: {user?.created_at}</p>
+          <p>수정일: {user?.updated_at}</p>
+        </div>
+      )}
     </div>
   );
-};
-
-export default Profile;
+}
