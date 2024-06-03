@@ -1,9 +1,6 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 
 const KakaoLogin = () => {
-  const router = useRouter();
-
   const handleKakaoLogin = () => {
     const kakaoAuthUrl = `http://54.180.86.80/api/v1/users/kakao/`;
     window.location.href = kakaoAuthUrl;
