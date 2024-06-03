@@ -1,11 +1,9 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axiosInstance from './axiosInstance';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-
 const Profile = () => {
   const [userData, setUserData] = useState({
-    id: null,
     계정: '',
     닉네임: '',
     운영진: false,
@@ -19,18 +17,23 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://54.180.86.80/api/v1/users/myinfo', {
-          withCredentials: true,
-        });
+        const response = await axiosInstance.get('/api/v1/users/myinfo');
         setUserData(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
+        // Handle token expiration or other errors
+        if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
+          // Token refresh is handled in axiosInstance interceptors
+        }
       }
     };
 
     fetchData();
   }, []);
+
+  if (!userData.계정) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
