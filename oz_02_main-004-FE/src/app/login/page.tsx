@@ -7,8 +7,8 @@ const KakaoLogin = () => {
 
   return (
     <div>
-      <h1>Kakao Login</h1>
-      <button onClick={handleKakaoLogin}>Login with Kakao</button>
+      
+      <button onClick={handleKakaoLogin}>로그인</button>
     </div>
   );
 };
