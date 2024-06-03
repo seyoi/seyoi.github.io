@@ -9,7 +9,7 @@ const getAccessToken = () => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'https://54.180.86.80', // Base URL of your backend API
+  baseURL: 'https://54.180.86.80/profile', // Base URL of your backend API
   withCredentials: true, // Ensure cookies are sent with requests
 });
 
