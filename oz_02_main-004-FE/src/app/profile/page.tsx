@@ -21,6 +21,7 @@ export default function Page() {
           withCredentials: true, // 쿠키를 함께 보냅니다
         });
         setUser(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Failed to fetch user data', error);
       }
