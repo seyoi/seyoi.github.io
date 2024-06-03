@@ -38,30 +38,29 @@ axiosInstance.interceptors.response.use(
   response => response,
   async error => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         const refreshToken = getRefreshToken();
         const response = await axios.post(
           'https://54.180.86.80/api/v1/users/refresh/',
-          {
-            refresh: refreshToken,
-          },
-          {
-            withCredentials: true,
-          },
+          { refresh: refreshToken },
+          { withCredentials: true },
         );
 
         const newAccessToken = response.data.access;
         document.cookie = `access_token=${newAccessToken}; path=/; secure; samesite=None;`;
 
-        axios.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+        // Update the original request's authorization header
+        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
       } catch (err) {
         console.error('Error refreshing token:', err);
         // Handle token refresh failure (e.g., redirect to login)
       }
     }
+
     return Promise.reject(error);
   },
 );
