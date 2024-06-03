@@ -26,17 +26,16 @@ axiosInstance.interceptors.request.use(
   },
 );
 
-axiosInstance.interceptors.response.use(
-  response => response,
-  async error => {
-    if (error.response && error.response.status === 401) {
-      // Handle token expiration or unauthorized access
-      console.error('Unauthorized access - redirecting to login.');
-      // Redirect to login page or show a login modal
-      window.location.href = '/login'; // or any appropriate action
-    }
-    return Promise.reject(error);
-  },
-);
+// axiosInstance.interceptors.response.use(
+//   response => response,
+//   async error => {
+//     if (error.response && error.response.status === 401) {
+//       // Handle token expiration or unauthorized access
+//       console.error('Unauthorized access - redirecting to login.');
+//       // Redirect to login page or show a login modal
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 
 export default axiosInstance;
