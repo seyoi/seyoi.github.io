@@ -23,6 +23,7 @@ const Profile = () => {
           withCredentials: true,
         });
         setUserData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -30,10 +31,6 @@ const Profile = () => {
 
     fetchData();
   }, []);
-
-  if (userData.id === null) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
