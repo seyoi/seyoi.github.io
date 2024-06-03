@@ -1,9 +1,9 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import axiosInstance from './axiosInstance';
 import axios from 'axios';
+import { GetServerSideProps } from 'next';
+
+// 유저 데이터 타입 정의
 interface UserData {
-  id: number | null;
+  id: number;
   계정: string;
   닉네임: string;
   운영진: boolean;
@@ -14,40 +14,43 @@ interface UserData {
   로그인: string;
 }
 
-const Profile = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [retry, setRetry] = useState(false);
+// getServerSideProps 함수 정의
+export const getServerSideProps: GetServerSideProps = async context => {
+  const token = context.req.headers.cookie
+    ?.split('; ')
+    .find(row => row.startsWith('access_token'))
+    ?.split('=')[1];
 
-  const fetchData = async () => {
-    try {
-      const response = await axiosInstance.get('/api/v1/users/myinfo');
-      setUserData(response.data);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      if (axios.isAxiosError(error) && error.response && error.response.status === 401) {
-        console.log('Unauthorized, setting retry to true');
-        setRetry(true);
-      } else {
-        console.log('Other error', error);
-      }
-    }
-  };
+  const axiosInstance = axios.create({
+    baseURL: 'www.oz-02-main-04.xyz',
+    headers: {
+      Authorization: token ? `Bearer ${token}` : '',
+    },
+  });
 
-  useEffect(() => {
-    if (!userData && !retry) {
-      console.log('Initial data fetch');
-      fetchData();
-    } else if (retry) {
-      console.log('Retrying data fetch');
-      const retryFetch = setTimeout(() => {
-        fetchData();
-        setRetry(false);
-      }, 2000); // 2-second delay to ensure token setting
+  try {
+    const response = await axiosInstance.get<UserData>('/api/v1/users/myinfo');
+    return {
+      props: {
+        userData: response.data,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return {
+      props: {
+        userData: null,
+      },
+    };
+  }
+};
 
-      return () => clearTimeout(retryFetch);
-    }
-  }, [userData, retry]);
+// Profile 컴포넌트 정의
+interface ProfileProps {
+  userData: UserData | null;
+}
 
+const Profile: React.FC<ProfileProps> = ({ userData }) => {
   if (!userData) {
     return <div>Loading...</div>;
   }

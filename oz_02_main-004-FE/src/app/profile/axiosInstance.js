@@ -8,14 +8,6 @@ const getAccessToken = () => {
   return null;
 };
 
-// Function to get refresh token from cookies
-const getRefreshToken = () => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; refresh_token=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-};
-
 const axiosInstance = axios.create({
   baseURL: 'https://54.180.86.80', // Base URL of your backend API
   withCredentials: true, // Ensure cookies are sent with requests
@@ -37,30 +29,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   response => response,
   async error => {
-    const originalRequest = error.config;
-
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const refreshToken = getRefreshToken();
-        const response = await axios.post(
-          'https://54.180.86.80/api/v1/users/refresh/',
-          { refresh: refreshToken },
-          { withCredentials: true },
-        );
-
-        const newAccessToken = response.data.access;
-        document.cookie = `access_token=${newAccessToken}; path=/; secure; samesite=None;`;
-
-        // Update the original request's authorization header
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-        return axiosInstance(originalRequest);
-      } catch (err) {
-        console.error('Error refreshing token:', err);
-        // Handle token refresh failure (e.g., redirect to login)
-      }
+    if (error.response && error.response.status === 401) {
+      // Handle token expiration or unauthorized access
+      console.error('Unauthorized access - redirecting to login.');
+      // Redirect to login page or show a login modal
+      window.location.href = '/login'; // or any appropriate action
     }
-
     return Promise.reject(error);
   },
 );
