@@ -4,7 +4,7 @@ import axios from 'axios';
 
 interface User {
   id: number;
-  이메일: string;
+  계정: string;
 }
 
 export default function Page() {
@@ -30,7 +30,7 @@ export default function Page() {
     <div>
       <h2>유저 정보</h2>
       <p>아이디: {user?.id}</p>
-      <p>이메일: {user?.이메일}</p>
+      <p>이메일: {user?.계정}</p>
     </div>
   );
 }
