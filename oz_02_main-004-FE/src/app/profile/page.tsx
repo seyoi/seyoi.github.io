@@ -19,6 +19,7 @@ const Profile = () => {
       try {
         const response = await axiosInstance.get('/api/v1/users/myinfo');
         setUserData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
         // Handle token expiration or other errors
@@ -30,10 +31,6 @@ const Profile = () => {
 
     fetchData();
   }, []);
-
-  if (!userData.계정) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
