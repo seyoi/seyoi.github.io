@@ -19,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://54.180.86.80/api/v1/users/myinfo', {
+        const response = await axios.get('https://54.180.86.80/api/v1/users/myinfo', {
           withCredentials: true,
         });
         setUserData(response.data);
