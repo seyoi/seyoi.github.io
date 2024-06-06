@@ -29,17 +29,16 @@ export default function Page() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/logout',
+        'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout',
         {},
         {
           withCredentials: true,
         },
       );
       setUser(null);
-      // Optionally, redirect to the login page
       window.location.href = '/login';
     } catch (error) {
-      console.error('Logout failed', error);
+      console.error('로그아웃 왜 안되니', error);
     }
   };
 
