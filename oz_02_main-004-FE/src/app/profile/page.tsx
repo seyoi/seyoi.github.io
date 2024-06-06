@@ -11,10 +11,11 @@ interface User {
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
   const accessToken = Cookies.get('access_token');
-
+  console.log(accessToken);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        console.log(accessToken);
         const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
           withCredentials: true,
           headers: {
@@ -33,9 +34,11 @@ export default function Page() {
 
   const handleLogout = async () => {
     try {
+      const accessToken = Cookies.get('access_token');
+      console.log(accessToken);
       const csrfToken = Cookies.get('csrftoken');
       const response = await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/logout/',
+        'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
         {},
         {
           withCredentials: true,
