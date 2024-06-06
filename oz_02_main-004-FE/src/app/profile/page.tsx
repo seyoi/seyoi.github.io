@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+
 interface User {
   id: number;
   계정: string;
@@ -9,12 +10,16 @@ interface User {
 
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
+  const accessToken = Cookies.get('access_token');
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
           withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         });
         setUser(response.data);
         console.log(response.data);
@@ -24,7 +29,7 @@ export default function Page() {
     };
 
     fetchUserData();
-  }, []);
+  }, [accessToken]);
 
   const handleLogout = async () => {
     try {
@@ -36,6 +41,7 @@ export default function Page() {
           withCredentials: true,
           headers: {
             'X-CSRFToken': csrfToken,
+            Authorization: `Bearer ${accessToken}`,
           },
         },
       );
@@ -43,10 +49,10 @@ export default function Page() {
         setUser(null);
         window.location.href = '/login';
       } else {
-        console.error('Logout failed with status:', response.status);
+        console.error(response.status);
       }
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error(error);
     }
   };
 
