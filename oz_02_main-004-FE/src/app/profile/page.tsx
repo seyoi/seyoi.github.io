@@ -28,9 +28,7 @@ export default function Page() {
 
   return (
     <div>
-      <h2>유저 정보</h2>
-      <p>아이디: {user?.id}</p>
-      <p>이메일: {user?.계정}</p>
+      <p>안녕하세여: {user?.계정} 님 </p>
     </div>
   );
 }
