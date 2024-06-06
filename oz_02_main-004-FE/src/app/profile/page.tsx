@@ -2,15 +2,26 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
+import { GetServerSideProps } from 'next';
+import cookies from 'next-cookies';
 interface User {
   id: number;
   계정: string;
 }
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { accessToken } = cookies(context);
 
-export default function Page() {
+  return {
+    props: {
+      initialAccessToken: accessToken || '',
+    },
+  };
+};
+export default function Page({ initialAccessToken }: any) {
   const [user, setUser] = useState<User | null>(null);
-  const accessToken = Cookies.get('access_token');
+  //   const accessToken = Cookies.get('access_token');
+  const [accessToken, setAccessToken] = useState(initialAccessToken);
+
   console.log(accessToken);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -34,26 +45,27 @@ export default function Page() {
 
   const handleLogout = async () => {
     try {
-      const accessToken = Cookies.get('access_token');
       console.log(accessToken);
       const csrfToken = Cookies.get('csrftoken');
       const response = await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
+        'https://api.oz-02-main-04.xyz/api/v1/users/logout/',
         {},
         {
           withCredentials: true,
           headers: {
+            'X-CSRFToken': csrfToken,
             Authorization: `Bearer ${accessToken}`,
           },
         },
       );
       if (response.status === 200) {
         setUser(null);
+        window.location.href = '/login';
       } else {
-        console.error(response.status);
+        console.error('Logout failed with status:', response.status);
       }
     } catch (error) {
-      console.error(error);
+      console.error('Logout failed:', error);
     }
   };
 
