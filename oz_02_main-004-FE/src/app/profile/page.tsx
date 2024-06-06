@@ -2,31 +2,27 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { GetServerSideProps } from 'next';
-import cookies from 'next-cookies';
+
 interface User {
   id: number;
   계정: string;
 }
-export const getServerSideProps: GetServerSideProps = async context => {
-  const { accessToken } = cookies(context);
 
-  return {
-    props: {
-      initialAccessToken: accessToken || '',
-    },
-  };
-};
-export default function Page({ initialAccessToken }: any) {
+export default function Page() {
   const [user, setUser] = useState<User | null>(null);
-  //   const accessToken = Cookies.get('access_token');
-  const [accessToken, setAccessToken] = useState(initialAccessToken);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  console.log(accessToken);
+  useEffect(() => {
+    const token = Cookies.get('accessToken');
+    if (token) {
+      setAccessToken(token);
+    }
+  }, []);
+
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!accessToken) return;
       try {
-        console.log(accessToken);
         const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
           withCredentials: true,
           headers: {
@@ -45,7 +41,6 @@ export default function Page({ initialAccessToken }: any) {
 
   const handleLogout = async () => {
     try {
-      console.log(accessToken);
       const csrfToken = Cookies.get('csrftoken');
       const response = await axios.post(
         'https://api.oz-02-main-04.xyz/api/v1/users/logout/',
