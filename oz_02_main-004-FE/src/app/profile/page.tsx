@@ -21,7 +21,8 @@ export default function Page() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!accessToken) return;
+      //   if (!accessToken) return;
+      console.log(accessToken);
       try {
         const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
           withCredentials: true,
@@ -43,7 +44,7 @@ export default function Page() {
     try {
       const csrfToken = Cookies.get('csrftoken');
       const response = await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/logout/',
+        'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
         {},
         {
           withCredentials: true,
