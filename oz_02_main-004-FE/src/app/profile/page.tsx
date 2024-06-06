@@ -40,14 +40,12 @@ export default function Page() {
         {
           withCredentials: true,
           headers: {
-            'X-CSRFToken': csrfToken,
             Authorization: `Bearer ${accessToken}`,
           },
         },
       );
       if (response.status === 200) {
         setUser(null);
-        window.location.href = '/login';
       } else {
         console.error(response.status);
       }
