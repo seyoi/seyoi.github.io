@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 interface User {
   id: number;
   계정: string;
@@ -28,17 +28,25 @@ export default function Page() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
+      const csrfToken = Cookies.get('csrftoken');
+      const response = await axios.post(
+        'https://api.oz-02-main-04.xyz/api/v1/users/logout/',
         {},
         {
           withCredentials: true,
+          headers: {
+            'X-CSRFToken': csrfToken,
+          },
         },
       );
-      setUser(null);
-      //   window.location.href = '/login';
+      if (response.status === 200) {
+        setUser(null);
+        window.location.href = '/login';
+      } else {
+        console.error('Logout failed with status:', response.status);
+      }
     } catch (error) {
-      console.error('로그아웃 왜 안되니', error);
+      console.error('Logout failed:', error);
     }
   };
 
