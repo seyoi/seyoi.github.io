@@ -17,7 +17,7 @@ export default function Page() {
     console.log('value', value);
     const parts = value.split(`; ${name}=`);
     console.log(parts);
-    const token = Cookies.get('accessToken');
+    const token = Cookies.get('access_token');
     if (token) {
       setAccessToken(token);
     }
