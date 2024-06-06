@@ -13,6 +13,10 @@ export default function Page() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
+    const value = `; ${document.cookie}`;
+    console.log('value', value);
+    const parts = value.split(`; ${name}=`);
+    console.log(parts);
     const token = Cookies.get('accessToken');
     if (token) {
       setAccessToken(token);
