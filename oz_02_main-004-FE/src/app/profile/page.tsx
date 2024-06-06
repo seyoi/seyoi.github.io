@@ -36,7 +36,7 @@ export default function Page() {
         },
       );
       setUser(null);
-      window.location.href = '/login';
+      //   window.location.href = '/login';
     } catch (error) {
       console.error('로그아웃 왜 안되니', error);
     }
