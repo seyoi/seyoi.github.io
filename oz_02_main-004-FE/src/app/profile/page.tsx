@@ -64,23 +64,23 @@ export default function Page() {
       //   console.log(accessToken);
       //   console.log(csrf);
 
-      const response = await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            'X-CSRFToken': csrf,
-            Authorization: `Bearer ${accessToken}`,
-          },
-        },
-      );
-      if (response.status === 200) {
-        setUser(null);
-        window.location.href = '/login';
-      } else {
-        console.error(response.status);
-      }
+      //   const response = await axios.post(
+      //     'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
+      //     {},
+      //     {
+      //       withCredentials: true,
+      //       headers: {
+      //         'X-CSRFToken': csrf,
+      //         Authorization: `Bearer ${accessToken}`,
+      //       },
+      //     },
+      //   );
+      //   if (response.status === 200) {
+      //     setUser(null);
+      //     window.location.href = '/login';
+      //   } else {
+      //     console.error(response.status);
+      //   }
     } catch (error) {
       console.error(error);
     }
