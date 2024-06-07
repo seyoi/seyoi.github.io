@@ -59,6 +59,7 @@ export default function Page() {
     try {
       deleteCookie('access_token', '/', 'oz-02-main-04.xyz');
       deleteCookie('refresh_token', '/', 'oz-02-main-04.xyz');
+      deleteCookie('csrftoken', '/', 'oz-02-main-04.xyz');
       console.log(accessToken);
       console.log(csrf);
 
