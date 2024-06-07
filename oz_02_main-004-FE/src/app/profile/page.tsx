@@ -1,26 +1,28 @@
 'use client';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 interface User {
   id: number;
   계정: string;
 }
-
+export const getCookieValue = (name: string) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()!.split(';').shift();
+};
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-
+  const [csrf, setCsrf] = useState('');
   useEffect(() => {
-    const value = `; ${document.cookie}`;
-    console.log('value', value);
-    const parts = value.split(`; ${name}=`);
-    console.log(parts);
-    const token = Cookies.get('access_token');
-    console.log(token);
+    const csrfToken = getCookieValue('csrftoken');
+    const token = getCookieValue('access_token');
     if (token) {
       setAccessToken(token);
+    }
+    if (csrfToken) {
+      setCsrf(csrfToken);
     }
   }, []);
 
@@ -48,15 +50,15 @@ export default function Page() {
   const handleLogout = async () => {
     try {
       console.log(accessToken);
-      const csrfToken = Cookies.get('csrftoken');
-      console.log(csrfToken);
+      console.log(csrf);
+
       const response = await axios.post(
         'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
         {},
         {
           withCredentials: true,
           headers: {
-            'X-CSRFToken': csrfToken,
+            'X-CSRFToken': csrf,
             Authorization: `Bearer ${accessToken}`,
           },
         },
@@ -77,9 +79,7 @@ export default function Page() {
       {user ? (
         <>
           <p>안녕하세요! {user.계정} 님 </p>
-          <button onClick={handleLogout} className="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">
-            로그아웃
-          </button>
+          <button onClick={handleLogout}>로그아웃</button>
         </>
       ) : (
         <p>로그인 해주세요.</p>

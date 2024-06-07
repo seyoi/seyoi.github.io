@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Function to get access token from cookies
 const getAccessToken = () => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; access_token=`);
@@ -9,8 +8,8 @@ const getAccessToken = () => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: 'https://54.180.86.80/', // Base URL of your backend API
-  withCredentials: true, // Ensure cookies are sent with requests
+  baseURL: 'https://54.180.86.80/',
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
