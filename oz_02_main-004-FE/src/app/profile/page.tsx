@@ -11,7 +11,12 @@ const getCookieValue = (name: string) => {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()!.split(';').shift();
 };
-
+function deleteCookie(name: any, path: any, domain: any) {
+  if (getCookieValue(name)) {
+    document.cookie =
+      name + '=; Max-Age=-99999999;' + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '');
+  }
+}
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -52,6 +57,8 @@ export default function Page() {
 
   const handleLogout = async () => {
     try {
+      deleteCookie('access_token', '/', 'oz-02-main-04.xyz');
+      deleteCookie('refresh_token', '/', 'oz-02-main-04.xyz');
       console.log(accessToken);
       console.log(csrf);
 
@@ -70,10 +77,10 @@ export default function Page() {
         setUser(null);
         window.location.href = '/login';
       } else {
-        console.error('Logout failed with status:', response.status);
+        console.error(response.status);
       }
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error(error);
     }
   };
 
