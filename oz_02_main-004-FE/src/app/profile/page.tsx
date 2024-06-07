@@ -6,11 +6,12 @@ interface User {
   id: number;
   계정: string;
 }
-export const getCookieValue = (name: string) => {
+const getCookieValue = (name: string) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()!.split(';').shift();
 };
+
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
