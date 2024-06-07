@@ -58,10 +58,11 @@ export default function Page() {
   const handleLogout = async () => {
     try {
       //   deleteCookie('access_token', '/', 'oz-02-main-04.xyz');
-      //   deleteCookie('refresh_token', '/', 'oz-02-main-04.xyz');
+      deleteCookie('refresh_token', '/', 'oz-02-main-04.xyz');
       //   deleteCookie('csrftoken', '/', 'oz-02-main-04.xyz');
-      console.log(accessToken);
-      console.log(csrf);
+      deleteCookie('user_state', '/', 'oz-02-main-04.xyz');
+      //   console.log(accessToken);
+      //   console.log(csrf);
 
       const response = await axios.post(
         'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
