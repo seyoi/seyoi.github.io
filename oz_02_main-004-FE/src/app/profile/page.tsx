@@ -18,6 +18,7 @@ export default function Page() {
     const parts = value.split(`; ${name}=`);
     console.log(parts);
     const token = Cookies.get('access_token');
+    console.log(token);
     if (token) {
       setAccessToken(token);
     }
@@ -46,7 +47,9 @@ export default function Page() {
 
   const handleLogout = async () => {
     try {
+      console.log(accessToken);
       const csrfToken = Cookies.get('csrftoken');
+      console.log(csrfToken);
       const response = await axios.post(
         'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
         {},

@@ -14,6 +14,7 @@ const KakaoLogin = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log(document.cookie);
     const token = getCookie('access_token');
     console.log(token);
     if (token) {
