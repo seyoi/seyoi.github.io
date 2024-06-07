@@ -59,8 +59,8 @@ export default function Page() {
     try {
       deleteCookie('access_token', '/', 'oz-02-main-04.xyz');
       deleteCookie('refresh_token', '/', 'oz-02-main-04.xyz');
-      deleteCookie('csrftoken', '/', 'api.oz-02-main-04.xyz');
-      deleteCookie('user_state', '/', 'api.oz-02-main-04.xyz');
+      deleteCookie('csrftoken', '/', 'oz-02-main-04.xyz');
+      deleteCookie('user_state', '/', 'oz-02-main-04.xyz');
       setUser(null);
       //   console.log(accessToken);
       //   console.log(csrf);
