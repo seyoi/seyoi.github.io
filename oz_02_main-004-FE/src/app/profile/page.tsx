@@ -15,7 +15,7 @@ const getCookieValue = (name: string) => {
 export default function Page() {
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [csrf, setCsrf] = useState('');
+  const [csrf, setCsrf] = useState<string | null>(null);
   useEffect(() => {
     const csrfToken = getCookieValue('csrftoken');
     const token = getCookieValue('access_token');
@@ -31,10 +31,12 @@ export default function Page() {
     const fetchUserData = async () => {
       //   if (!accessToken) return;
       console.log(accessToken);
+      console.log(csrf);
       try {
         const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
           withCredentials: true,
           headers: {
+            'X-CSRFToken': csrf,
             Authorization: `Bearer ${accessToken}`,
           },
         });
