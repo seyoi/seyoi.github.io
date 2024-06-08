@@ -5,6 +5,7 @@ import axios from 'axios';
 interface User {
   id: number;
   계정: string;
+  닉네임: string;
 }
 const getCookieValue = (name: string) => {
   const value = `; ${document.cookie}`;
@@ -92,7 +93,7 @@ export default function Page() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       {user ? (
         <>
-          <p>안녕하세요! {user.계정} 님 </p>
+          <p>안녕하세요! {user.닉네임} 님 </p>
           <button onClick={handleLogout}>로그아웃</button>
         </>
       ) : (
