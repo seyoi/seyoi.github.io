@@ -9,15 +9,17 @@ const KakaoLogin = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       {' '}
-      <button onClick={handleKakaoLogin}>
+      {/* <button onClick={handleKakaoLogin}>
         <img src="kakaoLogin.png" alt="" />
+      </button> */}
+      <button>
+        <Image
+          onClick={handleKakaoLogin}
+          src={'/images/kakaoLogin.png'}
+          alt="kakao-login"
+          width={200}
+          height={200}></Image>
       </button>
-      {/* <Image
-        onClick={handleKakaoLogin}
-        src={'/images/kakaoLogin.png'}
-        alt="kakao-login"
-        width={200}
-        height={200}></Image> */}
     </div>
   );
 };

@@ -64,6 +64,8 @@ export default function Page() {
       deleteCookie('csrftoken', '/', 'api.oz-02-main-04.xyz');
       deleteCookie('user_state', '/', 'oz-02-main-04.xyz');
       setUser(null);
+      setAccessToken(null);
+      setCsrf(null);
       //   console.log(accessToken);
       //   console.log(csrf);
 
