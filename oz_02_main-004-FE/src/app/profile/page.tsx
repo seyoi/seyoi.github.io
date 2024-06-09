@@ -37,7 +37,7 @@ export default function Page() {
   const csrf = getCookieValue('csrftoken');
   const accessToken = getCookieValue('access_token');
 
-  const { data, error, isLoading } = useQuery(['userData'], fetchUserData);
+  //   const { data, error, isLoading } = useQuery(['userData'], fetchUserData);
 
   const handleLogout = async () => {
     try {
@@ -53,14 +53,14 @@ export default function Page() {
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      setUser(data);
-    }
-  }, [data, setUser]);
+  //   useEffect(() => {
+  //     if (data) {
+  //       setUser(data);
+  //     }
+  //   }, [data, setUser]);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data</p>;
+  //   if (isLoading) return <p>Loading...</p>;
+  //   if (error) return <p>Error loading data</p>;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
