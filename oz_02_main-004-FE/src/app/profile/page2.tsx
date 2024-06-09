@@ -3,11 +3,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAtom } from 'jotai';
 import { Button } from '@/stories/Button';
-import { nickNameAtom } from '../../atoms/atoms';
+import { nicknameAtom } from '../../atoms/atoms';
 import Link from 'next/link';
 
 function Page() {
-  const [nickName, setNickName] = useAtom(nickNameAtom);
+  const [nickName, setNickName] = useAtom(nicknameAtom);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
 
