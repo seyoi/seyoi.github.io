@@ -37,7 +37,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      //   if (!accessToken) return;
+      if (!accessToken) return;
       console.log(accessToken);
       console.log(csrf);
       try {
