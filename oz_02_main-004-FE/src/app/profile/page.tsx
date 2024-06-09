@@ -20,6 +20,7 @@ function Page() {
   useEffect(() => {
     if (data) {
       setUser(data);
+      console.log(data);
     }
   }, [data, setUser]);
 
