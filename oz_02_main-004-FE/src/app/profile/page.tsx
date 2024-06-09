@@ -1,43 +1,108 @@
 'use client';
-import NavBottom from '@/components/NavBottom';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useAtom } from 'jotai';
 import { userAtom, accessTokenAtom, csrfTokenAtom } from '@/atoms/atoms';
-import { useQuery } from '@tanstack/react-query';
-import { fetchUserData, User } from '@/app/mypage/fetchUserData';
 
-function Page() {
+interface User {
+  id: number;
+  계정: string;
+  닉네임: string;
+}
+const getCookieValue = (name: string) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()!.split(';').shift();
+};
+function deleteCookie(name: any, path: any, domain: any) {
+  if (getCookieValue(name)) {
+    document.cookie =
+      name + '=; Max-Age=-99999999;' + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '');
+  }
+}
+export default function Page() {
   const [user, setUser] = useAtom(userAtom);
-  const [accessToken] = useAtom(accessTokenAtom);
-  const [csrf] = useAtom(csrfTokenAtom);
-
-  const { data, error, isLoading } = useQuery<User>({
-    queryKey: ['userData', csrf, accessToken],
-    queryFn: () => fetchUserData(csrf!, accessToken!),
-    enabled: !!csrf && !!accessToken,
-  });
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const [csrf, setCsrf] = useAtom(csrfTokenAtom);
+  useEffect(() => {
+    const csrfToken = getCookieValue('csrftoken');
+    const token = getCookieValue('access_token');
+    if (token) {
+      setAccessToken(token);
+    }
+    if (csrfToken) {
+      setCsrf(csrfToken);
+    }
+  }, []);
 
   useEffect(() => {
-    if (data) {
-      setUser(data);
-      console.log(data);
-    }
-  }, [data, setUser]);
+    const fetchUserData = async () => {
+      //   if (!accessToken) return;
+      console.log(accessToken);
+      console.log(csrf);
+      try {
+        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
+          withCredentials: true,
+          headers: {
+            'X-CSRFToken': csrf,
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        setUser(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
+    fetchUserData();
+  }, [accessToken]);
+
+  const handleLogout = async () => {
+    try {
+      deleteCookie('access_token', '/', 'oz-02-main-04.xyz');
+      deleteCookie('refresh_token', '/', 'oz-02-main-04.xyz');
+      deleteCookie('csrftoken', '/', 'oz-02-main-04.xyz');
+      deleteCookie('csrftoken', '/', 'api.oz-02-main-04.xyz');
+      deleteCookie('user_state', '/', 'oz-02-main-04.xyz');
+      setUser(null);
+      setAccessToken(null);
+      setCsrf(null);
+      //   console.log(accessToken);
+      //   console.log(csrf);
+
+      //   const response = await axios.post(
+      //     'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
+      //     {},
+      //     {
+      //       withCredentials: true,
+      //       headers: {
+      //         'X-CSRFToken': csrf,
+      //         Authorization: `Bearer ${accessToken}`,
+      //       },
+      //     },
+      //   );
+      //   if (response.status === 200) {
+      //     setUser(null);
+      //     window.location.href = '/login';
+      //   } else {
+      //     console.error(response.status);
+      //   }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <main className="w-full h-full">
-      <div>
-        <p>{data?.닉네임}</p>
-      </div>
-
-      <div className="w-full fixed bottom-0">
-        <NavBottom />
-      </div>
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      {user ? (
+        <>
+          <p>안녕하세요! {user.닉네임} 님 </p>
+          <button onClick={handleLogout}>로그아웃</button>
+        </>
+      ) : (
+        <p>로그인 해주세요.</p>
+      )}
+    </div>
   );
 }
-
-export default Page;
