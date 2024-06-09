@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAtom } from 'jotai';
 import { Button } from '@/stories/Button';
-import { nickNameAtom } from '../atoms';
+import { nickNameAtom } from '../../atoms/atoms';
 import Link from 'next/link';
 
 function Page() {

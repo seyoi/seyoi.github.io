@@ -2,12 +2,12 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useAtom } from 'jotai';
-import { nickNameAtom } from '../atoms';
+import { nicknameAtom } from '../../atoms/atoms';
 import Link from 'next/link';
 import React from 'react';
 
 function Nickname() {
-  const [nickName, setNickName] = useAtom(nickNameAtom);
+  const [nickName, setNickName] = useAtom(nicknameAtom);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState('');
 

@@ -11,8 +11,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.39.0",
-    "@tanstack/react-query-devtools": "^5.40.0",
+    "@tanstack/react-query": "^5.40.1",
+    "@tanstack/react-query-devtools": "^5.40.1",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.7.2",
     "jotai": "^2.8.2",
@@ -20,6 +20,7 @@
     "next-cookies": "^2.0.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-icons": "^5.2.1",
     "vercel": "^34.2.3"
   },
   "devDependencies": {

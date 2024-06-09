@@ -1,60 +1,43 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
+import { useAtom } from 'jotai';
+import { userAtom } from '@/atoms/atoms';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import NavBottom from '@/components/NavBottom';
 
-interface User {
-  id: number;
-  계정: string;
-  닉네임: string;
-}
 const getCookieValue = (name: string) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()!.split(';').shift();
+  return null;
 };
-function deleteCookie(name: any, path: any, domain: any) {
+
+const deleteCookie = (name: string, path: string, domain: string) => {
   if (getCookieValue(name)) {
     document.cookie =
       name + '=; Max-Age=-99999999;' + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '');
   }
-}
+};
+
+const fetchUserData = async (csrf: string, accessToken: string) => {
+  const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
+    withCredentials: true,
+    headers: {
+      'X-CSRFToken': csrf,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return response.data;
+};
+
 export default function Page() {
-  const [user, setUser] = useState<User | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [csrf, setCsrf] = useState<string | null>(null);
-  useEffect(() => {
-    const csrfToken = getCookieValue('csrftoken');
-    const token = getCookieValue('access_token');
-    if (token) {
-      setAccessToken(token);
-    }
-    if (csrfToken) {
-      setCsrf(csrfToken);
-    }
-  }, []);
+  const [user, setUser] = useAtom(userAtom);
+  const queryClient = useQueryClient();
+  const csrf = getCookieValue('csrftoken');
+  const accessToken = getCookieValue('access_token');
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      //   if (!accessToken) return;
-      console.log(accessToken);
-      console.log(csrf);
-      try {
-        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
-          withCredentials: true,
-          headers: {
-            'X-CSRFToken': csrf,
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        setUser(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserData();
-  }, [accessToken]);
+  const { data, error, isLoading } = useQuery(['userData'], fetchUserData);
 
   const handleLogout = async () => {
     try {
@@ -64,32 +47,20 @@ export default function Page() {
       deleteCookie('csrftoken', '/', 'api.oz-02-main-04.xyz');
       deleteCookie('user_state', '/', 'oz-02-main-04.xyz');
       setUser(null);
-      setAccessToken(null);
-      setCsrf(null);
-      //   console.log(accessToken);
-      //   console.log(csrf);
-
-      //   const response = await axios.post(
-      //     'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
-      //     {},
-      //     {
-      //       withCredentials: true,
-      //       headers: {
-      //         'X-CSRFToken': csrf,
-      //         Authorization: `Bearer ${accessToken}`,
-      //       },
-      //     },
-      //   );
-      //   if (response.status === 200) {
-      //     setUser(null);
-      //     window.location.href = '/login';
-      //   } else {
-      //     console.error(response.status);
-      //   }
+      queryClient.clear();
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      setUser(data);
+    }
+  }, [data, setUser]);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -101,6 +72,9 @@ export default function Page() {
       ) : (
         <p>로그인 해주세요.</p>
       )}
+      <div className="w-full fixed bottom-0">
+        <NavBottom />
+      </div>
     </div>
   );
 }
