@@ -5,6 +5,8 @@ import { useAtom } from 'jotai';
 import { userAtom, accessTokenAtom, csrfTokenAtom } from '@/atoms/atoms';
 import Image from 'next/image';
 import NavBottom from '@/components/NavBottom';
+import Link from 'next/link';
+
 interface User {
   id: number;
   계정: string;
@@ -118,7 +120,7 @@ export default function Page() {
         <>
           <p>안녕하세요! {user.닉네임} 님 </p>
           <hr />
-          <button>닉네임 변경하기</button> <hr />
+          <Link href="/nickname"> 닉네임 변경하기</Link> <button></button> <hr />
           <button>목표 설정하기</button> <hr />
           <button>petodo 가이드 보기</button> <hr />
           <button onClick={handleLogout}>로그아웃</button> <hr />
