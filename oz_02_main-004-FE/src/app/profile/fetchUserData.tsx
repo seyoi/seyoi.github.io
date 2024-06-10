@@ -1,12 +1,25 @@
 import axios from 'axios';
+import { User } from '@/atoms/atoms';
 
-export interface User {
-  id: number;
-  계정: string;
-  닉네임: string;
+export const getCookieValue = (name: string): string | undefined => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift();
+};
+export function deleteCookie(name: any, path: any, domain: any) {
+  if (getCookieValue(name)) {
+    document.cookie =
+      name + '=; Max-Age=-99999999;' + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '');
+  }
 }
+export const fetchUserData = async (): Promise<User> => {
+  const csrf = getCookieValue('csrftoken');
+  const accessToken = getCookieValue('access_token');
 
-export const fetchUserData = async (csrf: string, accessToken: string): Promise<User> => {
+  if (!csrf || !accessToken) {
+    throw new Error('No CSRF token or access token found');
+  }
+
   const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
     withCredentials: true,
     headers: {
@@ -14,5 +27,6 @@ export const fetchUserData = async (csrf: string, accessToken: string): Promise<
       Authorization: `Bearer ${accessToken}`,
     },
   });
+
   return response.data;
 };

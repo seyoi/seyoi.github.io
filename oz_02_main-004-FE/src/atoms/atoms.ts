@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-interface User {
+export interface User {
   id: number;
   계정: string;
   닉네임: string;
