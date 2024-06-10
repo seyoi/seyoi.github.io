@@ -56,7 +56,7 @@ export default function Page() {
     };
 
     fetchUserData();
-  }, []);
+  }, [accessToken]);
 
   const handleLogout = async () => {
     try {
