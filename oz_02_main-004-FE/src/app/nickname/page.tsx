@@ -38,6 +38,7 @@ const Nickname = () => {
             Authorization: `Bearer ${accessToken}`,
             'X-CSRFToken': csrfToken,
           },
+
           withCredentials: true,
         });
         setUser(response.data);
@@ -58,8 +59,10 @@ const Nickname = () => {
       const response = await axios.post(
         'https://api.oz-02-main-04.xyz/api/v1/users/myinfo',
         {
-          action: 'change_nickname',
-          nickname: newNickname,
+          data: {
+            action: 'change_nickname',
+            nickname: newNickname,
+          },
         },
         {
           headers: {
