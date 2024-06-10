@@ -33,7 +33,7 @@ const Nickname = () => {
     const fetchUserInfo = async () => {
       if (!accessToken) return;
       try {
-        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
+        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo/', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'X-CSRFToken': csrfToken,
@@ -51,13 +51,14 @@ const Nickname = () => {
   }, [accessToken, csrfToken]);
 
   const handleNicknameChange = async () => {
+    console.log(newNickname);
     if (!newNickname) {
       alert('닉네임을 입력해주세요.');
       return;
     }
     try {
       const response = await axios.post(
-        'https://api.oz-02-main-04.xyz/api/v1/users/myinfo',
+        'https://api.oz-02-main-04.xyz/api/v1/users/myinfo/',
         {
           data: {
             action: 'change_nickname',
@@ -77,10 +78,10 @@ const Nickname = () => {
         setUser({ ...user, 닉네임: newNickname });
       }
     } catch (error) {
-      console.error('Failed to change nickname:', error);
+      console.error(error);
     }
   };
-
+  console.log(newNickname);
   return (
     <div className="profile-container">
       {user ? (
