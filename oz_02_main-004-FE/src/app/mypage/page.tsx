@@ -5,7 +5,7 @@ import { userAtom } from '@/atoms/atoms';
 
 export default function AnotherPage() {
   const [user] = useAtom(userAtom);
-
+  console.log(user);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       {user ? (
