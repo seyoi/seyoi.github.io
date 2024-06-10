@@ -113,16 +113,16 @@ export default function Page() {
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="">
       {user ? (
         <>
           <p>안녕하세요! {user.닉네임} 님 </p>
           <hr />
           <button>닉네임 변경하기</button> <hr />
           <button>목표 설정하기</button> <hr />
-          <button>petodo 가이드 보기</button> hr
-          <button onClick={handleLogout}>로그아웃</button>
-          <div className="w-full fixed bottom-0">
+          <button>petodo 가이드 보기</button> <hr />
+          <button onClick={handleLogout}>로그아웃</button> <hr />
+          <div className="wrap-section">
             <NavBottom />
           </div>
         </>
@@ -137,6 +137,9 @@ export default function Page() {
               width={200}
               height={200}></Image>
           </button>{' '}
+          <div className="wrap-section">
+            <NavBottom />
+          </div>
         </>
       )}
     </div>

@@ -19,7 +19,7 @@ function Nickname() {
     setError('');
 
     axios
-      .post('/api/check-nickname', { nickname: inputValue })
+      .post('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', { action: 'change_nickname', nickname: inputValue })
       .then(response => {
         const { isDuplicate } = response.data;
         if (isDuplicate) {
@@ -28,18 +28,18 @@ function Nickname() {
           setNickName(inputValue);
           console.log(inputValue);
 
-          axios
-            .post('https://api.oz-02-main-04.xyz/api/v1/users/nickname', { nickname: inputValue })
-            .then(response => {
-              setNickName(inputValue);
-            })
-            .catch(error => {
-              console.error('Error submitting nickname:', error);
-            });
+          //   axios
+          //     .post('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', { nickname: inputValue })
+          //     .then(response => {
+          //       setNickName(inputValue);
+          //     })
+          //     .catch(error => {
+          //       console.error(error);
+          //     });
         }
       })
       .catch(error => {
-        console.error('Error checking nickname:', error);
+        console.error(error);
       });
   };
 
