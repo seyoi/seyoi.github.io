@@ -103,6 +103,13 @@ export default function Page() {
     const kakaoAuthUrl = `https://api.oz-02-main-04.xyz/api/v1/users/kakao/`;
     window.location.href = kakaoAuthUrl;
   };
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+        <p>로딩 중...</p>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       {user ? (
