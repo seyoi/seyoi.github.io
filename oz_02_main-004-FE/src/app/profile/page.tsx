@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAtom } from 'jotai';
 import { userAtom, accessTokenAtom, csrfTokenAtom } from '@/atoms/atoms';
-
+import Image from 'next/image';
 interface User {
   id: number;
   계정: string;
@@ -92,7 +92,10 @@ export default function Page() {
       console.error(error);
     }
   };
-
+  const handleKakaoLogin = () => {
+    const kakaoAuthUrl = `https://api.oz-02-main-04.xyz/api/v1/users/kakao/`;
+    window.location.href = kakaoAuthUrl;
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       {user ? (
@@ -101,7 +104,17 @@ export default function Page() {
           <button onClick={handleLogout}>로그아웃</button>
         </>
       ) : (
-        <p>로그인 해주세요.</p>
+        <>
+          <p>로그인 해주세요.</p>
+          <button>
+            <Image
+              onClick={handleKakaoLogin}
+              src={'/images/kakaoLogin.png'}
+              alt="kakao-login"
+              width={200}
+              height={200}></Image>
+          </button>
+        </>
       )}
     </div>
   );
