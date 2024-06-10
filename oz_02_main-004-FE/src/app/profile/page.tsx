@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAtom } from 'jotai';
 import { userAtom, accessTokenAtom, csrfTokenAtom } from '@/atoms/atoms';
 import Image from 'next/image';
+import NavBottom from '@/components/NavBottom';
 interface User {
   id: number;
   계정: string;
@@ -103,6 +104,7 @@ export default function Page() {
     const kakaoAuthUrl = `https://api.oz-02-main-04.xyz/api/v1/users/kakao/`;
     window.location.href = kakaoAuthUrl;
   };
+
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -115,7 +117,14 @@ export default function Page() {
       {user ? (
         <>
           <p>안녕하세요! {user.닉네임} 님 </p>
+          <hr />
+          <button>닉네임 변경하기</button> <hr />
+          <button>목표 설정하기</button> <hr />
+          <button>petodo 가이드 보기</button> hr
           <button onClick={handleLogout}>로그아웃</button>
+          <div className="w-full fixed bottom-0">
+            <NavBottom />
+          </div>
         </>
       ) : (
         <>
@@ -127,7 +136,7 @@ export default function Page() {
               alt="kakao-login"
               width={200}
               height={200}></Image>
-          </button>
+          </button>{' '}
         </>
       )}
     </div>
