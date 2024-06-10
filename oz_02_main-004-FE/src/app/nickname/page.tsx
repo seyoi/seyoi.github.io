@@ -1,69 +1,102 @@
-'use client';
-import { useState } from 'react';
 import axios from 'axios';
-import { useAtom } from 'jotai';
-import { nicknameAtom } from '../../atoms/atoms';
-import Link from 'next/link';
-import React from 'react';
+import { useState, useEffect } from 'react';
+interface User {
+  id?: number;
+  계정?: string;
+  닉네임: string;
+}
+const getCookieValue = (name: any) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()!.split(';').shift();
+};
 
-function Nickname() {
-  const [nickName, setNickName] = useAtom(nicknameAtom);
-  const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState('');
+const Nickname = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [newNickname, setNewNickname] = useState('');
+  const [csrfToken, setCsrfToken] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  const inputNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
+  useEffect(() => {
+    const csrfToken = getCookieValue('csrftoken');
+    const token = getCookieValue('access_token');
+    if (token) {
+      setAccessToken(token);
+    }
+    if (csrfToken) {
+      setCsrfToken(csrfToken);
+    }
+  }, []);
 
-  const saveNickname = () => {
-    setError('');
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (!accessToken) return;
+      try {
+        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'X-CSRFToken': csrfToken,
+          },
+          withCredentials: true,
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+      }
+    };
 
-    axios
-      .post('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', { action: 'change_nickname', nickname: inputValue })
-      .then(response => {
-        const { isDuplicate } = response.data;
-        if (isDuplicate) {
-          setError('이미 사용 중인 닉네임입니다.');
-        } else {
-          setNickName(inputValue);
-          console.log(inputValue);
+    fetchUserInfo();
+  }, [accessToken, csrfToken]);
 
-          //   axios
-          //     .post('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', { nickname: inputValue })
-          //     .then(response => {
-          //       setNickName(inputValue);
-          //     })
-          //     .catch(error => {
-          //       console.error(error);
-          //     });
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const handleNicknameChange = async () => {
+    if (!newNickname) {
+      alert('닉네임을 입력해주세요.');
+      return;
+    }
+    try {
+      const response = await axios.post(
+        'https://api.oz-02-main-04.xyz/api/v1/users/myinfo',
+        {
+          action: 'change_nickname',
+          nickname: newNickname,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'X-CSRFToken': csrfToken,
+          },
+          withCredentials: true,
+        },
+      );
+      if (response.status === 200) {
+        alert('닉네임이 변경되었습니다.');
+        setUser({ ...user, 닉네임: newNickname });
+      }
+    } catch (error) {
+      console.error('Failed to change nickname:', error);
+    }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen mx-12">
-      <form className="w-full max-w-md">
-        <h2 className="text-xl font-bold mb-4">닉네임을 입력해 주세요</h2>
-        <input
-          className="border border-gray-300 rounded-md p-2 mb-2 focus:outline-none focus:border-blue-500 w-full"
-          type="text"
-          id="nickname"
-          onChange={e => inputNickName(e)}
-        />
-        {error && <p className="text-red-500 mb-2">{error}</p>}
-        <div className="flex">
-          <Link href="/" className="mr-2">
-            <button>건너뛰기</button>
-          </Link>
-
-          <button onClick={saveNickname}>완료</button>
+    <div className="profile-container">
+      {user ? (
+        <div>
+          <h1>내 정보</h1>
+          <p>계정: {user?.계정}</p>
+          <p>닉네임: {user?.닉네임}</p>
+          <input
+            type="text"
+            value={newNickname}
+            onChange={e => setNewNickname(e.target.value)}
+            placeholder="새 닉네임 입력"
+          />
+          <button onClick={handleNicknameChange}>닉네임 변경</button>
         </div>
-      </form>
+      ) : (
+        <p>로딩 중...</p>
+      )}
     </div>
   );
-}
+};
 
 export default Nickname;

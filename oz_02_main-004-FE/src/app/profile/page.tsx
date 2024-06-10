@@ -115,7 +115,7 @@ export default function Page() {
     );
   }
   return (
-    <div className="">
+    <div className="h-full">
       {user ? (
         <>
           <p>안녕하세요! {user.닉네임} 님 </p>
