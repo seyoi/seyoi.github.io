@@ -24,6 +24,8 @@ export default function Page() {
   const [user, setUser] = useAtom(userAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const [csrf, setCsrf] = useAtom(csrfTokenAtom);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const csrfToken = getCookieValue('csrftoken');
     const token = getCookieValue('access_token');
@@ -37,7 +39,10 @@ export default function Page() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!accessToken) return;
+      if (!accessToken) {
+        setIsLoading(false);
+        return;
+      }
       console.log(accessToken);
       console.log(csrf);
       try {
@@ -52,11 +57,13 @@ export default function Page() {
         console.log(response.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchUserData();
-  }, [accessToken]);
+  }, [accessToken, csrf, setUser]);
 
   const handleLogout = async () => {
     try {
