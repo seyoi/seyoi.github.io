@@ -12,20 +12,17 @@ interface User {
   계정: string;
   닉네임: string;
 }
-
 const getCookieValue = (name: string) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()!.split(';').shift();
 };
-
 function deleteCookie(name: any, path: any, domain: any) {
   if (getCookieValue(name)) {
     document.cookie =
       name + '=; Max-Age=-99999999;' + (path ? '; path=' + path : '') + (domain ? '; domain=' + domain : '');
   }
 }
-
 export default function Page() {
   const [user, setUser] = useAtom<User | null>(userAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
@@ -33,28 +30,8 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTokens = async () => {
-      try {
-        const csrfToken = getCookieValue('csrftoken');
-        const token = getCookieValue('access_token');
-        console.log('CSRF Token:', csrfToken);
-        console.log('Access Token:', token);
-        if (token) {
-          setAccessToken(token);
-        }
-        if (csrfToken) {
-          setCsrf(csrfToken);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchTokens();
-  }, [accessToken, csrf, setAccessToken, setCsrf]);
-
-  useEffect(() => {
     const fetchUserData = async () => {
-      if (!accessToken || !csrf) {
+      if (!accessToken) {
         setIsLoading(false);
         return;
       }
@@ -78,7 +55,27 @@ export default function Page() {
     };
 
     fetchUserData();
-  }, [accessToken, csrf, setUser]);
+  }, [accessToken]);
+
+  useEffect(() => {
+    const fetchTokens = async () => {
+      try {
+        const csrfToken = getCookieValue('csrftoken');
+        const token = getCookieValue('access_token');
+        console.log('CSRF Token:', csrfToken);
+        console.log('Access Token:', token);
+        if (token) {
+          setAccessToken(token);
+        }
+        if (csrfToken) {
+          setCsrf(csrfToken);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchTokens();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -90,11 +87,30 @@ export default function Page() {
       setUser(null);
       setAccessToken(null);
       setCsrf(null);
+      //   console.log(accessToken);
+      //   console.log(csrf);
+
+      //   const response = await axios.post(
+      //     'https://api.oz-02-main-04.xyz/api/v1/users/kakao/logout/',
+      //     {},
+      //     {
+      //       withCredentials: true,
+      //       headers: {
+      //         'X-CSRFToken': csrf,
+      //         Authorization: `Bearer ${accessToken}`,
+      //       },
+      //     },
+      //   );
+      //   if (response.status === 200) {
+      //     setUser(null);
+      //     window.location.href = '/login';
+      //   } else {
+      //     console.error(response.status);
+      //   }
     } catch (error) {
       console.error(error);
     }
   };
-
   const handleKakaoLogin = () => {
     const kakaoAuthUrl = `https://api.oz-02-main-04.xyz/api/v1/users/kakao/`;
     window.location.href = kakaoAuthUrl;
@@ -107,21 +123,16 @@ export default function Page() {
       </div>
     );
   }
-
   return (
     <div className="h-full">
       {user ? (
         <>
           <p>안녕하세요! {user.닉네임} 님 </p>
           <hr />
-          <Link href="/nickname"> 닉네임 변경하기</Link>
-          <hr />
-          <button>목표 설정하기</button>
-          <hr />
-          <button>petodo 가이드 보기</button>
-          <hr />
-          <button onClick={handleLogout}>로그아웃</button>
-          <hr />
+          <Link href="/nickname"> 닉네임 변경하기</Link> <button></button> <hr />
+          <button>목표 설정하기</button> <hr />
+          <button>petodo 가이드 보기</button> <hr />
+          <button onClick={handleLogout}>로그아웃</button> <hr />
           <div className="wrap-section">
             <NavBottom />
           </div>
@@ -135,9 +146,8 @@ export default function Page() {
               src={'/images/kakaoLogin.png'}
               alt="kakao-login"
               width={200}
-              height={200}
-            />
-          </button>
+              height={200}></Image>
+          </button>{' '}
           <div className="wrap-section">
             <NavBottom />
           </div>
