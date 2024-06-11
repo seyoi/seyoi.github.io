@@ -68,7 +68,7 @@ const Nickname = () => {
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            'X-CSRFToken': csrfToken,
+            'x-crsftoken': csrfToken,
           },
           withCredentials: true,
         },
