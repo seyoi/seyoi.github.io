@@ -55,7 +55,7 @@ export default function Page() {
     };
 
     fetchUserData();
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     const fetchTokens = async () => {
