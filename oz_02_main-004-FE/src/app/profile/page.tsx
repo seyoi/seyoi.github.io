@@ -43,7 +43,7 @@ export default function Page() {
       }
     };
     fetchTokens();
-  }, [setAccessToken, setCsrf]);
+  }, [accessToken, csrf]);
 
   useEffect(() => {
     const fetchUserData = async () => {
