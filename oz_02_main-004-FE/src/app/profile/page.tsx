@@ -32,6 +32,7 @@ export default function Page() {
   useEffect(() => {
     const csrfToken = getCookieValue('csrftoken');
     const token = getCookieValue('access_token');
+    console.log(csrfToken);
     if (token) {
       setAccessToken(token);
     }
