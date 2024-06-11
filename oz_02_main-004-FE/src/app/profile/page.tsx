@@ -26,7 +26,7 @@ function deleteCookie(name: any, path: any, domain: any) {
 export default function Page() {
   const [user, setUser] = useAtom(userAtom);
   const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
-  const [csrf, setCsrf] = useAtom(csrfTokenAtom);
+  const [csrf, setCsrf] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
