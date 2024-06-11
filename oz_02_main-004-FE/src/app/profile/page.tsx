@@ -38,7 +38,7 @@ export default function Page() {
       console.log(accessToken);
       console.log(csrf);
       try {
-        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo', {
+        const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo/', {
           withCredentials: true,
           headers: {
             'x-csrftoken': csrf,
