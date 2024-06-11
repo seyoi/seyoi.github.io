@@ -50,7 +50,7 @@ export default function Page() {
       }
     };
     fetchTokens();
-  }, [setAccessToken, setCsrf]);
+  }, [accessToken, setAccessToken, setCsrf]);
 
   useEffect(() => {
     const fetchUserData = async () => {
