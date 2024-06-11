@@ -30,26 +30,6 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTokens = async () => {
-      try {
-        const csrfToken = getCookieValue('csrftoken');
-        const token = getCookieValue('access_token');
-        console.log('CSRF Token:', csrfToken);
-        console.log('Access Token:', token);
-        if (token) {
-          setAccessToken(token);
-        }
-        if (csrfToken) {
-          setCsrf(csrfToken);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchTokens();
-  }, [accessToken, csrf]);
-
-  useEffect(() => {
     const fetchUserData = async () => {
       if (!accessToken) {
         setIsLoading(false);
@@ -76,6 +56,26 @@ export default function Page() {
 
     fetchUserData();
   }, [accessToken, csrf, setUser]);
+
+  useEffect(() => {
+    const fetchTokens = async () => {
+      try {
+        const csrfToken = getCookieValue('csrftoken');
+        const token = getCookieValue('access_token');
+        console.log('CSRF Token:', csrfToken);
+        console.log('Access Token:', token);
+        if (token) {
+          setAccessToken(token);
+        }
+        if (csrfToken) {
+          setCsrf(csrfToken);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchTokens();
+  }, []);
 
   const handleLogout = async () => {
     try {
