@@ -31,15 +31,19 @@ export default function Page() {
 
   useEffect(() => {
     const fetchTokens = async () => {
-      const csrfToken = getCookieValue('csrftoken');
-      const token = getCookieValue('access_token');
-      console.log('CSRF Token:', csrfToken);
-      console.log('Access Token:', token);
-      if (token) {
-        setAccessToken(token);
-      }
-      if (csrfToken) {
-        setCsrf(csrfToken);
+      try {
+        const csrfToken = getCookieValue('csrftoken');
+        const token = getCookieValue('access_token');
+        console.log('CSRF Token:', csrfToken);
+        console.log('Access Token:', token);
+        if (token) {
+          setAccessToken(token);
+        }
+        if (csrfToken) {
+          setCsrf(csrfToken);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
     fetchTokens();
