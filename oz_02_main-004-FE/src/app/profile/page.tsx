@@ -38,7 +38,7 @@ export default function Page() {
     if (csrfToken) {
       setCsrf(csrfToken);
     }
-  }, []);
+  }, [setAccessToken, setCsrf]);
 
   useEffect(() => {
     const fetchUserData = async () => {
