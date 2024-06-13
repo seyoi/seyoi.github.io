@@ -36,14 +36,14 @@ const Nickname = () => {
         const response = await axios.get('https://api.oz-02-main-04.xyz/api/v1/users/myinfo/', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            'X-CSRFToken': csrfToken,
+            // 'X-CSRFToken': csrfToken,
           },
 
           withCredentials: true,
         });
         setUser(response.data);
       } catch (error) {
-        console.error('Failed to fetch user info:', error);
+        console.error(error);
       }
     };
 
