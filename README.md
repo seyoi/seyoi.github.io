@@ -1,2 +1,1 @@
-hi
-hahaha lets solve problems!
+seyoi's journey
