@@ -8,7 +8,7 @@ from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 
 # Firebase 초기화
-cred = credentials.Certificate("/Users/matias/Documents/github/seyoi.github.io/gpt/hanna-9d44a-firebase-adminsdk-z3ecc-098497e37f.json")
+cred = credentials.Certificate("/Users/matias/Documents/github/seyoi.github.io/backend/hanna-9d44a-firebase-adminsdk-z3ecc-098497e37f.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
