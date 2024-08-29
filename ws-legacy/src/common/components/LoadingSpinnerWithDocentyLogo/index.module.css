@@ -1,0 +1,103 @@
+.spinner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  box-sizing: border-box;
+
+  background-color: #1fd8b64d;
+  border-radius: 50%;
+}
+
+.spinner::before {
+  content: "";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-color: #1fd8b6;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.spinner div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-width: 4px;
+  border-style: solid;
+  border-color: #1fd8b6 transparent transparent transparent;
+  border-radius: 50%;
+
+  transform: rotate(45deg);
+
+  animation: spin 1.5s infinite;
+}
+
+.spinner div::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  top: 10%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 4px;
+  background: #1fd8b6;
+  border-radius: 4px;
+}
+
+.spinner div::after {
+  content: "";
+  position: absolute;
+  right: 4%;
+  top: 10%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 4px;
+  background: #1fd8b6;
+  border-radius: 4px;
+}
+
+.spinner div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.spinner div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.spinner div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+}
+
+.logo {
+  position: absolute;
+  animation: logoPop 1.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes logoPop {
+  0% {
+    opacity: 0;
+    scale: 0.1;
+  }
+  30% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}

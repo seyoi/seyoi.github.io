@@ -1,0 +1,610 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("PRISMA_POSTGRES_URL")
+  directUrl = env("PRISMA_POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  userCode      String    @unique @default(cuid())
+  email         String?   @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  acntUid       String?
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @updatedAt
+  deletedAt     DateTime?
+
+  accounts Account[]
+  sessions Session[]
+
+  joinedWorkspaceMemberships WorkspaceMember[]
+
+  businessPlanHistory BusinessPlanHistory[]
+
+  subscription Subscription?
+
+  paymentSubscription PaymentSubscription[]
+
+  userCredit UserCredit[]
+
+  @@unique([userCode, email])
+  @@map("users")
+}
+
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?
+  refresh_token_expires_in Int?    @map("RefreshTokenExpiresIn") // only for kakao oAuth
+  access_token             String?
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?
+  session_state            String?
+  oauth_token_secret       String?
+  oauth_token              String?
+  user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationTokens")
+}
+
+model Workspace {
+  id             String    @id @default(cuid())
+  avatarUrl      String
+  name           String
+  description    String?
+  welcomeMessage String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now()) @updatedAt
+  deletedAt      DateTime?
+
+  members     WorkspaceMember[]
+  roles       WorkspaceRole[]
+  invitations WorkspaceInvitation[]
+  bots        WorkspaceBot[]
+  plugIns     WorkspacePlugIn[]
+  scenarios   WorkspaceScenario[]
+
+  endUsers     EndUser[]
+  endUserChats EndUserChat[]
+  messages     Message[]
+  sessions     ChatSession[]
+
+  @@map("workspaces")
+}
+
+model WorkspaceMember {
+  id        String    @id @default(cuid())
+  avatarUrl String
+  name      String
+  email     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  deletedAt DateTime?
+
+  assignedEndUserChats EndUserChat[]
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  roleId String
+  role   WorkspaceRole @relation(fields: [roleId], references: [id])
+
+  @@unique([userId, workspaceId])
+  @@map("workspaceMembers")
+}
+
+model WorkspaceRole {
+  id        String    @id @default(cuid())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  deletedAt DateTime?
+
+  members WorkspaceMember[]
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("workspaceRoles")
+}
+
+model WorkspaceInvitation {
+  id        String   @id @default(cuid())
+  url       String
+  createdAt DateTime @default(now())
+  expiredAt DateTime
+
+  workspaceId String    @unique
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("workspaceInvitations")
+}
+
+model WorkspaceBot {
+  id             String    @id
+  avatarUrl      String
+  name           String
+  welcomeMessage String?
+  botClsUid      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now()) @updatedAt
+  deletedAt      DateTime?
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  plugInId String?          @unique
+  plugIn   WorkspacePlugIn? @relation(fields: [plugInId], references: [id])
+
+  externalService externalService[]
+
+  @@map("workspaceBots")
+}
+
+model WorkspacePlugIn {
+  id                  String    @id @default(cuid())
+  buttonImageUrl      String?
+  buttonLabelText     String?
+  coverImageUrl       String?
+  themeColor          String?
+  marginX             Int?      @default(24)
+  marginY             Int?      @default(24)
+  displayChatDuration Int?      @default(0) // 최신 날짜로부터 며칠까지의 chat을 보여줄지. 0 은 all
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @default(now()) @updatedAt
+  deletedAt           DateTime?
+
+  bot WorkspaceBot?
+
+  users EndUser[]
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("workspacePlugIns")
+}
+
+model WorkspaceScenario {
+  id        String    @id @default(cuid())
+  name      String
+  state     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  deletedAt DateTime?
+
+  plotVersions WorkspacePlot[] @relation(name: "PlotVersions")
+
+  currentPlotId String?        @unique
+  currentPlot   WorkspacePlot? @relation(name: "CurrentPlot", fields: [currentPlotId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("workspaceScenarios")
+}
+
+model WorkspacePlot {
+  id        String    @id @default(cuid())
+  steps     Json
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  currentPlotByWorkspaceScenario WorkspaceScenario? @relation(name: "CurrentPlot")
+
+  scenarioId String
+  scenario   WorkspaceScenario @relation(name: "PlotVersions", fields: [scenarioId], references: [id], onDelete: Cascade)
+
+  @@map("workspacePlots")
+}
+
+model EndUser {
+  id        String    @id @default(cuid())
+  avatarUrl String
+  name      String
+  email     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  veilId    String // browser session or external userId
+  deletedAt DateTime?
+
+  endUserChats EndUserChat[] @relation(name: "UserChats")
+
+  currentChatId String?      @unique
+  currentChat   EndUserChat? @relation(name: "CurrentUserChat", fields: [currentChatId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  plugInId String?
+  plugIn   WorkspacePlugIn? @relation(fields: [plugInId], references: [id], onDelete: Cascade)
+
+  externalServiceId String?          @db.Uuid // 값 없으면 docenty 내부서비스로, 있으면 외부 서비스로 (ForeignKey)
+  externalService   externalService? @relation(fields: [externalServiceId], references: [id])
+
+  @@unique([workspaceId, plugInId, veilId])
+  @@map("endUsers")
+}
+
+model EndUserChat {
+  id              String    @id @default(cuid())
+  state           String    @default("open")
+  handling        String?
+  notes           Json[]
+  followerIds     String[]
+  firstAskedAt    DateTime?
+  isAIBotOn       Boolean   @default(true)
+  hasFollowUpForm Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now()) @updatedAt
+  deletedAt       DateTime?
+
+  messages Message[]     @relation(name: "Messages")
+  sessions ChatSession[]
+
+  currentUserByEndUserChat EndUser? @relation(name: "CurrentUserChat")
+
+  currentMessageId String?  @unique
+  currentMessage   Message? @relation(name: "CurrentMessage", fields: [currentMessageId], references: [id], onDelete: Cascade)
+
+  endUserId String
+  endUser   EndUser @relation(name: "UserChats", fields: [endUserId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  assigneeId String?
+  assignee   WorkspaceMember? @relation(fields: [assigneeId], references: [id])
+
+  @@map("endUserChats")
+}
+
+model Message {
+  id           String        @id @default(cuid())
+  personId     String
+  personType   String
+  plainText    String?
+  form         Json?
+  button       Json?
+  scenario     Json?
+  log          Json?
+  options      String[]
+  sources      Json?
+  files        MessageFile[]
+  followUpForm FollowUpForm?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now()) @updatedAt
+  deletedAt    DateTime?
+
+  currentMessageByEndUserChat EndUserChat? @relation(name: "CurrentMessage")
+
+  endUserChatId String
+  endUserChat   EndUserChat @relation(name: "Messages", fields: [endUserChatId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model MessageFile {
+  id         String @id @default(cuid())
+  type       String // image/png, image/jpeg, application/pdf ...
+  name       String
+  size       Int?
+  width      Int?
+  height     Int?
+  bucketName String?
+  path       String
+
+  messageId String
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("messageFiles")
+}
+
+model FollowUpForm {
+  id          String    @id @default(cuid())
+  email       String
+  createdAt   DateTime  @default(now())
+  submittedAt DateTime?
+
+  messageId String  @unique
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("followUpForms")
+}
+
+model ChatSession {
+  id          String    @id
+  personId    String
+  personType  String
+  unreadCount Int
+  readAt      DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  deletedAt   DateTime?
+
+  endUserChatId String
+  endUserChat   EndUserChat @relation(fields: [endUserChatId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@map("endUserSessions")
+}
+
+model Subscription {
+  id        String           @id @default(cuid())
+  paymentId String           @unique @default(cuid())
+  createdAt DateTime?        @default(now())
+  updatedAt DateTime?        @updatedAt
+  deletedAt DateTime?
+  type      SubscriptionType @default(FREE_TRIAL)
+  userId    String           @unique
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
+}
+
+enum SubscriptionType {
+  FREE_TRIAL
+  ESSENTIAL
+  PRO
+  ENTERPRISE
+}
+
+model BusinessPlanHistory {
+  id                            String                         @id @default(cuid())
+  type                          String
+  filePaths                     String?
+  prompt                        String?
+  createdAt                     DateTime?                      @default(now())
+  updatedAt                     DateTime?                      @updatedAt
+  deletedAt                     DateTime?
+  creatorId                     String
+  businessPlanAutoWriteHistroys BusinessPlanAutoWriteHistory[]
+  creator                       User                           @relation(fields: [creatorId], references: [id])
+
+  @@map("businessPlanHistory")
+}
+
+model BusinessPlanAutoWriteHistory {
+  id                    String              @id @default(cuid())
+  type                  String
+  question              String
+  answer                String
+  createdAt             DateTime?           @default(now())
+  updatedAt             DateTime?           @updatedAt
+  deletedAt             DateTime?
+  businessPlanHistoryId String
+  businessPlanHistory   BusinessPlanHistory @relation(fields: [businessPlanHistoryId], references: [id], onDelete: Cascade)
+
+  @@map("businessPlanAutoWriteHistory")
+}
+
+model OrderFromNaverSmartStoreList {
+  id          String    @id @default(cuid())
+  name        String
+  email       String
+  orderNumber String
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime?
+
+  @@map("orderFromNaverSmartStoreList")
+}
+
+model PaymentSubscription {
+  id                String        @id @default(cuid())
+  billingKey        String?       @unique
+  customerKey       String        @unique
+  customerName      String? // 주문자 이름
+  paymentStatus     PaymentStatus
+  user              User          @relation(fields: [userId], references: [id])
+  userId            String
+  userDesc          String? // 결제자 정보 ex : 위드인천, 우미건설
+  paymentEmail      String        @default("") // 결제자 이메일, 결제 영수증이 전달됨
+  paymentPlan       PaymentPlan   @relation(fields: [paymentPlanId], references: [id])
+  paymentPlanId     String
+  paymentType       PaymentType // 구독시 등록한 결제 정보
+  paymentTypeDetail Json? // 카드 정보
+  amount            Decimal
+  currency          CurrencyUnit
+  lastOrderId       String?       @unique // 마지막 주문ID
+  startedAt         DateTime? // 구독 시작 일자
+  expireDate        DateTime?     @db.Date // 만료 일자
+  lastPaidAt        DateTime? // 마지막 결제 일자
+  nextPaymentDate   DateTime?     @db.Date // 다음 결제 일자
+  createdAt         DateTime?     @default(now())
+  updatedAt         DateTime?     @updatedAt
+  deletedAt         DateTime?
+
+  paymentSubscriptionLog PaymentSubscriptionLog[]
+
+  @@index([paymentEmail])
+  @@index([paymentStatus])
+  @@index([lastPaidAt])
+  @@index([nextPaymentDate])
+  @@index([expireDate])
+  @@map("paymentSubscriptions")
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
+
+enum CurrencyUnit {
+  KRW
+  USD
+  JPY
+}
+
+enum PaymentType {
+  CARD
+  CREDIT
+}
+
+model PaymentSubscriptionLog {
+  id                    String              @id @default(cuid())
+  orderId               String?
+  orderName             String?
+  paymentEmail          String
+  billingKey            String?
+  paymentKey            String?
+  customerKey           String
+  customerName          String? // 주문자 이름
+  orderStatus           PaymentOrderStatus
+  paymentStatus         PaymentStatus
+  paymentType           PaymentType
+  paymentTypeDetail     Json? // 카드 정보
+  paymentMethod         PaymentMethod? // 실제 결제한 방식
+  paymentMethodDetail   Json? // 실제 결제한 정보, 일반적으로는 카드정보와 동일
+  amount                Decimal // 총 결제 금액
+  currency              CurrencyUnit
+  vat                   Decimal // 총 결제 금액중 vat
+  responseStatus        String? // Toss 응답 결과
+  failureCode           String? // 실패 코드
+  failureMessage        String? // 실패 메시지
+  userId                String
+  userDesc              String? // 결제자 정보 ex : 위드인천, 우미건설
+  paymentSubscription   PaymentSubscription @relation(fields: [paymentSubscriptionId], references: [id], onDelete: Cascade)
+  paymentSubscriptionId String
+  paymentPlan           PaymentPlan         @relation(fields: [paymentPlanId], references: [id])
+  paymentPlanId         String
+  receiptUrl            String? // 영수증 url
+  country               String? // 결제 국가, 토스 응답값
+  startedAt             DateTime?
+  expireDate            DateTime?           @db.Date
+  lastPaidAt            DateTime?
+  nextPaymentDate       DateTime?           @db.Date
+  executedBy            ExecutedBy
+  createdAt             DateTime?           @default(now())
+  updatedAt             DateTime?           @updatedAt
+
+  @@index([orderId])
+  @@index([userId])
+  @@index([orderStatus])
+  @@index([paymentType])
+  @@index([createdAt])
+  @@map("paymentSubscriptionLogs")
+}
+
+enum PaymentOrderStatus {
+  REQUEST_SUBSCRIPTION
+  COMPLETE_SUBSCRIPTION
+  FAILED_SUBSCRIPTION
+  REQUEST_PAYMENT
+  COMPLETE_PAYMENT
+  FAILED_PAYMENT
+}
+
+enum PaymentMethod {
+  CARD
+  CREDIT
+}
+
+enum ExecutedBy {
+  SYSTEM_BATCH
+  ADMIN
+  USER
+}
+
+model PaymentPlan {
+  id        String          @id @default(cuid())
+  type      PaymentPlanType @default(FREE_TRIAL)
+  planName  String          @default("")
+  amount    Decimal
+  currency  CurrencyUnit
+  createdAt DateTime?       @default(now())
+  updatedAt DateTime?       @updatedAt
+  deletedAt DateTime?
+
+  paymentSubscription    PaymentSubscription[]
+  paymentSubscriptionLog PaymentSubscriptionLog[]
+
+  @@index([type])
+  @@map("paymentPlans")
+}
+
+enum PaymentPlanType {
+  NO_PLAN
+  FREE_TRIAL
+  BASIC
+  PRO
+  ENTERPRISE
+}
+
+model UserCredit {
+  id         String  @id @default(cuid())
+  amount     Decimal
+  creditUnit String // KRW | USD
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  expireDate DateTime?
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+  deletedAt  DateTime?
+
+  @@index([expireDate])
+  @@map("userCredits")
+}
+
+model DemoUser {
+  id          String    @id @default(cuid())
+  purpose     String    @default("")
+  name        String    @default("")
+  email       String    @default("")
+  createdAt   DateTime? @default(now())
+  demoDateAt  DateTime?
+  companySize String    @default("")
+}
+
+model externalService {
+  id         String       @id @default(uuid()) @db.Uuid
+  apiKey     String? // 서비스 api key
+  name       String // 서비스 네임 (lower case only)
+  hostNameId String // 외부 서비스 인식 아이디 ex//IAmYongMin, @도슨티
+  botId      String
+  bot        WorkspaceBot @relation(fields: [botId], references: [id])
+
+  endUsers EndUser[]
+
+  @@unique([name, hostNameId], name: "_name_hostNameId_uc") // naverIamTom 이 유니크 값으로 됨
+}

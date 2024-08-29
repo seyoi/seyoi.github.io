@@ -1,0 +1,3 @@
+files:
+  - source: /messages/ko/*.json
+    translation: en/%language%.json

@@ -1,0 +1,10 @@
+{
+  "regions": ["icn1"],
+  "functions": {
+    "app/**/*": {
+      "maxDuration": 300
+    }
+  },
+
+  "buildCommand": "sh vercel.sh"
+}
