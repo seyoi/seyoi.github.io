@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+npx mjml src/common/libs/emails/templates/SendEmailTemplate.mjml -o src/common/libs/emails/templates/SendEmailTemplate.html

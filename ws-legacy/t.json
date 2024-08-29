@@ -1,0 +1,5118 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "DCTY Fastapi", "version": "0.1.0" },
+  "paths": {
+    "/api/v1/account/items": {
+      "get": {
+        "tags": ["Account"],
+        "summary": "Get Item",
+        "description": "Verify an account",
+        "operationId": "get_item_api_v1_account_items_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Uid" },
+            "name": "uid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_AccountResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Account"],
+        "summary": "Update Item",
+        "description": "Edit an account",
+        "operationId": "update_item_api_v1_account_items_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AccountUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_AccountResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Account"],
+        "summary": "Create Item",
+        "description": "Create an account.",
+        "operationId": "create_item_api_v1_account_items_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AccountCreateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_AccountResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Account"],
+        "summary": "Delete Item",
+        "description": "Delete an account",
+        "operationId": "delete_item_api_v1_account_items_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AccountUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_AccountResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/scrape-web": {
+      "post": {
+        "tags": ["Ingest"],
+        "summary": "Scrape",
+        "operationId": "scrape_api_v1_ingest_scrape_web_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ScrapeWebReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ScrapeWebResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/generate-upload-url": {
+      "post": {
+        "tags": ["Ingest"],
+        "summary": "Upload Url",
+        "description": "Generate gcp signed url for file upload",
+        "operationId": "upload_url_api_v1_ingest_generate_upload_url_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StoreFilesReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_GenerateUrlsResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/upload-files": {
+      "post": {
+        "tags": ["Ingest"],
+        "summary": "Store Files",
+        "operationId": "store_files_api_v1_ingest_upload_files_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StoreFilesReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_StoreFilesReq_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/generate-image-upload-url": {
+      "post": {
+        "tags": ["Ingest"],
+        "summary": "Upload Image Url",
+        "description": "Generate gcp signed url for image upload",
+        "operationId": "upload_image_url_api_v1_ingest_generate_image_upload_url_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserMediaReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_GenerateUrlsResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/user-media": {
+      "post": {
+        "tags": ["Ingest"],
+        "summary": "Save User Media",
+        "operationId": "save_user_media_api_v1_ingest_user_media_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UserMediaReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_UserMediaResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/write-texts": {
+      "post": {
+        "tags": ["Ingest"],
+        "summary": "Store Text",
+        "operationId": "store_text_api_v1_ingest_write_texts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StoreTextReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/WebResp_DctItemDoc_" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/items/{itemuid}": {
+      "get": {
+        "tags": ["Ingest"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_ingest_items__itemuid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Itemuid" },
+            "name": "itemuid",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Taskuid" },
+            "name": "taskUid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ItemGetResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/items": {
+      "get": {
+        "tags": ["Ingest"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_ingest_items_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Taskuid" },
+            "name": "taskUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Itemuid" },
+            "name": "itemuid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ItemGetResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Ingest"],
+        "summary": "Delete Items",
+        "operationId": "delete_items_api_v1_ingest_items_delete",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ItemDeleteReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ItemUpdateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Ingest"],
+        "summary": "Patch Items",
+        "description": "Only modified_pageContent and title can be changed",
+        "operationId": "patch_items_api_v1_ingest_items_patch",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ItemUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ItemUpdateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ingest/items/{botClsUid}": {
+      "delete": {
+        "tags": ["Ingest"],
+        "summary": "Delete Items",
+        "description": "Chatbot updates are all done at once",
+        "operationId": "delete_items_api_v1_ingest_items__botClsUid__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ItemDeleteReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Ingest"],
+        "summary": "Patch Items",
+        "description": "Only modified_pageContent and title can be changed, Chatbot updates are all done at once",
+        "operationId": "patch_items_api_v1_ingest_items__botClsUid__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ItemUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knlg/items/{botClsUid}": {
+      "post": {
+        "tags": ["Knowledge"],
+        "summary": "Create Items",
+        "description": "Create knowledgedoc and chatbot",
+        "operationId": "create_items_api_v1_knlg_items__botClsUid__post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KnowledgeCreateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Knowledge"],
+        "summary": "Update Items",
+        "description": "Update knowledgedoc and chatbot",
+        "operationId": "update_items_api_v1_knlg_items__botClsUid__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KnowledgeUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knlg/items": {
+      "get": {
+        "tags": ["Knowledge"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_knlg_items_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Uid" },
+            "name": "uid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Itemuid" },
+            "name": "itemUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Limit" },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Skip" },
+            "name": "skip",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeGetResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Knowledge"],
+        "summary": "Create Items",
+        "description": "Only create knowledgedoc",
+        "operationId": "create_items_api_v1_knlg_items_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KnowledgeCreateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Knowledge"],
+        "summary": "Delete Items",
+        "description": "uid is required.",
+        "operationId": "delete_items_api_v1_knlg_items_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KnowledgeDeleteReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Knowledge"],
+        "summary": "Update Items",
+        "description": "Only Update knowledgedoc",
+        "operationId": "update_items_api_v1_knlg_items_patch",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KnowledgeUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knlg/items/botcls/{botClsUid}/{itemUid}": {
+      "get": {
+        "tags": ["Knowledge"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_knlg_items_botcls__botClsUid___itemUid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Itemuid" },
+            "name": "itemUid",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Uid" },
+            "name": "uid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Limit" },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Skip" },
+            "name": "skip",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeGetResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knlg/items/botcls/{botClsUid}": {
+      "get": {
+        "tags": ["Knowledge"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_knlg_items_botcls__botClsUid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Uid" },
+            "name": "uid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Itemuid" },
+            "name": "itemUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Limit" },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Skip" },
+            "name": "skip",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeGetResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knlg/items/{uid}": {
+      "get": {
+        "tags": ["Knowledge"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_knlg_items__uid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Uid" },
+            "name": "uid",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Itemuid" },
+            "name": "itemUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Limit" },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "integer", "title": "Skip" },
+            "name": "skip",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KnowledgeGetResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bot/items": {
+      "get": {
+        "tags": ["Bot"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_bot_items_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Bot"],
+        "summary": "Create Bot",
+        "operationId": "create_bot_api_v1_bot_items_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BotCreateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bot/items/{botClsUid}": {
+      "get": {
+        "tags": ["Bot"],
+        "summary": "Get Items",
+        "operationId": "get_items_api_v1_bot_items__botClsUid__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Acntuid" },
+            "name": "acntUid",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Wsuid" },
+            "name": "wsUid",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Bot"],
+        "summary": "Delete Cls",
+        "description": "Delete botClsUid and all botInstUid",
+        "operationId": "delete_cls_api_v1_bot_items__botClsUid__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botinstuid" },
+            "name": "botInstUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BotDeleteReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Bot"],
+        "summary": "Update Cls",
+        "description": "deleteProps is not supported.",
+        "operationId": "update_cls_api_v1_bot_items__botClsUid__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BotUpdateReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bot/items/{botClsUid}/{botInstUid}": {
+      "delete": {
+        "tags": ["Bot"],
+        "summary": "Delete Cls",
+        "description": "Delete botInstUid",
+        "operationId": "delete_cls_api_v1_bot_items__botClsUid___botInstUid__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botinstuid" },
+            "name": "botInstUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/BotDeleteReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chat/messages": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Post Messages",
+        "operationId": "post_messages_api_v1_chat_messages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ChatReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ChatRespData_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/startup-package/upload-files": {
+      "post": {
+        "tags": ["Startup-Package"],
+        "summary": "Upload Files For Chatbot",
+        "operationId": "upload_files_for_chatbot_api_v1_startup_package_upload_files_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PrepareBpReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_PrepareBpResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/startup-package/changpae": {
+      "post": {
+        "tags": ["Startup-Package"],
+        "summary": "Changpae",
+        "operationId": "changpae_api_v1_startup_package_changpae_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StartupPackageReqData" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/smart/sales-automation/{botClsUid}": {
+      "patch": {
+        "tags": ["Smart"],
+        "summary": "Sales Automation",
+        "description": "From scraping to chatbot update all at once for sales automation.",
+        "operationId": "sales_automation_api_v1_smart_sales_automation__botClsUid__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SmartReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/smart/sales-automation": {
+      "post": {
+        "tags": ["Smart"],
+        "summary": "Sales Automation",
+        "description": "From scraping to chatbot creation all at once for sales automation.",
+        "operationId": "sales_automation_api_v1_smart_sales_automation_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SmartReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/smart/chatbot/{botClsUid}": {
+      "patch": {
+        "tags": ["Smart"],
+        "summary": "Chatbot",
+        "description": "From scraping to chatbot update all at once.",
+        "operationId": "chatbot_api_v1_smart_chatbot__botClsUid__patch",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SmartReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/smart/chatbot": {
+      "post": {
+        "tags": ["Smart"],
+        "summary": "Chatbot",
+        "description": "From scraping to chatbot creation all at once.",
+        "operationId": "chatbot_api_v1_smart_chatbot_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Botclsuid" },
+            "name": "botClsUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SmartReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_BotCreateResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/navertalktalk/{external_service_id}": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Navertalk Webhook",
+        "description": "When echo event is called but depends on the event it will have different JSON structure\nhttps://github.com/hwonyo/naver_talk_sdk/blob/master/tests/api/test_webhook_handler.py\nlook at the test cases for different events\n{\n        'event': 'echo',\n        'echoedEvent': 'send',\n        'user': 'test_user_id',\n        'partner': 'testyo',\n        'imageContent': {\n            'imageUrl': 'https://example_image.png'\n        },\n        'textContent':{\n            'text':'text_from_test'\n        },\n        'compositeContent': {\n            'compositeList':[]\n        },\n        'options': {\n            'mobile': False\n        }\n    }",
+        "operationId": "navertalk_webhook_ext_v1_chat_navertalktalk__external_service_id__post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "type": "string", "title": "External Service Id" },
+            "name": "external_service_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/threads/{threadUid}/messages": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Post Messages",
+        "operationId": "post_messages_ext_v1_chat_threads__threadUid__messages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ExtChatReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ExtChatRespData_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/messages": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Post Messages",
+        "operationId": "post_messages_ext_v1_chat_messages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ExtChatReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_ExtChatRespData_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/kakao/message": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Post Kakao Message",
+        "description": "사용자 메시지 수신 및 발신, infobank가 호출하는 webhook api",
+        "operationId": "post_kakao_message_ext_v1_chat_kakao_message_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Threaduid" },
+            "name": "threadUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KakaoChatMessageReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KakaoChatResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/kakao/reference": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Post Kakao Reference",
+        "description": "사용자 메타 정보 수신, infobank가 호출하는 webhook api",
+        "operationId": "post_kakao_reference_ext_v1_chat_kakao_reference_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Threaduid" },
+            "name": "threadUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KakaoChatReferenceReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KakaoChatResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/kakao/expired_session": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Post Kakao Expired Session",
+        "description": "사용자 세션 종료 정보 수신, infobank가 호출하는 webhook api",
+        "operationId": "post_kakao_expired_session_ext_v1_chat_kakao_expired_session_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Threaduid" },
+            "name": "threadUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KakaoChatExpiredSessionReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KakaoChatResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ext/v1/chat/kakao/result": {
+      "post": {
+        "tags": ["Ext_Chat"],
+        "summary": "Post Kakao Result",
+        "description": "전송 요청 결과, infobank가 호출하는 webhook api",
+        "operationId": "post_kakao_result_ext_v1_chat_kakao_result_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Threaduid" },
+            "name": "threadUid",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/KakaoChatResultReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_KakaoChatResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/faq/generate-upload-url": {
+      "post": {
+        "tags": ["Faq"],
+        "summary": "Generate Upload Url",
+        "description": "Generate gcp signed url for file upload",
+        "operationId": "generate_upload_url_api_v1_faq_generate_upload_url_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/StoreFilesReq" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebResp_GenerateUrlsResp_"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/faq/nodes": {
+      "get": {
+        "tags": ["Faq"],
+        "summary": "Get Nodes",
+        "description": "find question and answer pairing nodes",
+        "operationId": "get_nodes_api_v1_faq_nodes_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Qa Node Uid" },
+            "name": "qa_node_uid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Bot Class Uid" },
+            "name": "bot_class_uid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": { "type": "string", "title": "Workspace Uid" },
+            "name": "workspace_uid",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "title": "Activated Only",
+              "default": false
+            },
+            "name": "activated_only",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/QaResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Faq"],
+        "summary": "Create Qa Nodes",
+        "description": "create question and answer pairing nodes. it can be created from excel file or WEB UI.",
+        "operationId": "create_qa_nodes_api_v1_faq_nodes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_qa_nodes_api_v1_faq_nodes_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/QaResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Faq"],
+        "summary": "Delete Node",
+        "description": "delete question and a answer pairing nodes",
+        "operationId": "delete_node_api_v1_faq_nodes_delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QaRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/QaResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Faq"],
+        "summary": "Update Node",
+        "description": "update question and answer pairing nodes",
+        "operationId": "update_node_api_v1_faq_nodes_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/QaRequest" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/QaResponse" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountCreateReq": {
+        "properties": {
+          "baseName": {
+            "type": "string",
+            "title": "Basename",
+            "example": "docenty"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "example": "dcty.swe.dev.shared@docenty.ai",
+            "nullable": true
+          },
+          "fireAuthUid": {
+            "type": "string",
+            "title": "Fireauthuid",
+            "example": "abcdefghijklmnopqrstuvwxyz",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["baseName"],
+        "title": "AccountCreateReq"
+      },
+      "AccountDto": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "docenty-abcdefgh"
+          },
+          "lid": {
+            "type": "string",
+            "title": "Lid",
+            "default": "",
+            "example": "abcdefgh",
+            "nullable": true
+          },
+          "fireAuthUid": {
+            "type": "string",
+            "title": "Fireauthuid",
+            "example": "abcdefghijklmnopqrstuvwxyz",
+            "nullable": true
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "baseName": {
+            "type": "string",
+            "title": "Basename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "example": "dcty.swe.dev.shared@docenty.ai",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Deletedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["uid"],
+        "title": "AccountDto"
+      },
+      "AccountResp": {
+        "properties": {
+          "item": {
+            "allOf": [{ "$ref": "#/components/schemas/AccountDto" }],
+            "title": "Item",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "AccountResp"
+      },
+      "AccountUpdateReq": {
+        "properties": {
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "example": "dcty.swe.dev.shared@docenty.ai",
+            "nullable": true
+          },
+          "fireAuthId": {
+            "type": "string",
+            "title": "Fireauthid",
+            "example": "abcdefghijklmnopqrstuvwxyz",
+            "nullable": true
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["acntUid"],
+        "title": "AccountUpdateReq"
+      },
+      "Body_create_qa_nodes_api_v1_faq_nodes_post": {
+        "properties": {
+          "web_request": { "$ref": "#/components/schemas/QaRequest" },
+          "file_request": { "$ref": "#/components/schemas/StoreFilesReq" }
+        },
+        "type": "object",
+        "title": "Body_create_qa_nodes_api_v1_faq_nodes_post"
+      },
+      "BotClsDto": {
+        "properties": {
+          "uid": { "type": "string", "title": "Uid" },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "trialEmail": {
+            "type": "string",
+            "title": "Trialemail",
+            "example": "dcty.swe.dev.shared@docenty.ai",
+            "nullable": true
+          },
+          "creatorFireAuthUid": {
+            "type": "string",
+            "title": "Creatorfireauthuid",
+            "example": "abcdefghijklmnopqrstuvwxyz",
+            "nullable": true
+          },
+          "showSources": {
+            "type": "boolean",
+            "title": "Showsources",
+            "default": true,
+            "example": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty Bot",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "title": "Displayname",
+            "example": "Docenty Bot",
+            "nullable": true
+          },
+          "extraFrontInfo": {
+            "type": "object",
+            "title": "Extrafrontinfo",
+            "nullable": true
+          },
+          "namedKnowledgeIndexes2s": {
+            "items": {
+              "$ref": "#/components/schemas/NamedValues_KnowledgeIndexStruct_"
+            },
+            "type": "array",
+            "title": "Namedknowledgeindexes2S",
+            "nullable": true
+          },
+          "namedVecsDatas": {
+            "items": { "$ref": "#/components/schemas/NamedValue_VecsData_" },
+            "type": "array",
+            "title": "Namedvecsdatas",
+            "nullable": true
+          },
+          "namedPrompts": {
+            "items": { "$ref": "#/components/schemas/NamedValue_str_" },
+            "type": "array",
+            "title": "Namedprompts",
+            "nullable": true
+          },
+          "status": {
+            "allOf": [{ "$ref": "#/components/schemas/BotStatus" }],
+            "example": "DOWN_CREATING",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "draft": { "type": "boolean", "title": "Draft", "nullable": true },
+          "published": {
+            "type": "boolean",
+            "title": "Published",
+            "nullable": true
+          },
+          "instUids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Instuids",
+            "default": [],
+            "nullable": true
+          },
+          "activeInstUid": {
+            "type": "string",
+            "title": "Activeinstuid",
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          },
+          "botUrl": { "type": "string", "title": "Boturl", "nullable": true }
+        },
+        "type": "object",
+        "required": ["uid", "acntUid"],
+        "title": "BotClsDto"
+      },
+      "BotCreateParams": {
+        "properties": {
+          "namedKnowledgeUids2s": {
+            "items": { "$ref": "#/components/schemas/NamedIds" },
+            "type": "array",
+            "title": "Namedknowledgeuids2S",
+            "example": { "name": "0", "ids": ["Nuz9Ts-Docenty-PAB94Axg"] },
+            "nullable": true
+          },
+          "namedVecsNamespaces": {
+            "items": { "$ref": "#/components/schemas/NamedId" },
+            "type": "array",
+            "title": "Namedvecsnamespaces",
+            "nullable": true
+          },
+          "showSources": {
+            "type": "boolean",
+            "title": "Showsources",
+            "default": true,
+            "example": true,
+            "nullable": true
+          },
+          "ownership": {
+            "allOf": [{ "$ref": "#/components/schemas/BotOwnershipParams" }],
+            "title": "Ownership",
+            "nullable": true
+          },
+          "view": {
+            "allOf": [{ "$ref": "#/components/schemas/BotViewParams" }],
+            "title": "View",
+            "nullable": true
+          },
+          "model": {
+            "allOf": [{ "$ref": "#/components/schemas/BotModelParams" }],
+            "title": "Model",
+            "nullable": true
+          },
+          "draft": { "type": "boolean", "title": "Draft", "nullable": true },
+          "published": {
+            "type": "boolean",
+            "title": "Published",
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "BotCreateParams"
+      },
+      "BotCreateReq": {
+        "properties": {
+          "namedKnowledgeUids2s": {
+            "items": { "$ref": "#/components/schemas/NamedIds" },
+            "type": "array",
+            "title": "Namedknowledgeuids2S",
+            "example": { "name": "0", "ids": ["Nuz9Ts-Docenty-PAB94Axg"] },
+            "nullable": true
+          },
+          "namedVecsNamespaces": {
+            "items": { "$ref": "#/components/schemas/NamedId" },
+            "type": "array",
+            "title": "Namedvecsnamespaces",
+            "nullable": true
+          },
+          "showSources": {
+            "type": "boolean",
+            "title": "Showsources",
+            "default": true
+          },
+          "ownership": {
+            "allOf": [{ "$ref": "#/components/schemas/BotOwnershipParams" }],
+            "title": "Ownership",
+            "example": { "acntUid": "docenty-abcdefgh", "wsUid": "default" }
+          },
+          "view": {
+            "allOf": [{ "$ref": "#/components/schemas/BotViewParams" }],
+            "title": "View",
+            "nullable": true
+          },
+          "model": {
+            "allOf": [{ "$ref": "#/components/schemas/BotModelParams" }],
+            "title": "Model",
+            "nullable": true
+          },
+          "draft": { "type": "boolean", "title": "Draft", "nullable": true },
+          "published": {
+            "type": "boolean",
+            "title": "Published",
+            "default": true,
+            "example": true,
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["ownership"],
+        "title": "BotCreateReq"
+      },
+      "BotCreateResp": {
+        "properties": {
+          "cloneBotClsUid": {
+            "type": "string",
+            "title": "Clonebotclsuid",
+            "nullable": true
+          },
+          "items": {
+            "items": { "$ref": "#/components/schemas/BotClsDto" },
+            "type": "array",
+            "title": "Items",
+            "nullable": true
+          },
+          "instantiate": {
+            "type": "boolean",
+            "title": "Instantiate",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "BotCreateResp"
+      },
+      "BotDeleteReq": {
+        "properties": {
+          "deleteBot": {
+            "allOf": [{ "$ref": "#/components/schemas/BotCreateParams" }],
+            "title": "Deletebot",
+            "description": "Not implemented yet."
+          }
+        },
+        "type": "object",
+        "required": ["deleteBot"],
+        "title": "BotDeleteReq"
+      },
+      "BotModelParams": {
+        "properties": {
+          "namedPrompts": {
+            "items": { "$ref": "#/components/schemas/NamedValue_str_" },
+            "type": "array",
+            "title": "Namedprompts",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "BotModelParams"
+      },
+      "BotOwnershipParams": {
+        "properties": {
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": { "type": "string", "title": "Wsuid", "example": "default" },
+          "trialEmail": {
+            "type": "string",
+            "title": "Trialemail",
+            "example": "dcty.swe.dev.shared@docenty.ai",
+            "nullable": true
+          },
+          "creatorFireAuthUid": {
+            "type": "string",
+            "title": "Creatorfireauthuid",
+            "example": "abcdefghijklmnopqrstuvwxyz",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["acntUid", "wsUid"],
+        "title": "BotOwnershipParams"
+      },
+      "BotStatus": {
+        "type": "string",
+        "enum": [
+          "STABLE_ANY",
+          "UNSTABLE_UPDATING",
+          "DOWN_CREATING",
+          "DOWN_UPDATING",
+          "DOWN_FAILED",
+          "DOWN_DELETED",
+          "TASK_SUCCEEDED",
+          "TASK_FAILED",
+          "DOCS_SUCCEEDED",
+          "DOCS_FAILED",
+          "KNLG_SUCCEEDED",
+          "KNLG_FAILED",
+          "BOTCLS_SUCCEEDED",
+          "BOTCLS_FAILED"
+        ],
+        "title": "BotStatus",
+        "description": "An enumeration."
+      },
+      "BotUpdateReq": {
+        "properties": {
+          "updateParams": {
+            "allOf": [{ "$ref": "#/components/schemas/BotCreateParams" }],
+            "title": "Updateparams",
+            "description": "Update > Delete",
+            "nullable": true
+          },
+          "deleteParams": {
+            "allOf": [{ "$ref": "#/components/schemas/BotCreateParams" }],
+            "title": "Deleteparams",
+            "description": "Not implemented yet.",
+            "nullable": true
+          },
+          "conditionProps": {
+            "allOf": [{ "$ref": "#/components/schemas/BotCreateParams" }],
+            "title": "Conditionprops",
+            "description": "Update or delete if this condition is not None. Not implemented yet.",
+            "nullable": true
+          },
+          "instantiate": {
+            "type": "boolean",
+            "title": "Instantiate",
+            "nullable": true
+          },
+          "ownership": {
+            "allOf": [{ "$ref": "#/components/schemas/BotOwnershipParams" }],
+            "title": "Ownership",
+            "example": { "acntUid": "docenty-abcdefgh", "wsUid": "default" },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "BotUpdateReq"
+      },
+      "BotViewParams": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty Bot",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "title": "Displayname",
+            "example": "Docenty Bot",
+            "nullable": true
+          },
+          "extraFrontInfo": {
+            "type": "object",
+            "title": "Extrafrontinfo",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "BotViewParams"
+      },
+      "ChatDatasource": {
+        "properties": {
+          "chatSources": {
+            "items": { "$ref": "#/components/schemas/ChatSource" },
+            "type": "array",
+            "title": "Chatsources"
+          }
+        },
+        "type": "object",
+        "required": ["chatSources"],
+        "title": "ChatDatasource"
+      },
+      "ChatReq": {
+        "properties": {
+          "role": {
+            "allOf": [{ "$ref": "#/components/schemas/SpeakerRole" }],
+            "example": "USER"
+          },
+          "message": { "$ref": "#/components/schemas/Message" },
+          "botName": {
+            "type": "string",
+            "title": "Botname",
+            "description": "Either botName or botClsUid should be provided.",
+            "nullable": true
+          },
+          "botClsUid": {
+            "type": "string",
+            "title": "Botclsuid",
+            "description": "Either botName or botClsUid should be provided.",
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          },
+          "openAi": {
+            "allOf": [{ "$ref": "#/components/schemas/LangchainOpenai" }],
+            "default": "azure_openai",
+            "example": "azure_openai",
+            "nullable": true
+          },
+          "userLang": {
+            "type": "string",
+            "title": "Userlang",
+            "nullable": true
+          },
+          "docMainLang": {
+            "type": "string",
+            "title": "Docmainlang",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh",
+            "nullable": true
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "userEmail": { "type": "string", "title": "Useremail" },
+          "channelName": { "type": "string", "title": "Channelname" },
+          "is_streaming": {
+            "type": "boolean",
+            "title": "Is Streaming",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": ["role", "message"],
+        "title": "ChatReq"
+      },
+      "ChatRespData": {
+        "properties": {
+          "datasource": {
+            "allOf": [{ "$ref": "#/components/schemas/ChatDatasource" }],
+            "title": "Datasource",
+            "nullable": true
+          },
+          "messageUid": {
+            "type": "string",
+            "title": "Messageuid",
+            "nullable": true
+          },
+          "messageGenUuid": {
+            "type": "string",
+            "title": "Messagegenuuid",
+            "nullable": true
+          },
+          "botMessage": { "$ref": "#/components/schemas/Message" },
+          "answer": {
+            "type": "string",
+            "title": "Answer",
+            "example": "Docenty는 인공지능을 활용하여 사용자의 웹사이트나 기존 문서를 기반으로 맞춤형 AI 챗봇을 자동으로 생성하는 B2B SaaS 제품입니다."
+          },
+          "etc": { "type": "object", "title": "Etc", "nullable": true },
+          "modelName": {
+            "type": "string",
+            "title": "Modelname",
+            "example": "gpt-4o"
+          },
+          "openAi": {
+            "allOf": [{ "$ref": "#/components/schemas/LangchainOpenai" }],
+            "default": "azure_openai",
+            "example": "azure_openai",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["botMessage", "answer", "modelName"],
+        "title": "ChatRespData"
+      },
+      "ChatSource": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "example": "https://www.docenty.ai/",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "title": "Filename",
+            "example": "www.docenty.ai/_index.html",
+            "nullable": true
+          },
+          "itemKey": {
+            "type": "string",
+            "title": "Itemkey",
+            "example": "https://www.docenty.ai/",
+            "nullable": true
+          },
+          "pageNum": {
+            "type": "integer",
+            "title": "Pagenum",
+            "example": 1,
+            "nullable": true
+          },
+          "score": {
+            "type": "number",
+            "title": "Score",
+            "example": 0.726478457,
+            "nullable": true
+          },
+          "similarity": {
+            "type": "boolean",
+            "title": "Similarity",
+            "default": true,
+            "example": true,
+            "nullable": true
+          },
+          "pageContent": {
+            "type": "string",
+            "title": "Pagecontent",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI...",
+            "nullable": true
+          },
+          "images_path": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Images Path",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "ChatSource",
+        "description": "Related contents info for the question."
+      },
+      "Content": {
+        "properties": {
+          "content_id": { "type": "string", "title": "Content Id" },
+          "question": { "type": "string", "title": "Question" },
+          "answer": { "type": "string", "title": "Answer" },
+          "keywords": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Keywords"
+          },
+          "images_path": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Images Path"
+          },
+          "button": { "type": "object", "title": "Button" },
+          "form": { "type": "object", "title": "Form" }
+        },
+        "type": "object",
+        "required": ["content_id", "answer"],
+        "title": "Content"
+      },
+      "DctItemDoc": {
+        "properties": {
+          "_id": {
+            "type": "string",
+            "title": " Id",
+            "description": "MongoDB document ObjectID",
+            "example": "5eb7cf5a86d9755df3a6c593"
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": { "type": "string", "title": "Wsuid", "example": "default" },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          },
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "doc-web-Nuz9Ts-Name78-XVX73f383oHRXVKP"
+          },
+          "loadingName": {
+            "allOf": [{ "$ref": "#/components/schemas/DocLoadingName" }],
+            "example": "scraped"
+          },
+          "documents": {
+            "allOf": [{ "$ref": "#/components/schemas/PagedDocument" }],
+            "title": "Documents",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["acntUid", "wsUid", "uid", "loadingName"],
+        "title": "DctItemDoc",
+        "description": "Document Mapping class.\n\nFields:\n\n- `id` - MongoDB document ObjectID \"_id\" field.\nMapped to the PydanticObjectId class"
+      },
+      "DocLoadingName": {
+        "enum": ["scraped", "uploaded", "written", "ingested"],
+        "title": "DocLoadingName",
+        "description": "An enumeration."
+      },
+      "ExtChatReq": {
+        "properties": {
+          "message": { "$ref": "#/components/schemas/Message" },
+          "botClsUid": {
+            "type": "string",
+            "title": "Botclsuid",
+            "description": "Either botName or botClsUid should be provided.",
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["message"],
+        "title": "ExtChatReq"
+      },
+      "ExtChatRespData": {
+        "properties": {
+          "answer": {
+            "type": "string",
+            "title": "Answer",
+            "example": "Docenty는 인공지능을 활용하여 사용자의 웹사이트나 기존 문서를 기반으로 맞춤형 AI 챗봇을 자동으로 생성하는 B2B SaaS 제품입니다."
+          }
+        },
+        "type": "object",
+        "required": ["answer"],
+        "title": "ExtChatRespData"
+      },
+      "FileLoadingReqData": {
+        "properties": {
+          "ingestionType": {
+            "allOf": [{ "$ref": "#/components/schemas/IngestionType" }],
+            "default": "UPLOAD_File_Plain"
+          },
+          "basePath": {
+            "type": "string",
+            "title": "Basepath",
+            "nullable": true
+          },
+          "fileNames": {
+            "items": { "$ref": "#/components/schemas/FileReqList" },
+            "type": "array",
+            "title": "Filenames",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "FileLoadingReqData"
+      },
+      "FileReqList": {
+        "properties": {
+          "fileName": { "type": "string", "title": "Filename" },
+          "fileType": {
+            "type": "string",
+            "title": "Filetype",
+            "default": "application/octet-stream"
+          }
+        },
+        "type": "object",
+        "required": ["fileName"],
+        "title": "FileReqList"
+      },
+      "GenerateUrlsResp": {
+        "properties": {
+          "genUrls": {
+            "additionalProperties": { "type": "string" },
+            "type": "object",
+            "title": "Genurls"
+          },
+          "basePath": {
+            "type": "string",
+            "format": "path",
+            "title": "Basepath",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          }
+        },
+        "type": "object",
+        "required": ["genUrls", "acntUid", "taskUid"],
+        "title": "GenerateUrlsResp"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IngestedItem": {
+        "properties": {
+          "itemKey": {
+            "type": "string",
+            "title": "Itemkey",
+            "example": "https://www.docenty.ai/"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "example": "https://www.docenty.ai/",
+            "nullable": true
+          },
+          "filePath": {
+            "type": "string",
+            "title": "Filepath",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["itemKey"],
+        "title": "IngestedItem"
+      },
+      "IngestionType": {
+        "type": "string",
+        "enum": [
+          "SCRAPE_Web_Plain",
+          "UPLOAD_File_Plain",
+          "FILE_Pdf_Plain",
+          "FILE_Csv_Structured",
+          "MDB_Csv_Plain",
+          "MDB_Qna_Qna",
+          "MDB_Text_Plain",
+          "UPLOAD_Image_Plain"
+        ],
+        "title": "IngestionType",
+        "description": "An enumeration."
+      },
+      "ItemDeleteReq": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "doc-web-Nuz9Ts-Name78-XVX73f383oHRXVKP"
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": { "type": "string", "title": "Wsuid", "example": "default" },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          }
+        },
+        "type": "object",
+        "required": ["uid", "acntUid", "wsUid"],
+        "title": "ItemDeleteReq"
+      },
+      "ItemGetResp": {
+        "properties": {
+          "result": {
+            "items": { "$ref": "#/components/schemas/DctItemDoc" },
+            "type": "array",
+            "title": "Result",
+            "example": [
+              {
+                "taskUid": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY",
+                "status": "COMPLETED_SUCCEEDED",
+                "updatedAt": "2024-01-01T01:11:11.111111",
+                "createdAt": "2024-01-01T01:11:11.111111"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "ItemGetResp"
+      },
+      "ItemKeyStatus": {
+        "properties": {
+          "used_itemkeys": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Used Itemkeys",
+            "nullable": true
+          },
+          "unused_itemkeys": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Unused Itemkeys",
+            "nullable": true
+          },
+          "deleted_itemkeys": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Deleted Itemkeys",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "ItemKeyStatus"
+      },
+      "ItemReqPagedDocument": {
+        "properties": {
+          "modified_pageContent": {
+            "type": "string",
+            "title": "Modified Pagecontent",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI...",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty - AI Chatbot For your website",
+            "nullable": true
+          },
+          "status": {
+            "allOf": [{ "$ref": "#/components/schemas/PagedDocumentStatus" }],
+            "default": "USED",
+            "example": "USED",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "ItemReqPagedDocument"
+      },
+      "ItemSelectionDocToDto": {
+        "properties": {
+          "itemuid": {
+            "type": "string",
+            "title": "Itemuid",
+            "example": "Nuz9Ts-Docenty-PAB94Axg"
+          },
+          "itemkey": { "type": "string", "title": "Itemkey" },
+          "modified_pageContent": {
+            "type": "string",
+            "title": "Modified Pagecontent",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI...",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "type": {
+            "allOf": [{ "$ref": "#/components/schemas/DocLoadingName" }],
+            "example": "scraped",
+            "nullable": true
+          },
+          "status": {
+            "allOf": [{ "$ref": "#/components/schemas/PagedDocumentStatus" }],
+            "example": "USED",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "metadata": { "type": "object", "title": "Metadata" }
+        },
+        "type": "object",
+        "required": ["itemuid", "itemkey"],
+        "title": "ItemSelectionDocToDto"
+      },
+      "ItemUpdateReq": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "doc-web-Nuz9Ts-Name78-XVX73f383oHRXVKP"
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": { "type": "string", "title": "Wsuid", "example": "default" },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          },
+          "document": {
+            "allOf": [{ "$ref": "#/components/schemas/ItemReqPagedDocument" }],
+            "title": "Document"
+          }
+        },
+        "type": "object",
+        "required": ["uid", "acntUid", "wsUid", "document"],
+        "title": "ItemUpdateReq"
+      },
+      "ItemUpdateResp": {
+        "properties": {
+          "result": {
+            "allOf": [{ "$ref": "#/components/schemas/DctItemDoc" }],
+            "title": "Result",
+            "example": [
+              {
+                "taskUid": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY",
+                "status": "COMPLETED_SUCCEEDED",
+                "updatedAt": "2024-01-01T01:11:11.111111",
+                "createdAt": "2024-01-01T01:11:11.111111"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "ItemUpdateResp"
+      },
+      "KakaoChatExpiredSessionReq": {
+        "properties": {
+          "pf_id": {
+            "type": "string",
+            "title": "Pf Id",
+            "description": "플러스 친구 아이디",
+            "example": "@svcdevbiztalk"
+          },
+          "user_key": {
+            "type": "string",
+            "title": "User Key",
+            "description": "사용자 키",
+            "example": "MZjEVK4x18_V"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id",
+            "description": "종료된 세션 아이디",
+            "example": "123"
+          }
+        },
+        "type": "object",
+        "required": ["pf_id", "user_key", "session_id"],
+        "title": "KakaoChatExpiredSessionReq"
+      },
+      "KakaoChatMessageReq": {
+        "properties": {
+          "pf_id": {
+            "type": "string",
+            "title": "Pf Id",
+            "description": "플러스 친구 아이디",
+            "example": "@svcdevbiztalk"
+          },
+          "user_key": {
+            "type": "string",
+            "title": "User Key",
+            "description": "유저 키",
+            "example": "MZjEVK4x18_V"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "description": "사용자가 전송한 메시지 종류 (text, photo, video, audio)",
+            "example": "text"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "description": "사용자가 전송한 메시지. type이 text가 아닌 미디어인 경우 json",
+            "example": "안녕하세요"
+          },
+          "contents": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Contents",
+            "description": "사용자가 전송한 데이터 배열",
+            "default": []
+          },
+          "attachment": {
+            "type": "string",
+            "title": "Attachment",
+            "description": "전체 메시지의 첨부 파일 URL"
+          },
+          "extra": {
+            "type": "string",
+            "title": "Extra",
+            "description": "사용자가 전송한 메시지의 extra 정보"
+          },
+          "acnt_uid": {
+            "type": "string",
+            "title": "Acnt Uid",
+            "description": "계정 UID",
+            "default": "None",
+            "example": "None"
+          },
+          "asctime": {
+            "type": "string",
+            "title": "Asctime",
+            "description": "타임스탬프",
+            "default": "2024-07-29T16:32:09",
+            "example": "2024-07-29T16:32:09"
+          },
+          "levelname": {
+            "type": "string",
+            "title": "Levelname",
+            "description": "로그 레벨",
+            "default": "INFO",
+            "example": "INFO"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "메시지",
+            "default": "",
+            "example": ""
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "로거 이름",
+            "default": "src.main",
+            "example": "src.main"
+          },
+          "request_id": {
+            "type": "string",
+            "title": "Request Id",
+            "description": "요청 ID",
+            "default": "None",
+            "example": "None"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "상태",
+            "default": "INFO",
+            "example": "INFO"
+          },
+          "ws_uid": {
+            "type": "string",
+            "title": "Ws Uid",
+            "description": "웹 서비스 UID",
+            "default": "None",
+            "example": "None"
+          },
+          "yellow_id": {
+            "type": "string",
+            "title": "Yellow Id",
+            "description": "옐로우 아이디",
+            "example": "@도슨티"
+          }
+        },
+        "type": "object",
+        "required": ["pf_id", "user_key", "type", "content", "yellow_id"],
+        "title": "KakaoChatMessageReq"
+      },
+      "KakaoChatReferenceReq": {
+        "properties": {
+          "pf_id": {
+            "type": "string",
+            "title": "Pf Id",
+            "description": "플러스 친구 아이디",
+            "example": "@svcdevbiztalk"
+          },
+          "user_key": {
+            "type": "string",
+            "title": "User Key",
+            "description": "유저 키",
+            "example": "MZjEVK4x18_V"
+          },
+          "app_user_id": {
+            "type": "integer",
+            "title": "App User Id",
+            "description": "앱 유저 아이디"
+          },
+          "reference": {
+            "type": "object",
+            "title": "Reference",
+            "description": "고객사에서 설정한 메타 정보"
+          },
+          "last_reference": {
+            "type": "object",
+            "title": "Last Reference",
+            "description": "마지막 메타 정보"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id",
+            "description": "세션 아이디"
+          },
+          "chatbot_messages": {
+            "items": { "type": "object" },
+            "type": "array",
+            "title": "Chatbot Messages",
+            "description": "챗봇 대화 내역"
+          }
+        },
+        "type": "object",
+        "required": ["pf_id", "user_key"],
+        "title": "KakaoChatReferenceReq"
+      },
+      "KakaoChatResp": {
+        "properties": {
+          "msg": {
+            "type": "string",
+            "title": "Msg",
+            "default": "Received",
+            "example": "Received"
+          },
+          "data": {
+            "anyOf": [
+              { "$ref": "#/components/schemas/KakaoChatReferenceReq" },
+              { "$ref": "#/components/schemas/KakaoChatMessageReq" },
+              { "$ref": "#/components/schemas/KakaoChatExpiredSessionReq" },
+              { "$ref": "#/components/schemas/KakaoChatResultReq" }
+            ],
+            "title": "Data",
+            "description": "Received data object"
+          }
+        },
+        "type": "object",
+        "required": ["data"],
+        "title": "KakaoChatResp"
+      },
+      "KakaoChatResultReq": {
+        "properties": {
+          "pf_id": {
+            "type": "string",
+            "title": "Pf Id",
+            "description": "플러스 친구 아이디",
+            "example": "@svcdevbiztalk"
+          },
+          "serial_number": {
+            "type": "string",
+            "title": "Serial Number",
+            "description": "요청 일련번호",
+            "example": "1001982167_605498276"
+          },
+          "request_type": {
+            "type": "string",
+            "title": "Request Type",
+            "description": "요청 타입",
+            "example": "activate"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "처리 결과 코드",
+            "example": "0"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "오류 메시지",
+            "example": "NoJsonBodyException(1)"
+          },
+          "image": {
+            "type": "string",
+            "title": "Image",
+            "description": "업로드된 이미지 경로",
+            "example": "http://mudkage.kakao.com/dn/sdjhfksdf/adfkjhd/asdkfj/original.jpg"
+          },
+          "file": {
+            "type": "string",
+            "title": "File",
+            "description": "업로드된 파일 경로",
+            "example": "http://mudkage.kakao.com/dn/sdjhfksdf/adfkjhd/asdkfj/original.pdf"
+          },
+          "file_name": {
+            "type": "string",
+            "title": "File Name",
+            "description": "업로드된 파일 이름",
+            "example": "파일테스트.pdf"
+          },
+          "file_size": {
+            "type": "string",
+            "title": "File Size",
+            "description": "업로드된 파일 용량",
+            "example": "123456"
+          }
+        },
+        "type": "object",
+        "required": ["serial_number", "request_type", "code"],
+        "title": "KakaoChatResultReq"
+      },
+      "KnowledgeCreateReq": {
+        "properties": {
+          "itemkeySelections": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Itemkeyselections",
+            "nullable": true
+          },
+          "baseName": {
+            "type": "string",
+            "title": "Basename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          },
+          "botCreateReq": {
+            "allOf": [{ "$ref": "#/components/schemas/BotCreateReq" }],
+            "title": "Botcreatereq",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["acntUid"],
+        "title": "KnowledgeCreateReq"
+      },
+      "KnowledgeCreateResp": {
+        "properties": {
+          "item": {
+            "allOf": [{ "$ref": "#/components/schemas/KnowledgeDto" }],
+            "title": "Item",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "KnowledgeCreateResp"
+      },
+      "KnowledgeDeleteReq": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "Nuz9Ts-Docenty-PAB94Axg",
+            "nullable": true
+          },
+          "ownership": {
+            "allOf": [{ "$ref": "#/components/schemas/BotOwnershipParams" }],
+            "title": "Ownership",
+            "example": { "acntUid": "docenty-abcdefgh", "wsUid": "default" },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "KnowledgeDeleteReq"
+      },
+      "KnowledgeDto": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "Nuz9Ts-Docenty-PAB94Axg"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "example": "docenty",
+            "nullable": true
+          },
+          "itemSelections": {
+            "items": { "$ref": "#/components/schemas/ItemSelectionDocToDto" },
+            "type": "array",
+            "title": "Itemselections",
+            "nullable": true
+          },
+          "failedDocItemKeysDict": {
+            "additionalProperties": {
+              "items": { "type": "string" },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Faileddocitemkeysdict",
+            "nullable": true
+          },
+          "vecsData": {
+            "allOf": [{ "$ref": "#/components/schemas/VecsData" }],
+            "title": "Vecsdata",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "title": "Metadata",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["uid", "acntUid"],
+        "title": "KnowledgeDto"
+      },
+      "KnowledgeGetResp": {
+        "properties": {
+          "items": {
+            "items": { "$ref": "#/components/schemas/KnowledgeDto" },
+            "type": "array",
+            "title": "Items",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "KnowledgeGetResp"
+      },
+      "KnowledgeIndexStruct": {
+        "properties": {
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": { "type": "string", "title": "Wsuid", "example": "default" },
+          "name": { "type": "string", "title": "Name", "nullable": true },
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "Nuz9Ts-Docenty-PAB94Axg"
+          }
+        },
+        "type": "object",
+        "required": ["acntUid", "wsUid", "uid"],
+        "title": "KnowledgeIndexStruct"
+      },
+      "KnowledgeUpdateReq": {
+        "properties": {
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "example": "Nuz9Ts-Docenty-PAB94Axg",
+            "nullable": true
+          },
+          "itemkeySelections": {
+            "allOf": [{ "$ref": "#/components/schemas/ItemKeyStatus" }],
+            "title": "Itemkeyselections",
+            "nullable": true
+          },
+          "baseName": {
+            "type": "string",
+            "title": "Basename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "modelName": {
+            "allOf": [{ "$ref": "#/components/schemas/ModelName" }],
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "includePageContent": {
+            "type": "boolean",
+            "title": "Includepagecontent",
+            "default": false,
+            "example": false,
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["acntUid"],
+        "title": "KnowledgeUpdateReq"
+      },
+      "LangchainOpenai": {
+        "type": "string",
+        "enum": ["chat_openai", "azure_openai", "ollama"],
+        "title": "LangchainOpenai",
+        "description": "An enumeration."
+      },
+      "Message": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content",
+            "example": "Docenty 가 뭐야?"
+          },
+          "additional_kwargs": {
+            "type": "object",
+            "title": "Additional Kwargs"
+          },
+          "response_metadata": {
+            "type": "object",
+            "title": "Response Metadata"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "example": "ai",
+            "nullable": true
+          },
+          "name": { "type": "string", "title": "Name" },
+          "id": { "type": "string", "title": "Id" },
+          "speakerRole": {
+            "allOf": [{ "$ref": "#/components/schemas/SpeakerRole" }],
+            "default": "USER",
+            "example": "USER",
+            "nullable": true
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt",
+            "example": "한글로 대답해",
+            "nullable": true
+          },
+          "params": { "type": "object", "title": "Params", "nullable": true },
+          "sentUuid": {
+            "type": "string",
+            "title": "Sentuuid",
+            "description": "Message uuid generated by sender.",
+            "nullable": true
+          },
+          "originSentUuid": {
+            "type": "string",
+            "title": "Originsentuuid",
+            "description": "Target message uuid generated by sender.",
+            "nullable": true
+          },
+          "uid": {
+            "type": "string",
+            "title": "Uid",
+            "description": "Not supported yet.",
+            "nullable": true
+          },
+          "action": { "type": "string", "title": "Action", "nullable": true },
+          "actionParams": {
+            "type": "object",
+            "title": "Actionparams",
+            "nullable": true
+          },
+          "origin": {
+            "allOf": [{ "$ref": "#/components/schemas/Message" }],
+            "title": "Origin",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["content"],
+        "title": "Message",
+        "description": "Base abstract Message class.\n\nMessages are the inputs and outputs of ChatModels."
+      },
+      "ModelName": {
+        "type": "string",
+        "enum": [
+          "gpt-3.5-turbo",
+          "gpt-3.5-turbo-1106",
+          "gpt-3.5-turbo-0125",
+          "gpt-4",
+          "gpt-4-1106-preview",
+          "gpt-4-turbo",
+          "gpt-4o",
+          "gpt-4o-mini",
+          "upstage/solar-1-mini-chat-ko",
+          "llama3",
+          "llama3:70b"
+        ],
+        "title": "ModelName",
+        "description": "An enumeration."
+      },
+      "NamedId": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "id": { "type": "string", "title": "Id" }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "NamedId"
+      },
+      "NamedIds": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "ids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Ids"
+          }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "NamedIds"
+      },
+      "NamedValue_VecsData_": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "value": { "$ref": "#/components/schemas/VecsData" }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "NamedValue[VecsData]"
+      },
+      "NamedValue_str_": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "value": { "type": "string", "title": "Value" }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "NamedValue[str]"
+      },
+      "NamedValues_KnowledgeIndexStruct_": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "values": { "$ref": "#/components/schemas/KnowledgeIndexStruct" }
+        },
+        "type": "object",
+        "required": ["name", "values"],
+        "title": "NamedValues[KnowledgeIndexStruct]"
+      },
+      "PagedDocument": {
+        "properties": {
+          "original_pageContent": {
+            "type": "string",
+            "title": "Original Pagecontent",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI...",
+            "nullable": true
+          },
+          "modified_pageContent": {
+            "type": "string",
+            "title": "Modified Pagecontent",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI...",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "example": "https://www.docenty.ai/",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "example": "Docenty",
+            "nullable": true
+          },
+          "contentPath": {
+            "type": "string",
+            "title": "Contentpath",
+            "nullable": true
+          },
+          "pagePath": {
+            "type": "string",
+            "title": "Pagepath",
+            "example": "https://www.docenty.ai/",
+            "nullable": true
+          },
+          "pageNum": {
+            "type": "integer",
+            "title": "Pagenum",
+            "example": 1,
+            "nullable": true
+          },
+          "itemKey": {
+            "type": "string",
+            "title": "Itemkey",
+            "example": "https://www.docenty.ai/",
+            "nullable": true
+          },
+          "status": {
+            "allOf": [{ "$ref": "#/components/schemas/PagedDocumentStatus" }],
+            "default": "USED",
+            "example": "USED",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Deletedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "metadata": { "type": "object", "title": "Metadata" }
+        },
+        "type": "object",
+        "title": "PagedDocument"
+      },
+      "PagedDocumentStatus": {
+        "type": "string",
+        "enum": ["USED", "UNUSED", "DELETE"],
+        "title": "PagedDocumentStatus",
+        "description": "An enumeration."
+      },
+      "PrepareBpReq": {
+        "properties": {
+          "task_ws_path": { "type": "string", "title": "Task Ws Path" },
+          "scraping_base_name": {
+            "type": "string",
+            "title": "Scraping Base Name"
+          },
+          "bucket_name": { "type": "string", "title": "Bucket Name" },
+          "files": {
+            "items": { "type": "object" },
+            "type": "array",
+            "title": "Files"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "chochangpae"
+          },
+          "prompt": { "type": "object", "title": "Prompt" }
+        },
+        "type": "object",
+        "required": ["task_ws_path", "scraping_base_name", "bucket_name"],
+        "title": "PrepareBpReq"
+      },
+      "PrepareBpResp": {
+        "properties": {
+          "task_ws_path": { "type": "string", "title": "Task Ws Path" },
+          "scraping_base_name": {
+            "type": "string",
+            "title": "Scraping Base Name"
+          },
+          "task_name": { "type": "string", "title": "Task Name" },
+          "sucedded_file_paths": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Sucedded File Paths"
+          },
+          "failed_file_paths": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Failed File Paths"
+          }
+        },
+        "type": "object",
+        "required": [
+          "task_ws_path",
+          "scraping_base_name",
+          "task_name",
+          "sucedded_file_paths",
+          "failed_file_paths"
+        ],
+        "title": "PrepareBpResp"
+      },
+      "QaCreateParameter": {
+        "properties": {
+          "qa_node": { "$ref": "#/components/schemas/QaNode" },
+          "parent_uids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Parent Uids"
+          }
+        },
+        "type": "object",
+        "required": ["qa_node"],
+        "title": "QaCreateParameter"
+      },
+      "QaCreateResponse": {
+        "properties": { "qa_node": { "$ref": "#/components/schemas/QaNode" } },
+        "type": "object",
+        "required": ["qa_node"],
+        "title": "QaCreateResponse"
+      },
+      "QaDeleteParameter": {
+        "properties": {
+          "qa_node_uid": { "type": "string", "title": "Qa Node Uid" }
+        },
+        "type": "object",
+        "required": ["qa_node_uid"],
+        "title": "QaDeleteParameter"
+      },
+      "QaDeleteResponse": {
+        "properties": {
+          "request_success": { "type": "boolean", "title": "Request Success" }
+        },
+        "type": "object",
+        "title": "QaDeleteResponse"
+      },
+      "QaGetResponse": {
+        "properties": {
+          "qa_nodes": {
+            "items": { "$ref": "#/components/schemas/QaNode" },
+            "type": "array",
+            "title": "Qa Nodes"
+          }
+        },
+        "type": "object",
+        "title": "QaGetResponse"
+      },
+      "QaNode": {
+        "properties": {
+          "_id": {
+            "type": "string",
+            "title": " Id",
+            "description": "MongoDB document ObjectID",
+            "example": "5eb7cf5a86d9755df3a6c593"
+          },
+          "title": { "type": "string", "title": "Title" },
+          "qa_uid": { "type": "string", "title": "Qa Uid" },
+          "account_uid": { "type": "string", "title": "Account Uid" },
+          "workspace_uid": { "type": "string", "title": "Workspace Uid" },
+          "bot_class_uids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Bot Class Uids"
+          },
+          "question": { "type": "string", "title": "Question" },
+          "contents": {
+            "items": { "$ref": "#/components/schemas/Content" },
+            "type": "array",
+            "title": "Contents"
+          },
+          "parent_uids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Parent Uids"
+          },
+          "is_root": {
+            "type": "boolean",
+            "title": "Is Root",
+            "default": false
+          },
+          "children": {
+            "items": { "allOf": [{ "$ref": "#/components/schemas/QaNode" }] },
+            "type": "array",
+            "title": "Children"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "default": "2024-08-13T11:23:43.742978+00:00"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "default": "2024-08-13T11:23:43.742987+00:00"
+          },
+          "is_activated": {
+            "type": "boolean",
+            "title": "Is Activated",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": ["qa_uid", "account_uid", "workspace_uid", "question"],
+        "title": "QaNode",
+        "description": "Document Mapping class.\n\nFields:\n\n- `id` - MongoDB document ObjectID \"_id\" field.\nMapped to the PydanticObjectId class"
+      },
+      "QaRequest": {
+        "properties": {
+          "create_request": {
+            "$ref": "#/components/schemas/QaCreateParameter"
+          },
+          "update_request": {
+            "$ref": "#/components/schemas/QaUpdateParameter"
+          },
+          "delete_request": { "$ref": "#/components/schemas/QaDeleteParameter" }
+        },
+        "type": "object",
+        "title": "QaRequest"
+      },
+      "QaResponse": {
+        "properties": {
+          "create_response": {
+            "$ref": "#/components/schemas/QaCreateResponse"
+          },
+          "get_response": { "$ref": "#/components/schemas/QaGetResponse" },
+          "update_response": {
+            "$ref": "#/components/schemas/QaUpdateResponse"
+          },
+          "delete_response": { "$ref": "#/components/schemas/QaDeleteResponse" }
+        },
+        "type": "object",
+        "title": "QaResponse"
+      },
+      "QaUpdateParameter": {
+        "properties": {
+          "qa_node_uid": { "type": "string", "title": "Qa Node Uid" },
+          "question": { "type": "string", "title": "Question" },
+          "contents": {
+            "items": { "$ref": "#/components/schemas/Content" },
+            "type": "array",
+            "title": "Contents"
+          },
+          "children": {
+            "items": { "$ref": "#/components/schemas/QaNode" },
+            "type": "array",
+            "title": "Children"
+          },
+          "delete_bot_class_uids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Delete Bot Class Uids"
+          },
+          "add_bot_class_uids": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Add Bot Class Uids"
+          }
+        },
+        "type": "object",
+        "required": ["qa_node_uid"],
+        "title": "QaUpdateParameter"
+      },
+      "QaUpdateResponse": {
+        "properties": {
+          "qa_nodes": {
+            "items": { "$ref": "#/components/schemas/QaNode" },
+            "type": "array",
+            "title": "Qa Nodes"
+          }
+        },
+        "type": "object",
+        "title": "QaUpdateResponse"
+      },
+      "RespError": {
+        "properties": {
+          "code": { "type": "integer", "title": "Code", "nullable": true },
+          "msg": { "type": "string", "title": "Msg", "nullable": true },
+          "desc": {
+            "anyOf": [
+              { "type": "string" },
+              { "items": {}, "type": "array" },
+              { "type": "object" }
+            ],
+            "title": "Desc",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "RespError"
+      },
+      "RespMeta": {
+        "properties": {
+          "code": { "type": "integer", "title": "Code", "nullable": true },
+          "errors": {
+            "items": { "$ref": "#/components/schemas/RespError" },
+            "type": "array",
+            "title": "Errors",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "RespMeta"
+      },
+      "ScrapeWebReq": {
+        "properties": {
+          "reqData": { "$ref": "#/components/schemas/ScrapeWebReqData" },
+          "taskBaseName": {
+            "type": "string",
+            "title": "Taskbasename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["reqData", "acntUid"],
+        "title": "ScrapeWebReq"
+      },
+      "ScrapeWebReqData": {
+        "properties": {
+          "ingestionType": {
+            "allOf": [{ "$ref": "#/components/schemas/IngestionType" }],
+            "default": "SCRAPE_Web_Plain"
+          },
+          "startUrls": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Starturls",
+            "default": [],
+            "example": ["https://www.docenty.ai/"],
+            "nullable": true
+          },
+          "leafUrls": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Leafurls",
+            "default": [],
+            "example": [
+              "https://docenty.notion.site/b54e2a0eb9b14471b90e25f6b6b59447"
+            ],
+            "nullable": true
+          },
+          "allowedDomains": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Alloweddomains",
+            "example": ["docenty.ai"],
+            "nullable": true
+          },
+          "allowedPatterns": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Allowedpatterns",
+            "nullable": true
+          },
+          "deniedPatterns": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Deniedpatterns",
+            "nullable": true
+          },
+          "depthLimit": {
+            "type": "integer",
+            "title": "Depthlimit",
+            "default": 3,
+            "example": 3,
+            "nullable": true
+          },
+          "navigationTimeoutSec": {
+            "type": "integer",
+            "title": "Navigationtimeoutsec",
+            "default": 120,
+            "example": 120,
+            "nullable": true
+          },
+          "perPageLinkLimit": {
+            "type": "integer",
+            "title": "Perpagelinklimit",
+            "default": 20,
+            "example": 20,
+            "nullable": true
+          },
+          "ignoreUrls": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Ignoreurls",
+            "nullable": true
+          },
+          "gitbookLoad": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Gitbookload",
+            "example": ["https://www.docenty.ai/"],
+            "nullable": true
+          },
+          "scraper": {
+            "allOf": [{ "$ref": "#/components/schemas/ScraperType" }],
+            "default": "playwright"
+          },
+          "endPointType": {
+            "type": "string",
+            "title": "Endpointtype",
+            "default": "html",
+            "example": "html",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "ScrapeWebReqData"
+      },
+      "ScrapeWebResp": {
+        "properties": {
+          "wsPath": {
+            "type": "string",
+            "title": "Wspath",
+            "example": "docenty-abcdefgh/default"
+          },
+          "startUrls": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Starturls",
+            "example": ["https://www.docenty.ai/"],
+            "nullable": true
+          },
+          "leafUrls": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Leafurls",
+            "example": [
+              "https://docenty.notion.site/b54e2a0eb9b14471b90e25f6b6b59447"
+            ],
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          }
+        },
+        "type": "object",
+        "required": ["wsPath", "acntUid", "taskUid"],
+        "title": "ScrapeWebResp"
+      },
+      "ScraperType": {
+        "type": "string",
+        "enum": ["playwright", "zyte", "scrapy"],
+        "title": "ScraperType",
+        "description": "An enumeration."
+      },
+      "SmartReq": {
+        "properties": {
+          "web_reqData": {
+            "items": { "$ref": "#/components/schemas/ScrapeWebReqData" },
+            "type": "array",
+            "title": "Web Reqdata",
+            "nullable": true
+          },
+          "file_reqData": {
+            "items": { "$ref": "#/components/schemas/FileLoadingReqData" },
+            "type": "array",
+            "title": "File Reqdata",
+            "nullable": true
+          },
+          "text_reqData": {
+            "items": { "$ref": "#/components/schemas/WriteTextReqData" },
+            "type": "array",
+            "title": "Text Reqdata",
+            "nullable": true
+          },
+          "userMedia_reqData": {
+            "items": { "$ref": "#/components/schemas/UserMediaReqData" },
+            "type": "array",
+            "title": "Usermedia Reqdata",
+            "nullable": true
+          },
+          "taskBaseName": {
+            "type": "string",
+            "title": "Taskbasename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": { "type": "string", "title": "Wsuid", "example": "default" }
+        },
+        "type": "object",
+        "required": ["acntUid", "wsUid"],
+        "title": "SmartReq"
+      },
+      "SpeakerRole": {
+        "type": "string",
+        "enum": ["BOT", "USER", "AGENT"],
+        "title": "SpeakerRole",
+        "description": "An enumeration."
+      },
+      "StartupPackageReqData": {
+        "properties": {
+          "message": { "type": "string", "title": "Message" },
+          "vecs_name": { "type": "string", "title": "Vecs Name" },
+          "model_name": {
+            "type": "string",
+            "title": "Model Name",
+            "default": "gpt-4o",
+            "example": "gpt-4o",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "chochangpae",
+            "example": "chochangpae",
+            "nullable": true
+          },
+          "account_id": {
+            "type": "string",
+            "title": "Account Id",
+            "default": "a19",
+            "example": "a19",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["message", "vecs_name"],
+        "title": "StartupPackageReqData"
+      },
+      "StoreFilesReq": {
+        "properties": {
+          "reqData": { "$ref": "#/components/schemas/FileLoadingReqData" },
+          "taskBaseName": {
+            "type": "string",
+            "title": "Taskbasename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY",
+            "nullable": true
+          },
+          "loadingName": {
+            "allOf": [{ "$ref": "#/components/schemas/DocLoadingName" }],
+            "description": "{<DocLoadingName.scraped: 'scraped'>: 'Scraped', <DocLoadingName.uploaded: 'uploaded'>: 'Uploaded', <DocLoadingName.written: 'written'>: 'Written Text', <DocLoadingName.ingested: 'ingested'>: 'Not used yet'}",
+            "default": "uploaded",
+            "example": "uploaded"
+          },
+          "forceUpdateDb": {
+            "type": "boolean",
+            "title": "Forceupdatedb",
+            "default": false,
+            "example": false
+          },
+          "includeResult": {
+            "type": "boolean",
+            "title": "Includeresult",
+            "default": false,
+            "example": false,
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["reqData", "acntUid"],
+        "title": "StoreFilesReq"
+      },
+      "StoreTextReq": {
+        "properties": {
+          "reqData": { "$ref": "#/components/schemas/WriteTextReqData" },
+          "taskBaseName": {
+            "type": "string",
+            "title": "Taskbasename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "loadingName": {
+            "allOf": [{ "$ref": "#/components/schemas/DocLoadingName" }],
+            "description": "{<DocLoadingName.scraped: 'scraped'>: 'Scraped', <DocLoadingName.uploaded: 'uploaded'>: 'Uploaded', <DocLoadingName.written: 'written'>: 'Written Text', <DocLoadingName.ingested: 'ingested'>: 'Not used yet'}",
+            "default": "written",
+            "example": "written",
+            "nullable": true
+          },
+          "forceUpdateDb": {
+            "type": "boolean",
+            "title": "Forceupdatedb",
+            "default": false,
+            "example": false
+          },
+          "includeResult": {
+            "type": "boolean",
+            "title": "Includeresult",
+            "default": false,
+            "example": false,
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["reqData", "acntUid"],
+        "title": "StoreTextReq"
+      },
+      "TaskResult": {
+        "properties": {
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          },
+          "acntUid": { "type": "string", "title": "Acntuid", "nullable": true },
+          "wsUid": { "type": "string", "title": "Wsuid", "nullable": true },
+          "loadingName": {
+            "allOf": [{ "$ref": "#/components/schemas/DocLoadingName" }],
+            "nullable": true
+          },
+          "urlPaths": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Urlpaths",
+            "nullable": true
+          },
+          "items": {
+            "items": { "$ref": "#/components/schemas/IngestedItem" },
+            "type": "array",
+            "title": "Items",
+            "nullable": true
+          },
+          "status": {
+            "allOf": [{ "$ref": "#/components/schemas/TaskStatus" }],
+            "example": "COMPLETED_SUCCEEDED",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["taskUid"],
+        "title": "TaskResult"
+      },
+      "TaskResultData": {
+        "properties": {
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY"
+          },
+          "result": {
+            "allOf": [{ "$ref": "#/components/schemas/TaskResult" }],
+            "title": "Result",
+            "nullable": true
+          },
+          "status": {
+            "allOf": [{ "$ref": "#/components/schemas/TaskStatus" }],
+            "example": "COMPLETED_SUCCEEDED",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Createdat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["taskUid"],
+        "title": "TaskResultData"
+      },
+      "TaskStatus": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "NONE",
+          "STARTED",
+          "PROGRESS_ANY",
+          "PROGRESS_NORMAL",
+          "PROGRESS_SUSPICIOUS",
+          "PROGRESS_FAILED",
+          "PROGRESS_CANCELLED",
+          "COMPLETED_ANY",
+          "COMPLETED_SUCCEEDED",
+          "COMPLETED_FAILED",
+          "COMPLETED_CANCELLED",
+          "COMPLETED_ERROR",
+          "DELETED"
+        ],
+        "title": "TaskStatus",
+        "description": "An enumeration."
+      },
+      "UserMediaReq": {
+        "properties": {
+          "reqData": { "$ref": "#/components/schemas/UserMediaReqData" },
+          "taskBaseName": {
+            "type": "string",
+            "title": "Taskbasename",
+            "example": "docenty",
+            "nullable": true
+          },
+          "acntUid": {
+            "type": "string",
+            "title": "Acntuid",
+            "example": "docenty-abcdefgh"
+          },
+          "wsUid": {
+            "type": "string",
+            "title": "Wsuid",
+            "default": "default",
+            "example": "default",
+            "nullable": true
+          },
+          "taskUid": {
+            "type": "string",
+            "title": "Taskuid",
+            "example": "task-file-Nuz9Ts-task-file-Hyeonseop-XQ6XJKcc4z-XQ6X2bPNsY",
+            "nullable": true
+          },
+          "loadingName": {
+            "allOf": [{ "$ref": "#/components/schemas/DocLoadingName" }],
+            "description": "{<DocLoadingName.scraped: 'scraped'>: 'Scraped', <DocLoadingName.uploaded: 'uploaded'>: 'Uploaded', <DocLoadingName.written: 'written'>: 'Written Text', <DocLoadingName.ingested: 'ingested'>: 'Not used yet'}",
+            "default": "uploaded",
+            "example": "uploaded"
+          },
+          "forceUpdateDb": {
+            "type": "boolean",
+            "title": "Forceupdatedb",
+            "default": false,
+            "example": false
+          },
+          "includeResult": {
+            "type": "boolean",
+            "title": "Includeresult",
+            "default": false,
+            "example": false,
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["reqData", "acntUid"],
+        "title": "UserMediaReq"
+      },
+      "UserMediaReqData": {
+        "properties": {
+          "ingestionType": {
+            "allOf": [{ "$ref": "#/components/schemas/IngestionType" }],
+            "example": "UPLOAD_File_Plain"
+          },
+          "images_path": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Images Path",
+            "nullable": false
+          },
+          "keywords": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Keywords",
+            "nullable": true
+          },
+          "query_sentence": {
+            "type": "string",
+            "title": "Query Sentence",
+            "nullable": true
+          },
+          "texts": {
+            "type": "string",
+            "title": "Texts",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI...",
+            "nullable": false
+          }
+        },
+        "type": "object",
+        "required": ["ingestionType"],
+        "title": "UserMediaReqData"
+      },
+      "UserMediaResp": {
+        "properties": {
+          "result": {
+            "allOf": [{ "$ref": "#/components/schemas/TaskResultData" }],
+            "title": "Result",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "UserMediaResp"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      },
+      "VecsData": {
+        "properties": {
+          "namespace": { "type": "string", "title": "Namespace" },
+          "vectorCount": {
+            "type": "integer",
+            "title": "Vectorcount",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updatedat",
+            "example": "2024-01-01T01:11:11.111111",
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "required": ["namespace"],
+        "title": "VecsData"
+      },
+      "WebResp_AccountResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/AccountResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[AccountResp]"
+      },
+      "WebResp_BotCreateResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/BotCreateResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[BotCreateResp]"
+      },
+      "WebResp_ChatRespData_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/ChatRespData" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[ChatRespData]"
+      },
+      "WebResp_DctItemDoc_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/DctItemDoc" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[DctItemDoc]"
+      },
+      "WebResp_ExtChatRespData_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/ExtChatRespData" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[ExtChatRespData]"
+      },
+      "WebResp_GenerateUrlsResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/GenerateUrlsResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[GenerateUrlsResp]"
+      },
+      "WebResp_ItemGetResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/ItemGetResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[ItemGetResp]"
+      },
+      "WebResp_ItemUpdateResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/ItemUpdateResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[ItemUpdateResp]"
+      },
+      "WebResp_KakaoChatResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/KakaoChatResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[KakaoChatResp]"
+      },
+      "WebResp_KnowledgeCreateResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/KnowledgeCreateResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[KnowledgeCreateResp]"
+      },
+      "WebResp_KnowledgeGetResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/KnowledgeGetResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[KnowledgeGetResp]"
+      },
+      "WebResp_PrepareBpResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/PrepareBpResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[PrepareBpResp]"
+      },
+      "WebResp_ScrapeWebResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/ScrapeWebResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[ScrapeWebResp]"
+      },
+      "WebResp_StoreFilesReq_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/StoreFilesReq" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[StoreFilesReq]"
+      },
+      "WebResp_UserMediaResp_": {
+        "properties": {
+          "data": {
+            "allOf": [{ "$ref": "#/components/schemas/UserMediaResp" }],
+            "title": "Data",
+            "nullable": true
+          },
+          "meta": {
+            "allOf": [{ "$ref": "#/components/schemas/RespMeta" }],
+            "title": "Meta",
+            "default": { "code": 200 },
+            "example": { "code": 200 },
+            "nullable": true
+          }
+        },
+        "type": "object",
+        "title": "WebResp[UserMediaResp]"
+      },
+      "WriteTextReqData": {
+        "properties": {
+          "ingestionType": {
+            "allOf": [{ "$ref": "#/components/schemas/IngestionType" }],
+            "default": "MDB_Text_Plain"
+          },
+          "texts": {
+            "type": "string",
+            "title": "Texts",
+            "example": "답답한 ARS 선택 채팅은\n이제 그만! 상담 운영비 50% 절감\nAI가 자동 생성해주는 AI..."
+          }
+        },
+        "type": "object",
+        "required": ["texts"],
+        "title": "WriteTextReqData"
+      }
+    }
+  },
+  "tags": [
+    { "name": "Account", "description": "Manage accounts." },
+    {
+      "name": "Ingest",
+      "description": "Scrape web, files, etc. and save them in document format in DB."
+    },
+    { "name": "Knowledge", "description": "Save data as knowledge document." },
+    { "name": "Bot", "description": "Convert text data to vector data." },
+    { "name": "Chat", "description": "Talk to chatbot." },
+    {
+      "name": "Smart",
+      "description": "Combining several APIs into one or making it simple to use."
+    },
+    { "name": "Ext_Chat", "description": "External API." },
+    {
+      "name": "Faq",
+      "description": "Handle Rule-based(scenario-based or predefined) chatbot."
+    }
+  ]
+}
