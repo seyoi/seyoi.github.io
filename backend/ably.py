@@ -6,18 +6,35 @@ from firebase_admin import credentials, firestore, auth
 from typing import List
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
-
-# Firebase 초기화
-cred = credentials.Certificate("/Users/matias/Documents/github/seyoi.github.io/backend/hanna-9d44a-firebase-adminsdk-z3ecc-098497e37f.json")
-firebase_admin.initialize_app(cred)
-db = firestore.client()
-
-app = FastAPI()
-
 from dotenv import load_dotenv
 import os
 load_dotenv()
+
+
+
+app = FastAPI()
+
+
 api_key = os.environ.get('OPENAI_API_KEY')
+private_key = os.getenv('FIREBASE_PRIVATE_KEY').replace('\\n', '\n')
+client_email = os.getenv('FIREBASE_CLIENT_EMAIL')
+cred = credentials.Certificate({
+    "type": "service_account",
+    "project_id": os.getenv('FIREBASE_PROJECT_ID'),
+    "private_key_id": os.getenv('FIREBASE_PRIVATE_KEY_ID'),
+    "private_key": private_key,
+    "client_email": client_email,
+    "client_id": os.getenv('FIREBASE_CLIENT_ID'),
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": f"https://www.googleapis.com/robot/v1/metadata/x509/{client_email.replace('@', '%40')}",
+    "universe_domain": "googleapis.com"
+})
+
+# Firebase 초기화
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 # CORS 설정
 app.add_middleware(
