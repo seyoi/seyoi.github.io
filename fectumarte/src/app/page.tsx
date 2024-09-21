@@ -1,3 +1,6 @@
+export async function generateStaticParams() {
+  return [];
+}
 import React from 'react'
 
 function App() {
