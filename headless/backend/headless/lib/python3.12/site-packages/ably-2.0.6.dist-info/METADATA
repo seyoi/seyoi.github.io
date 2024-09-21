@@ -1,0 +1,58 @@
+Metadata-Version: 2.1
+Name: ably
+Version: 2.0.6
+Summary: Python REST and Realtime client library SDK for Ably realtime messaging service
+Home-page: https://ably.com
+License: Apache-2.0
+Author: Ably
+Author-email: support@ably.com
+Requires-Python: >=3.7,<4.0
+Classifier: Development Status :: 6 - Mature
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Provides-Extra: crypto
+Provides-Extra: oldcrypto
+Requires-Dist: h2 (>=4.1.0,<5.0.0)
+Requires-Dist: httpx (>=0.24.1,<0.25.0) ; python_version >= "3.7" and python_version < "3.8"
+Requires-Dist: httpx (>=0.25.0,<1.0) ; python_version >= "3.8" and python_version < "4.0"
+Requires-Dist: methoddispatch (>=3.0.2,<4.0.0)
+Requires-Dist: msgpack (>=1.0.0,<2.0.0)
+Requires-Dist: pycrypto (>=2.6.1,<3.0.0) ; extra == "oldcrypto"
+Requires-Dist: pycryptodome ; extra == "crypto"
+Requires-Dist: pyee (>=11.1.0,<12.0.0) ; python_version >= "3.8" and python_version < "4.0"
+Requires-Dist: pyee (>=9.0.4,<10.0.0) ; python_version >= "3.7" and python_version < "3.8"
+Requires-Dist: websockets (>=10.0,<13.0)
+Project-URL: Repository, https://github.com/ably/ably-python
+Description-Content-Type: text/x-rst
+
+Official Ably Bindings for Python
+==================================
+
+A Python client library for Ably Realtime messaging.
+
+
+Setup
+-----
+
+You can install this package by using the pip tool and installing:
+
+    pip install ably
+
+
+Using Ably for Python
+---------------------
+
+- Sign up for Ably at https://ably.com/sign-up
+- Get usage examples at https://github.com/ably/ably-python
+- Visit https://ably.com/docs for a complete API reference and more examples
+
