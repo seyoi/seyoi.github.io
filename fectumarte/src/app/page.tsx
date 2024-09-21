@@ -12,6 +12,9 @@ function App() {
     
     </div> 
     <div>Registerd No. 123-38-651110</div><br></br>
+    <div>
+    address_251-43 itaewon yongsan seoul south korea
+</div>
     <div>Mobile +8210 4222 6836</div>
     <div>Email seyoit@gmail.com</div>
     <div>Fectumarte 2024</div></div>
